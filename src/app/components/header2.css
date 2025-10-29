@@ -1,0 +1,17 @@
+/* Curved header shape for maroon section */
+.curved-maroon {
+    clip-path: polygon(0 0, 70% 0, 85% 100%, 0 100%);
+    background: linear-gradient(135deg, #631012 0%, #4a0c0e 100%);
+}
+
+/* White section with complementary curve */
+.white-curved {
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 25% 100%);
+    background: white;
+}
+
+/* Alternative shape for testing */
+.shape {
+    clip-path: polygon(0 0, 20% 100%, 30% 0);
+    background: #631012;
+}

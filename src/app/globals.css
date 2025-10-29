@@ -1,55 +1,11 @@
 @import "tailwindcss";
-@tailwind utilities;
 
-@import "tailwindcss";
-
-@theme {
-  /* Custom color palette */
-  --color-primary: oklch(0.24 0.09 253.5); /* #0A2351 */
-  --color-accent: oklch(0.69 0.18 50.8); /* #FF7A00 */
-  --color-background: oklch(0.96 0.002 264.5); /* #F3F4F6 */
-  --color-foreground: oklch(1 0 0); /* #FFFFFF */
-  --color-text-primary: oklch(0.17 0.01 264.5); /* #111827 */
-  --color-text-secondary: oklch(0.51 0.01 264.5); /* #6B7280 */
-  --color-border: oklch(0.85 0.005 264.5); /* #D1D5DB */
-  
-  /* Dark theme colors */
-  --color-primary-dark: oklch(0.92 0.008 264.5); /* #E6E9EF */
-  --color-accent-dark: oklch(0.69 0.18 50.8); /* #FF7A00 */
-  --color-background-dark: oklch(0.17 0.01 264.5); /* #111827 */
-  --color-foreground-dark: oklch(0.25 0.01 264.5); /* #1F2937 */
-  --color-text-primary-dark: oklch(0.96 0.002 264.5); /* #F3F4F6 */
-  --color-text-secondary-dark: oklch(0.66 0.005 264.5); /* #9CA3AF */
-  --color-border-dark: oklch(0.35 0.01 264.5); /* #374151 */
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-@layer utilities {
-  /* Light theme (default) */
-  .bg-primary { background-color: var(--color-primary); }
-  .bg-accent { background-color: var(--color-accent); }
-  .bg-background { background-color: var(--color-background); }
-  .bg-foreground { background-color: var(--color-foreground); }
-  
-  .text-primary { color: var(--color-primary); }
-  .text-accent { color: var(--color-accent); }
-  .text-text-primary { color: var(--color-text-primary); }
-  .text-text-secondary { color: var(--color-text-secondary); }
-  
-  .border-border { border-color: var(--color-border); }
-  
-  /* Dark theme */
-  .dark .bg-primary { background-color: var(--color-primary-dark); }
-  .dark .bg-accent { background-color: var(--color-accent-dark); }
-  .dark .bg-background { background-color: var(--color-background-dark); }
-  .dark .bg-foreground { background-color: var(--color-foreground-dark); }
-  
-  .dark .text-primary { color: var(--color-primary-dark); }
-  .dark .text-accent { color: var(--color-accent-dark); }
-  .dark .text-text-primary { color: var(--color-text-primary-dark); }
-  .dark .text-text-secondary { color: var(--color-text-secondary-dark); }
-  
-  .dark .border-border { border-color: var(--color-border-dark); }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
-
- 
-
