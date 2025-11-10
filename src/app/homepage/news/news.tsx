@@ -1,86 +1,97 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-function News() {
-  const baseNews = [
-    {
-      id: 1,
-      title: 'Campus Hosts International Tech Conference',
-      image: '/nith.jpg',
-      description:
-        'Our campus recently hosted an international tech conference bringing together innovators and leaders from around the world. The event featured keynote speeches, panel discussions, and networking opportunities.',
-      date: 'Oct 30, 2024',
-      category: 'Academic',
-      content:
-        'Lorem ipsum dolor sit amet consectetur. Lacus risus dui est fringilla dis. Pellentesque risus habitasse turpis sit. Ornare convallis ut adipiscing ut tellus.',
-    },
-    {
-      id: 2,
-      title: 'New Research Center Inaugurated',
-      image: '/direct.jpg',
-      description:
-        'The university inaugurated a state-of-the-art research center dedicated to sustainable technology and innovation. This facility will support cutting-edge research projects.',
-      date: 'Oct 28, 2024',
-      category: 'Infrastructure',
-      content:
-        'Lorem ipsum dolor sit amet consectetur. Lacus risus dui est fringilla dis. Pellentesque risus habitasse turpis sit. Ornare convallis ut adipiscing ut tellus.',
-    },
-    {
-      id: 3,
-      title: 'Student Achievement in National Olympiad',
-      image: '/robosocnith_cover.jpg',
-      description:
-        'Our students secured top positions in the National Science Olympiad, showcasing their exceptional talent and dedication to excellence in academics.',
-      date: 'Oct 25, 2024',
-      category: 'Achievement',
-      content:
-        'Lorem ipsum dolor sit amet consectetur. Lacus risus dui est fringilla dis. Pellentesque risus habitasse turpis sit. Ornare convallis ut adipiscing ut tellus.',
-    },
-    {
-      id: 4,
-      title: 'Faculty Member Receives National Award',
-      image: '/award.jpg',
-      description:
-        'Dr. Sharma received the prestigious National Research Award for her groundbreaking contributions to the field of biotechnology and innovation.',
-      date: 'Oct 20, 2024',
-      category: 'Recognition',
-      content:
-        'Lorem ipsum dolor sit amet consectetur. Lacus risus dui est fringilla dis. Pellentesque risus habitasse turpis sit. Ornare convallis ut adipiscing ut tellus.',
-    },
-    {
-      id: 5,
-      title: 'New Scholarship Program Launched',
-      image: '/admin.jpg',
-      description:
-        'The university launched a comprehensive scholarship program to support deserving students from underprivileged backgrounds to pursue higher education.',
-      date: 'Oct 18, 2024',
-      category: 'Announcement',
-      content:
-        'Lorem ipsum dolor sit amet consectetur. Lacus risus dui est fringilla dis. Pellentesque risus habitasse turpis sit. Ornare convallis ut adipiscing ut tellus.',
-    },
-  ];
+// Define the News type based on your database schema
+type NewsData = {
+  id: number;
+  Heading: string;
+  Subheading: string;
+  Description: string;
+  image: string;
+  startedAt: string; // ISO date string from API
+  endedAt: string; // ISO date string from API
+  createdAt: string;
+  updatedAt: string;
+};
 
+// Transform database news to display format
+const transformNews = (news: NewsData) => ({
+  id: news.id,
+  title: news.Heading,
+  subtitle: news.Subheading,
+  image: news.image,
+  description: news.Description,
+  date: new Date(news.startedAt).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }),
+  category: 'News', // Default category since it's not in schema
+  content: news.Description, // Use description as content
+});
+
+function News() {
+  const [newsData, setNewsData] = useState<NewsData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const selectedNews = baseNews[selectedIndex];
+
+  // Fetch news from API
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/users/news');
+        const result = await response.json();
+
+        if (result.success && result.data) {
+          setNewsData(result.data);
+          setError(null);
+        } else {
+          setError(result.message || 'Failed to fetch news');
+          setNewsData([]); // Set empty array on error
+        }
+      } catch (err) {
+        console.error('Error fetching news:', err);
+        setError('Failed to fetch news');
+        setNewsData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+  // Transform news for display
+  const displayNews = newsData.map(transformNews);
+  const selectedNews = displayNews[selectedIndex] || null;
 
   const handlePrev = () => {
-    setSelectedIndex((prev) => (prev - 1 + baseNews.length) % baseNews.length);
+    if (displayNews.length > 0) {
+      setSelectedIndex(
+        (prev) => (prev - 1 + displayNews.length) % displayNews.length
+      );
+    }
   };
 
   const handleNext = () => {
-    setSelectedIndex((prev) => (prev + 1) % baseNews.length);
+    if (displayNews.length > 0) {
+      setSelectedIndex((prev) => (prev + 1) % displayNews.length);
+    }
   };
 
   // Get visible cards (current + 2 on each side)
   const getVisibleCards = () => {
+    if (displayNews.length === 0) return [];
     const result = [];
     for (let i = -2; i <= 2; i++) {
-      const idx = (selectedIndex + i + baseNews.length) % baseNews.length;
+      const idx = (selectedIndex + i + displayNews.length) % displayNews.length;
       result.push({
-        news: baseNews[idx],
+        news: displayNews[idx],
         index: idx,
         offset: i,
       });
@@ -89,6 +100,111 @@ function News() {
   };
 
   const visibleCards = getVisibleCards();
+
+  // Loading state
+  if (loading) {
+    return (
+      <section className="pt-14 pb-5 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+            <div>
+              <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
+                Admissions
+              </h3>
+              <div className="space-y-4">
+                <div className="border border-gray-200 rounded-lg p-6 bg-white hover:border-[#631012] hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-[#631012] mb-2">
+                    B.Tech
+                  </h4>
+                  <p className="text-gray-600">Undergraduate Program</p>
+                </div>
+                <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012] bg-white hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-[#631012] mb-2">
+                    M.Tech, M.Sc, MBA
+                  </h4>
+                  <p className="text-gray-600">Postgraduate Program</p>
+                </div>
+                <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012] bg-white hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-[#631012] mb-2">
+                    Ph.D
+                  </h4>
+                  <p className="text-gray-600">Doctorate Program</p>
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-2">
+              <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
+                Latest News
+              </h3>
+              <div className="flex items-center justify-center py-20">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#631012] mx-auto mb-4"></div>
+                  <p className="text-gray-600">Loading news...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Error state or no data
+  if (error || displayNews.length === 0) {
+    return (
+      <section className="pt-14 pb-5 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+            <div>
+              <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
+                Admissions
+              </h3>
+              <div className="space-y-4">
+                <div className="border border-gray-200 rounded-lg p-6 bg-white hover:border-[#631012] hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-[#631012] mb-2">
+                    B.Tech
+                  </h4>
+                  <p className="text-gray-600">Undergraduate Program</p>
+                </div>
+                <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012] bg-white hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-[#631012] mb-2">
+                    M.Tech, M.Sc, MBA
+                  </h4>
+                  <p className="text-gray-600">Postgraduate Program</p>
+                </div>
+                <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012] bg-white hover:shadow-md transition-shadow">
+                  <h4 className="text-xl font-bold text-[#631012] mb-2">
+                    Ph.D
+                  </h4>
+                  <p className="text-gray-600">Doctorate Program</p>
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-2">
+              <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
+                Latest News
+              </h3>
+              <div className="flex items-center justify-center py-20">
+                <div className="text-center">
+                  <p className="text-gray-600 text-lg mb-4">
+                    {error || 'No news available at the moment'}
+                  </p>
+                  <p className="text-gray-500 text-sm">
+                    Please check back later or contact support if this persists.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Ensure selectedNews exists
+  if (!selectedNews) {
+    return null;
+  }
 
   return (
     <section className="pt-14 pb-5 px-6 bg-gray-50">
@@ -259,7 +375,7 @@ function News() {
                   </button>
 
                   <div className="flex gap-2">
-                    {baseNews.map((_, idx) => (
+                    {displayNews.map((_, idx: number) => (
                       <button
                         key={idx}
                         onClick={() => setSelectedIndex(idx)}
@@ -282,7 +398,7 @@ function News() {
 
                 {/* Progress Text */}
                 <p className="text-center text-gray-600 mt-4 font-semibold text-sm">
-                  News {selectedIndex + 1} of {baseNews.length}
+                  News {selectedIndex + 1} of {displayNews.length}
                 </p>
               </div>
             </div>

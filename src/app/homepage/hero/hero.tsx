@@ -1,9 +1,17 @@
-import React from 'react';
 import Image from 'next/image';
+import { getHomepageData, type Homepage } from '../../../../lib/prisma';
 
-function Hero() {
+export default async function Hero() {
+  // Get homepage data from database only
+  const homepage: Homepage = await getHomepageData();
+
+  const HeroMain = homepage.HeroMain || '';
+  const HeroSub = homepage.HeroSub || '';
+  const HeroDesc = homepage.HeroDesc || '';
+  const HeroBtnText = homepage.HeroBtnText || 'About Us';
+
   return (
-    <div className="relative w-full h-full overflow-hidden top-2">
+    <div className="relative w-full h-full overflow-hidden top-2 z-0">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
@@ -22,25 +30,28 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
 
       {/* Content overlay */}
-      <div className="relative z-10 h-full flex items-center justify-center">
+      <div className="relative z-1 h-full flex items-center justify-center">
         <div className="text-center text-white max-w-4xl mx-auto px-6">
           {/* Welcome badge */}
-          <div className="mb-8 inline-block">
-            <span className="px-4 py-2 bg-white/20 backdrop-blur-sm text-white text-sm font-bold rounded-full border border-white/40">
-              Welcome to NIT Hamirpur
-            </span>
+          <div className="mb-8 inline-block text-center">
+            {HeroMain ? (
+              <div className="mt-2 text-sm text-white/90 font-semibold">
+                {HeroMain}
+              </div>
+            ) : (
+              'Welcome to NIT Hamirpur'
+            )}
           </div>
 
           {/* Main heading with better visibility */}
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-xl">
-            Good Education to Build A Better Future
+            {HeroSub || 'Good Education to Build A Better Future'}
           </h1>
 
           {/* Subtitle with improved visibility */}
           <p className="text-lg md:text-xl mb-8 leading-relaxed max-w-3xl mx-auto drop-shadow-lg">
-            To achieve academic excellence in engineering, technology,
-            architecture and science by imparting quality and value based
-            education.
+            {HeroDesc ||
+              'To achieve academic excellence in engineering, technology, architecture and science by imparting quality and value based education.'}
           </p>
 
           {/* Navigation Buttons to Sections */}
@@ -52,7 +63,7 @@ function Hero() {
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
               </svg>
-              About Us
+              {HeroBtnText}
             </a>
             <a
               href="#events"
@@ -96,5 +107,3 @@ function Hero() {
     </div>
   );
 }
-
-export default Hero;

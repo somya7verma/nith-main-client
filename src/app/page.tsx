@@ -11,11 +11,13 @@ import Hero from './homepage/hero/hero';
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       {/* Header and Hero section */}
-      <div className="h-screen flex flex-col">
-        <Page />
-        <div className="flex-1">
+      <div className="h-screen flex flex-col relative">
+        <div className="relative">
+          <Page />
+        </div>
+        <div className="flex-1 relative z-0">
           <Hero />
         </div>
       </div>

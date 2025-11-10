@@ -3,59 +3,77 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-export default function Event() {
-  const baseEvents = [
-    {
-      id: 1,
-      title: 'Tech Summit 2025',
-      image: '/group.jpg',
-      description:
-        'Join us for our annual Tech Summit featuring industry leaders and cutting-edge innovations. This event brings together the brightest minds in technology for networking and knowledge sharing.',
-      date: 'Mar 15, 2025',
-      attendees: '500+',
-    },
-    {
-      id: 2,
-      title: 'Annual Conference',
-      image: '/direct.jpg',
-      description:
-        'Our flagship annual conference showcasing the latest research and developments. Connect with peers, participate in workshops, and stay updated with industry trends.',
-      date: 'Apr 20, 2025',
-      attendees: '800+',
-    },
-    {
-      id: 3,
-      title: 'Workshop Series',
-      image: '/workshop.jpg',
-      description:
-        'Intensive hands-on workshops designed to enhance your skills. Expert instructors guide you through practical exercises and real-world applications.',
-      date: 'May 10, 2025',
-      attendees: '300+',
-    },
-    {
-      id: 4,
-      title: 'Networking Event',
-      image: '/robosocnith_cover.jpg',
-      description:
-        'Build meaningful connections with professionals from various fields. Enjoy interactive sessions and collaborative opportunities.',
-      date: 'Jun 5, 2025',
-      attendees: '600+',
-    },
-    {
-      id: 5,
-      title: 'Innovation Expo',
-      image: '/admin.jpg',
-      description:
-        'Explore innovative projects and groundbreaking research. Showcase your work and discover new possibilities in your field.',
-      date: 'Jul 15, 2025',
-      attendees: '1000+',
-    },
-  ];
+// Define the Event type based on your database schema
+type EventData = {
+  id: number;
+  Heading: string;
+  Subheading: string;
+  Description: string;
+  image: string;
+  startedAt: string; // ISO date string from API
+  endedAt: string; // ISO date string from API
+  createdAt: string;
+  updatedAt: string;
+};
 
+// Transform database event to display format
+const transformEvent = (event: EventData) => ({
+  id: event.id,
+  title: event.Heading,
+  subtitle: event.Subheading,
+  image: event.image,
+  description: event.Description,
+  startDate: new Date(event.startedAt).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }),
+  endDate: new Date(event.endedAt).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }),
+  attendees: '500+', // Default attendees since it's not in schema
+});
+
+export default function Event() {
+  const [events, setEvents] = useState<EventData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isInitialRender, setIsInitialRender] = useState(true);
   const [shouldAnimate, setShouldAnimate] = useState(false);
-  const selectedEvent = baseEvents[selectedIndex];
+
+  // Fetch events from API
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/users/event');
+        const result = await response.json();
+
+        if (result.success && result.data) {
+          setEvents(result.data);
+          setError(null);
+        } else {
+          setError(result.message || 'Failed to fetch events');
+          setEvents([]); // Set empty array on error
+        }
+      } catch (err) {
+        console.error('Error fetching events:', err);
+        setError('Failed to fetch events');
+        setEvents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  // Transform events for display
+  const displayEvents = events.map(transformEvent);
+  const selectedEvent = displayEvents[selectedIndex];
 
   useEffect(() => {
     if (isInitialRender) {
@@ -68,14 +86,64 @@ export default function Event() {
   }, [selectedIndex, isInitialRender]);
 
   const handlePrev = () => {
-    setSelectedIndex(
-      (prev) => (prev - 1 + baseEvents.length) % baseEvents.length
-    );
+    if (displayEvents.length > 0) {
+      setSelectedIndex(
+        (prev) => (prev - 1 + displayEvents.length) % displayEvents.length
+      );
+    }
   };
 
   const handleNext = () => {
-    setSelectedIndex((prev) => (prev + 1) % baseEvents.length);
+    if (displayEvents.length > 0) {
+      setSelectedIndex((prev) => (prev + 1) % displayEvents.length);
+    }
   };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex py-10 bg-gray-50">
+        <section className="px-6 w-2/3 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-bold ml-24 text-[#631012] mt-5 border-b-4 border-[#631012] pb-2 inline-block">
+              Latest Events
+            </h2>
+            <div className="flex items-center justify-center py-20">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#631012] mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading events...</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || displayEvents.length === 0) {
+    return (
+      <div className="flex py-10 bg-gray-50">
+        <section className="px-6 w-2/3 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-bold ml-24 text-[#631012] mt-5 border-b-4 border-[#631012] pb-2 inline-block">
+              Latest Events
+            </h2>
+            <div className="flex items-center justify-center py-20">
+              <div className="text-center">
+                <p className="text-gray-600 text-lg mb-4">
+                  {error || 'No events available at the moment'}
+                </p>
+                <p className="text-gray-500 text-sm">
+                  Please check back later or contact support if this persists.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="flex py-10 bg-gray-50">
@@ -90,15 +158,15 @@ export default function Event() {
             <div className="w-full lg:w-1/4 flex flex-col items-center justify-center relative h-96">
               <div className="relative w-full h-full">
                 {/* Semi-circular positioned thumbnails */}
-                {baseEvents.map((event, idx) => {
+                {displayEvents.map((event, idx) => {
                   const offset =
-                    (idx - selectedIndex + baseEvents.length) %
-                    baseEvents.length;
+                    (idx - selectedIndex + displayEvents.length) %
+                    displayEvents.length;
                   const isCenter = offset === 0;
 
                   // Position thumbnails in a semi-circle on the left side
                   const angle =
-                    (offset / baseEvents.length) * Math.PI - Math.PI / 2;
+                    (offset / displayEvents.length) * Math.PI - Math.PI / 2;
                   const radius = 140;
                   const x = Math.cos(angle) * radius - 60; // Offset to left
                   const y = Math.sin(angle) * radius;
@@ -107,8 +175,8 @@ export default function Event() {
                   let zIndex = isCenter ? 30 : 20 - offset;
                   const scale = isCenter ? 1 : 0.7;
 
-                  // Show all 5 circles, hide none
-                  if (offset > baseEvents.length) {
+                  // Show all circles, hide none
+                  if (offset > displayEvents.length) {
                     opacity = 0;
                     zIndex = 0;
                   }
@@ -199,7 +267,9 @@ export default function Event() {
                     </svg>
                   </div>
                   <span className="text-base font-semibold">
-                    {selectedEvent.date}
+                    {selectedEvent.startDate}
+                    {selectedEvent.endDate !== selectedEvent.startDate &&
+                      ` - ${selectedEvent.endDate}`}
                   </span>
                 </div>
 
@@ -263,7 +333,7 @@ export default function Event() {
                 <span className="text-[#631012] font-bold text-lg">
                   {selectedIndex + 1}
                 </span>{' '}
-                / {baseEvents.length}
+                / {displayEvents.length}
               </p>
             </div>
           </div>
@@ -298,7 +368,7 @@ export default function Event() {
             Upcoming Events
           </h2>
           <div className="flex flex-col items-start justify-start gap-6 my-8 max-h-[440px] overflow-auto ">
-            {baseEvents.map((event, idx) => (
+            {displayEvents.map((event, idx) => (
               <div
                 key={event.id}
                 className={`w-full p-4 rounded-2xl border-2 ${
@@ -326,7 +396,7 @@ export default function Event() {
                   >
                     <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
                   </svg>
-                  <span>{event.date}</span>
+                  <span>{event.startDate}</span>
                 </div>
               </div>
             ))}

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const data = [
@@ -23,6 +23,27 @@ const fadeUp = {
 };
 
 function Aboutus() {
+  const [aboutDesc, setAboutDesc] = useState<string>('');
+
+  useEffect(() => {
+    let mounted = true;
+    async function load() {
+      try {
+        const res = await fetch('/api/users/homepage');
+        const json = await res.json();
+        if (mounted && json && json.success && json.data) {
+          setAboutDesc(json.data.AboutDesc || '');
+        }
+      } catch (e) {
+        // ignore
+        console.error('Failed to load homepage about description', e);
+      }
+    }
+    load();
+    return () => {
+      mounted = false;
+    };
+  }, []);
   return (
     <section className="relative py-15 px-6  overflow-hidden">
       {/* Decorative gradient blob */}
@@ -58,15 +79,22 @@ function Aboutus() {
               />
             </motion.h2>
 
-            <p className="text-gray-700 leading-relaxed text-md">
-              National Institute of Technology Hamirpur is one of the thirty-one
-              NITs of the country, which came into existence on 7th August 1986
-              as Regional Engineering College, a joint and cooperative
-              enterprise of the Govt. of India and Govt. of Himachal Pradesh. At
-              the time of inception, Institute had only two departments i.e.,
-              Civil and Electrical Engineering having an intake of 30 students
-              in each.
-            </p>
+            {aboutDesc ? (
+              <p className="text-gray-700 leading-relaxed text-md mt-4">
+                {aboutDesc}
+              </p>
+            ) : (
+              <div>
+                {' '}
+                National Institute of Technology Hamirpur is one of the
+                thirty-one NITs of the country, which came into existence on 7th
+                August 1986 as Regional Engineering College, a joint and
+                cooperative enterprise of the Govt. of India and Govt. of
+                Himachal Pradesh. At the time of inception, Institute had only
+                two departments i.e., Civil and Electrical Engineering having an
+                intake of 30 students in each.
+              </div>
+            )}
           </motion.div>
 
           {/* Right side - Stats with animation */}
