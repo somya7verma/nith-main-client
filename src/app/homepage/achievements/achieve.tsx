@@ -1,80 +1,154 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-function Achieve() {
-  const baseAchievements = [
-    {
-      id: 1,
-      title: 'Excellence in Research',
-      image: '/admin.jpg',
-      description:
-        'Recognized for groundbreaking research contributions and innovative solutions that advance our field.',
-      category: 'Research',
-    },
-    {
-      id: 2,
-      title: 'Academic Excellence',
-      image: '/direct.jpg',
-      description:
-        'Outstanding academic performance and commitment to educational excellence.',
-      category: 'Academic',
-    },
-    {
-      id: 3,
-      title: 'Innovation Award',
-      image: '/window.svg',
-      description:
-        'Pioneering innovative projects that showcase creativity and technical excellence.',
-      category: 'Innovation',
-    },
-    {
-      id: 4,
-      title: 'Community Service',
-      image: '/glob.svg',
-      description:
-        'Dedicated service and positive impact on the community and society.',
-      category: 'Service',
-    },
-    {
-      id: 5,
-      title: 'Student Achievement',
-      image: '/admin.jpg',
-      description:
-        'Exceptional performance and dedication to excellence in student endeavors.',
-      category: 'Student',
-    },
-  ];
+interface Achievement {
+  id: number;
+  tagline: string;
+  Heading: string;
+  description: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
+interface TransformedAchievement {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+  category: string;
+}
+
+function Achieve() {
+  const [achievements, setAchievements] = useState<TransformedAchievement[]>(
+    []
+  );
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  // Transform database achievement to display format
+  const transformAchievement = (
+    achievement: Achievement
+  ): TransformedAchievement => ({
+    id: achievement.id,
+    title: achievement.Heading,
+    image: achievement.image,
+    description: achievement.description,
+    category: achievement.tagline, // Using tagline as category
+  });
+
+  useEffect(() => {
+    const fetchAchievements = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/users/achievement');
+        const result = await response.json();
+
+        if (result.success && Array.isArray(result.data)) {
+          const transformedAchievements = result.data.map(transformAchievement);
+          setAchievements(transformedAchievements);
+          // Reset selectedIndex if it's out of bounds
+          if (transformedAchievements.length > 0) {
+            setSelectedIndex(0);
+          }
+        } else {
+          setError('Failed to load achievements');
+        }
+      } catch (err) {
+        setError('Error fetching achievements');
+        console.error('Error fetching achievements:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAchievements();
+  }, []);
+
   const handlePrev = () => {
+    if (achievements.length === 0) return;
     setSelectedIndex(
-      (prev) => (prev - 1 + baseAchievements.length) % baseAchievements.length
+      (prev) => (prev - 1 + achievements.length) % achievements.length
     );
   };
 
   const handleNext = () => {
-    setSelectedIndex((prev) => (prev + 1) % baseAchievements.length);
+    if (achievements.length === 0) return;
+    setSelectedIndex((prev) => (prev + 1) % achievements.length);
   };
 
   // Get visible cards for carousel
   const getVisibleCards = () => {
+    if (achievements.length === 0) return [];
+
     const result = [];
     for (let i = -2; i <= 2; i++) {
       const idx =
-        (selectedIndex + i + baseAchievements.length) % baseAchievements.length;
-      result.push({
-        achievement: baseAchievements[idx],
-        index: idx,
-        offset: i,
-      });
+        (selectedIndex + i + achievements.length) % achievements.length;
+      const achievement = achievements[idx];
+      if (achievement) {
+        result.push({
+          achievement,
+          index: idx,
+          offset: i,
+        });
+      }
     }
     return result;
   };
 
   const visibleCards = getVisibleCards();
+
+  // Loading state
+  if (loading) {
+    return (
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-[#631012] mb-12 border-b-4 border-[#631012] pb-2 inline-block">
+            Achievements
+          </h2>
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#631012]"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-[#631012] mb-12 border-b-4 border-[#631012] pb-2 inline-block">
+            Achievements
+          </h2>
+          <div className="flex justify-center items-center h-64">
+            <p className="text-gray-600">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Empty state
+  if (achievements.length === 0) {
+    return (
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-[#631012] mb-12 border-b-4 border-[#631012] pb-2 inline-block">
+            Achievements
+          </h2>
+          <div className="flex justify-center items-center h-64">
+            <p className="text-gray-600">No achievements available</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 px-6 bg-white">
@@ -99,6 +173,9 @@ function Achieve() {
               {/* Scrollable cards container */}
               <div className="relative w-full h-full flex items-center justify-center perspective">
                 {visibleCards.map(({ achievement, index, offset }) => {
+                  // Safety check to ensure achievement exists
+                  if (!achievement) return null;
+
                   const isCenter = offset === 0;
                   let scale = 0.7;
                   let opacity = 0.4;
@@ -116,7 +193,7 @@ function Achieve() {
 
                   return (
                     <div
-                      key={achievement.id}
+                      key={`${achievement.id}-${offset}-${index}`}
                       onClick={() => setSelectedIndex(index)}
                       className="absolute cursor-pointer transition-all duration-500 ease-out"
                       style={{
@@ -136,8 +213,8 @@ function Achieve() {
                         {/* Image */}
                         <div className="relative h-48 overflow-hidden bg-gray-100">
                           <Image
-                            src={achievement.image}
-                            alt={achievement.title}
+                            src={achievement.image || '/placeholder.jpg'}
+                            alt={achievement.title || 'Achievement'}
                             fill
                             className="object-cover hover:scale-110 transition-transform duration-500"
                           />
@@ -148,18 +225,19 @@ function Achieve() {
                           {/* Category badge */}
                           <div className="mb-3">
                             <span className="inline-block px-3 py-1 bg-[#631012]/10 text-[#631012] text-xs font-bold rounded-full border border-[#631012]/30">
-                              {achievement.category}
+                              {achievement.category || 'General'}
                             </span>
                           </div>
 
                           {/* Title */}
                           <h3 className="text-lg font-bold text-[#631012] mb-3 line-clamp-2">
-                            {achievement.title}
+                            {achievement.title || 'Untitled Achievement'}
                           </h3>
 
                           {/* Description */}
                           <p className="text-gray-700 text-sm leading-relaxed line-clamp-2">
-                            {achievement.description}
+                            {achievement.description ||
+                              'No description available'}
                           </p>
                         </div>
                       </div>
@@ -183,9 +261,9 @@ function Achieve() {
         <div className="flex justify-center mt-8">
           <p className="text-gray-600 font-semibold text-sm">
             <span className="text-[#631012] font-bold">
-              {selectedIndex + 1}
+              {achievements.length > 0 ? selectedIndex + 1 : 0}
             </span>{' '}
-            / {baseAchievements.length}
+            / {achievements.length}
           </p>
         </div>
       </div>

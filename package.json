@@ -7,7 +7,12 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "db:generate": "npx prisma generate",
+    "db:push": "npx prisma db push",
+    "db:seed": "node prisma/seed.js",
+    "db:studio": "npx prisma studio",
+    "db:setup": "npm run db:generate && npm run db:push && npm run db:seed"
   },
   "dependencies": {
     "@prisma/client": "^6.18.0",

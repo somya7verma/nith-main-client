@@ -1,7 +1,22 @@
-import React from 'react';
 import Image from 'next/image';
+import { getHomepageData, type Homepage } from '../../../../lib/prisma';
 
-export default function Director() {
+export default async function Director() {
+  // Get homepage data from database only
+  const homepage: Homepage = await getHomepageData();
+
+  const DirectorName = homepage.DirectorName || '';
+  const DirectorMessage = homepage.DirectorMessage || '';
+  const DirectorDesignation = homepage.DirectorDesignation || '';
+  // Email and phone are available in the data but not displayed in this component
+  // const Directoremail = homepage.Directoremail || '';
+  // const Directorphone = homepage.Directorphone || '';
+
+  // Don't render the section if no director data is available
+  if (!DirectorName && !DirectorMessage && !DirectorDesignation) {
+    return null;
+  }
+
   return (
     <section className="py-16 px-6 bg-gray-200">
       <div className="max-w-7xl mx-auto">
@@ -30,11 +45,7 @@ export default function Director() {
             {/* Right side - Quote and attribution */}
             <div className="space-y-6 flex flex-col justify-center">
               <blockquote className="text-lg leading-relaxed text-gray-800 text-left">
-                &ldquo;NIT Hamirpur is a hub of innovation and learning, where
-                we are committed to fostering a culture of excellence. Our focus
-                is on nurturing the next generation of leaders and
-                problem-solvers who can make a positive impact on
-                society.&rdquo;
+                &ldquo;{DirectorMessage}&rdquo;
               </blockquote>
 
               {/* Divider line */}
@@ -43,9 +54,9 @@ export default function Director() {
               {/* Attribution */}
               <div className="space-y-1">
                 <p className="text-xl font-bold text-gray-900">
-                  Dr. H.M. Suryavanshi
+                  {DirectorName}
                 </p>
-                <p className="text-gray-700">Director, NIT Hamirpur</p>
+                <p className="text-gray-700">{DirectorDesignation}</p>
               </div>
             </div>
           </div>
