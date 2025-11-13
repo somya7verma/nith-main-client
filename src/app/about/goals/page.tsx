@@ -131,7 +131,6 @@ export default function GoalsPage() {
     <div className="min-h-screen bg-white">
       <Header31 />
 
-      {/* Breadcrumb */}
       <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto">
           <nav className="flex items-center space-x-2 text-sm text-gray-600">
@@ -149,7 +148,6 @@ export default function GoalsPage() {
         </div>
       </div>
 
-      {/* Page Header */}
       <section className="relative bg-gradient-to-br from-[#800000] via-[#631012] to-[#8B1E1E] overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse"></div>
@@ -165,18 +163,6 @@ export default function GoalsPage() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-white/90 text-sm font-medium">
-              Strategic Vision
-            </span>
-          </motion.div>
-
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             Our Goals
           </h1>
@@ -188,7 +174,6 @@ export default function GoalsPage() {
         </motion.div>
       </section>
 
-      {/* Strategic Goals Overview */}
       <section className="relative py-24 px-6 bg-gradient-to-b from-white via-gray-50/50 to-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -199,9 +184,6 @@ export default function GoalsPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
-              Strategic Roadmap
-            </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Institutional Goals
             </h2>
