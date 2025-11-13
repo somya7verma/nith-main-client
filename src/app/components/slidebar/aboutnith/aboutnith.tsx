@@ -1,8 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 
 function Aboutnith() {
   const links = [
-    { label: 'History', href: '#' },
+    { label: 'History', href: '/about/history' },
     { label: 'Vision & Mission', href: '#' },
     { label: 'Goals', href: '#' },
     { label: 'Core Values', href: '#' },
@@ -13,13 +14,13 @@ function Aboutnith() {
   return (
     <div className="grid grid-cols-3 gap-4">
       {links.map((link) => (
-        <a
+        <Link
           key={link.label}
           href={link.href}
           className="block px-6 py-4 text-black hover:bg-gray-200 text-center transition-colors font-medium text-base rounded-lg border border-gray-300 hover:border-black"
         >
           {link.label}
-        </a>
+        </Link>
       ))}
     </div>
   );
