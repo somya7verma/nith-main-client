@@ -7,7 +7,7 @@ function Aboutnith() {
     { label: 'About the City', href: '/about/the-city' },
     { label: 'Vision & Mission', href: '#' },
     { label: 'Goals', href: '#' },
-    { label: 'Core Values', href: '#' },
+    { label: 'Core Values', href: '/about/core-values' },
     { label: 'Connectivity', href: '#' },
   ];
 
