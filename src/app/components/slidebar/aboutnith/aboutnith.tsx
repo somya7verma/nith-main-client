@@ -8,7 +8,7 @@ function Aboutnith() {
     { label: 'Vision & Mission', href: '#' },
     { label: 'Goals', href: '#' },
     { label: 'Core Values', href: '/about/core-values' },
-    { label: 'Connectivity', href: '#' },
+    { label: 'Connectivity', href: '/about/connectivity' },
   ];
 
   return (
