@@ -81,24 +81,49 @@ export default function HistoryPage() {
     <div className="min-h-screen bg-gray-50">
       <Page />
 
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-3">
-          <nav className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-[#631012] transition-colors">
+      <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          <nav className="flex items-center space-x-2 text-sm text-gray-600">
+            <Link
+              href="/"
+              className="hover:text-[#800000] transition-colors duration-200"
+            >
               Home
             </Link>
-            <span>/</span>
+            <span>›</span>
             <span className="text-gray-400">About</span>
-            <span>/</span>
-            <span className="text-[#631012] font-medium">History</span>
+            <span>›</span>
+            <span className="text-[#800000] font-medium">History</span>
           </nav>
         </div>
       </div>
 
-      <section className="relative py-16 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-100 overflow-hidden">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-[#631012]/10 rounded-full blur-3xl opacity-40"></div>
-        <div className="absolute bottom-10 left-10 w-60 h-60 bg-gray-200 rounded-full blur-3xl opacity-30"></div>
+      <section className="relative bg-gradient-to-br from-[#800000] via-[#631012] to-[#8B1E1E] overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
 
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')] opacity-5"></div>
+
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
+        >
+          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
+            Our History
+          </h1>
+          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+            From our establishment in 1986 to becoming an Institute of National
+            Importance — a journey of excellence and growth.
+          </p>
+        </motion.div>
+      </section>
+
+      <section className="relative py-16 px-6 bg-white">
         <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial="hidden"
@@ -108,11 +133,6 @@ export default function HistoryPage() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-[#631012] mb-6">
-              History
-            </h1>
-            <div className="w-24 h-1 bg-[#631012] mx-auto mb-8 rounded-full"></div>
-
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -123,7 +143,7 @@ export default function HistoryPage() {
               <p>
                 National Institute of Technology Hamirpur (NIT Hamirpur) is one
                 of the thirty-one NITs of India. It came into existence on{' '}
-                <span className="font-semibold text-[#631012]">
+                <span className="font-semibold text-[#800000]">
                   7th August 1986
                 </span>{' '}
                 as Regional Engineering College (REC) — a joint and cooperative
@@ -136,12 +156,12 @@ export default function HistoryPage() {
               </p>
               <div className="flex justify-center gap-8 mt-6 mb-6">
                 <div className="bg-white px-6 py-3 rounded-lg shadow-md border border-gray-200">
-                  <span className="font-semibold text-[#631012]">
+                  <span className="font-semibold text-[#800000]">
                     Civil Engineering
                   </span>
                 </div>
                 <div className="bg-white px-6 py-3 rounded-lg shadow-md border border-gray-200">
-                  <span className="font-semibold text-[#631012]">
+                  <span className="font-semibold text-[#800000]">
                     Electrical Engineering
                   </span>
                 </div>
@@ -154,7 +174,7 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      <section className="relative py-20 px-6 bg-white">
+      <section className="relative py-24 px-6 bg-gradient-to-b from-white via-gray-50/50 to-white">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial="hidden"
@@ -164,10 +184,15 @@ export default function HistoryPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#631012] mb-4">
+            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
+              Journey Through Time
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Timeline
             </h2>
-            <div className="w-20 h-1 bg-[#631012] mx-auto rounded-full"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+              Key milestones in our journey from REC to NIT
+            </p>
           </motion.div>
 
           <div className="hidden md:block relative">
@@ -238,21 +263,21 @@ export default function HistoryPage() {
                 }}
                 className="relative pl-16 pb-12 last:pb-0"
               >
-                <div className="absolute left-4 top-0 w-5 h-5 bg-[#631012] rounded-full border-4 border-white shadow-lg z-10"></div>
+                <div className="absolute left-4 top-0 w-5 h-5 bg-[#800000] rounded-full border-4 border-white shadow-lg z-10"></div>
 
                 <motion.div
                   className="bg-white rounded-xl shadow-lg p-5 border border-gray-200"
                   whileHover={{ scale: 1.02 }}
                 >
                   <div className="mb-2">
-                    <span className="inline-block bg-[#631012] text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    <span className="inline-block bg-[#800000] text-white px-3 py-1 rounded-full text-xs font-semibold">
                       {event.year}
                     </span>
                   </div>
                   <h3 className="text-lg font-bold text-gray-800 mb-2">
                     {event.title}
                   </h3>
-                  <p className="text-sm text-[#631012] font-medium mb-2">
+                  <p className="text-sm text-[#800000] font-medium mb-2">
                     {event.date}
                   </p>
                   <p className="text-gray-600 leading-relaxed text-sm">
@@ -265,10 +290,7 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      <section className="relative py-20 px-6 bg-gradient-to-br from-[#631012]/5 via-white to-gray-50 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#631012]/5 rounded-full blur-3xl opacity-50"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gray-200 rounded-full blur-3xl opacity-40"></div>
-
+      <section className="relative py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial="hidden"
@@ -278,10 +300,15 @@ export default function HistoryPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#631012] mb-4">
+            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
+              Transformation
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Journey of Excellence
             </h2>
-            <div className="w-20 h-1 bg-[#631012] mx-auto rounded-full"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+              From humble beginnings to national recognition
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-8">

@@ -2,8 +2,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Page from '../../components/header31';
+import Header31 from '../../components/header31';
 import Footer from '../../components/footer';
+import { Sparkles } from 'lucide-react';
 
 const TrainIcon = () => (
   <svg
@@ -62,7 +63,7 @@ const BusIcon = () => (
 const fadeUp = {
   hidden: {
     opacity: 0,
-    y: 40,
+    y: 30,
   },
   visible: {
     opacity: 1,
@@ -73,7 +74,7 @@ const fadeUp = {
 const fadeInScale = {
   hidden: {
     opacity: 0,
-    scale: 0.95,
+    scale: 0.9,
   },
   visible: {
     opacity: 1,
@@ -129,28 +130,66 @@ export default function ConnectivityPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Page />
+    <div className="min-h-screen bg-white">
+      <Header31 />
 
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-3">
-          <nav className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-[#631012] transition-colors">
+      <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          <nav className="flex items-center space-x-2 text-sm text-gray-600">
+            <Link
+              href="/"
+              className="hover:text-[#800000] transition-colors duration-200"
+            >
               Home
             </Link>
-            <span>/</span>
+            <span>›</span>
             <span className="text-gray-400">About</span>
-            <span>/</span>
-            <span className="text-[#631012] font-medium">Connectivity</span>
+            <span>›</span>
+            <span className="text-[#800000] font-medium">Connectivity</span>
           </nav>
         </div>
       </div>
 
-      <section className="relative py-20 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-100 overflow-hidden">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-[#631012]/10 rounded-full blur-3xl opacity-40"></div>
-        <div className="absolute bottom-10 left-10 w-80 h-80 bg-gray-200 rounded-full blur-3xl opacity-30"></div>
+      <section className="relative bg-gradient-to-br from-[#800000] via-[#631012] to-[#8B1E1E] overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')] opacity-5"></div>
+
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6"
+          >
+            <Sparkles className="w-4 h-4 text-white" />
+            <span className="text-white/90 text-sm font-medium">
+              How to Reach
+            </span>
+          </motion.div>
+
+          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
+            Connectivity
+          </h1>
+          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+            Well connected to all major cities through rail, air, and road
+            networks — situated amidst serene hills while offering excellent
+            accessibility
+          </p>
+        </motion.div>
+      </section>
+
+      <section className="relative py-24 px-6 bg-gradient-to-b from-white via-gray-50/50 to-white">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -159,16 +198,14 @@ export default function ConnectivityPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-3xl md:text-4xl font-bold text-[#631012] mb-6 tracking-wide uppercase">
-              Connectivity
-            </h1>
-            <div className="w-20 h-1 bg-[#631012] mx-auto rounded-full mb-8"></div>
-            <p className="text-gray-600 text-center max-w-3xl mx-auto leading-relaxed text-lg">
-              NIT Hamirpur is well connected to all major cities and towns of
-              North India through rail, air, and road networks. The campus is
-              situated amidst the serene hills of Himachal Pradesh, offering
-              excellent accessibility while retaining its peaceful environment
-              ideal for academics and research.
+            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
+              Travel Options
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              How to Reach
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+              Multiple convenient options to reach our campus
             </p>
           </motion.div>
 
@@ -191,7 +228,7 @@ export default function ConnectivityPage() {
                 }}
                 className="bg-white border border-gray-200 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
               >
-                <div className="bg-[#631012] text-white py-6 flex items-center justify-center flex-col gap-3">
+                <div className="bg-[#800000] text-white py-6 flex items-center justify-center flex-col gap-3">
                   <motion.div
                     whileHover={{
                       scale: 1.1,
@@ -208,26 +245,26 @@ export default function ConnectivityPage() {
 
                 <div className="p-6 space-y-4">
                   <div>
-                    <h4 className="text-sm font-semibold text-[#631012] mb-1">
+                    <h4 className="text-sm font-semibold text-[#800000] mb-1">
                       Nearest Point:
                     </h4>
                     <p className="text-gray-700 text-sm">{mode.nearestPoint}</p>
                   </div>
 
                   <div>
-                    <h4 className="text-sm font-semibold text-[#631012] mb-1">
+                    <h4 className="text-sm font-semibold text-[#800000] mb-1">
                       Distance:
                     </h4>
                     <p className="text-gray-700 text-sm">{mode.distance}</p>
                     {mode.travelTime && (
-                      <span className="inline-block mt-1 bg-[#631012]/10 text-[#631012] text-xs font-medium px-3 py-1 rounded-full">
+                      <span className="inline-block mt-1 bg-[#800000]/10 text-[#800000] text-xs font-medium px-3 py-1 rounded-full">
                         {mode.travelTime}
                       </span>
                     )}
                   </div>
 
                   <div>
-                    <h4 className="text-sm font-semibold text-[#631012] mb-1">
+                    <h4 className="text-sm font-semibold text-[#800000] mb-1">
                       Services Available:
                     </h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
@@ -249,7 +286,7 @@ export default function ConnectivityPage() {
         </div>
       </section>
 
-      <section className="relative py-20 px-6 bg-white">
+      <section className="relative py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
@@ -257,12 +294,17 @@ export default function ConnectivityPage() {
             viewport={{ once: true }}
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">
+            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
+              Find Us
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Campus Location Map
             </h2>
-            <div className="w-16 h-1 bg-[#631012] mx-auto rounded"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+              Navigate to our campus with ease
+            </p>
           </motion.div>
 
           <motion.div
@@ -295,7 +337,7 @@ export default function ConnectivityPage() {
                   href="https://www.google.com/maps/dir/?api=1&destination=National+Institute+of+Technology+Hamirpur"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#631012] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#7d1315] transition-colors shadow-md hover:shadow-lg"
+                  className="inline-flex items-center gap-2 bg-[#800000] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#631012] transition-colors shadow-md hover:shadow-lg"
                 >
                   <svg
                     className="w-5 h-5"
@@ -318,23 +360,25 @@ export default function ConnectivityPage() {
         </div>
       </section>
 
-      <section className="relative py-16 px-6 bg-gradient-to-br from-[#631012]/5 via-white to-gray-50 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#631012]/5 rounded-full blur-3xl opacity-50"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gray-200 rounded-full blur-3xl opacity-40"></div>
-
-        <div className="max-w-5xl mx-auto relative z-10">
+      <section className="relative py-24 px-6 bg-gradient-to-b from-white via-gray-50/50 to-white">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-center mb-10"
+            className="text-center mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-[#631012] mb-4">
+            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
+              Quick Reference
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Quick Travel Guide
             </h2>
-            <div className="w-20 h-1 bg-[#631012] mx-auto rounded-full"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+              Essential travel information from major cities
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -344,11 +388,11 @@ export default function ConnectivityPage() {
               viewport={{ once: true }}
               variants={fadeUp}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-[#631012]"
+              className="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-[#800000]"
             >
               <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 text-[#631012]"
+                  className="w-5 h-5 text-[#800000]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -364,15 +408,15 @@ export default function ConnectivityPage() {
               </h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-[#631012] mt-1">•</span>
+                  <span className="text-[#800000] mt-1">•</span>
                   <span>Distance: ~450 km</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#631012] mt-1">•</span>
+                  <span className="text-[#800000] mt-1">•</span>
                   <span>By Road: 8-9 hours via NH-44 & NH-3</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#631012] mt-1">•</span>
+                  <span className="text-[#800000] mt-1">•</span>
                   <span>By Train: Delhi to Una, then road to Hamirpur</span>
                 </li>
               </ul>
@@ -384,11 +428,11 @@ export default function ConnectivityPage() {
               viewport={{ once: true }}
               variants={fadeUp}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-[#631012]"
+              className="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-[#800000]"
             >
               <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 text-[#631012]"
+                  className="w-5 h-5 text-[#800000]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -404,15 +448,15 @@ export default function ConnectivityPage() {
               </h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-[#631012] mt-1">•</span>
+                  <span className="text-[#800000] mt-1">•</span>
                   <span>Distance: ~200 km</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#631012] mt-1">•</span>
+                  <span className="text-[#800000] mt-1">•</span>
                   <span>By Road: 4-5 hours via NH-3</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#631012] mt-1">•</span>
+                  <span className="text-[#800000] mt-1">•</span>
                   <span>Regular HRTC buses available</span>
                 </li>
               </ul>
