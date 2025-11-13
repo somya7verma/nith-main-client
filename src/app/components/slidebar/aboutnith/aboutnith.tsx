@@ -4,10 +4,10 @@ import Link from 'next/link';
 function Aboutnith() {
   const links = [
     { label: 'History', href: '/about/history' },
+    { label: 'About the City', href: '/about/the-city' },
     { label: 'Vision & Mission', href: '#' },
     { label: 'Goals', href: '#' },
     { label: 'Core Values', href: '#' },
-    { label: 'About', href: '#' },
     { label: 'Connectivity', href: '#' },
   ];
 
