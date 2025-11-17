@@ -62,7 +62,7 @@ function Page() {
             </div>
           </div>
         </div>
-        <div className="flex justify-end mb-0.5 -mt-7">
+        <div className="flex justify-end mb-0.5 ">
           <div className="flex justify-center items-center rounf h-10 w-[85%] rounded-tl-full bg-[#631012] gap-4 text-white">
             <div className="flex items-center gap-8 py-0 text-sm text-white">
               <div id="abouth" className="relative group">
@@ -113,6 +113,11 @@ function Page() {
                 </span>
               </div>
 
+              <div id="downloadsh" className="relative group">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
+                  Downloads
+                </span>
+              </div>
               <div id="downloadsh" className="relative group">
                 <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
                   Downloads
