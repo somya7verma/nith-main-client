@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <div className="min-h-screen relative">
       {/* Header and Hero section */}
-      <div className="h-screen flex flex-col relative">
-        <div className="relative">
+      <div className="h-full flex flex-col">
+        <div className="sticky top-0 left-0 w-screen">
           <Page />
         </div>
         <div className="flex-1 relative z-0">
