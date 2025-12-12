@@ -138,18 +138,6 @@ export default function VisionMissionPage() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-white/90 text-sm font-medium">
-              Our Vision & Mission
-            </span>
-          </motion.div>
-
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             Guiding Principles
           </h1>

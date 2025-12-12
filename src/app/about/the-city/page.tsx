@@ -87,24 +87,15 @@ export default function AboutCityPage() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-white/90 text-sm font-medium">
-              Discover Hamirpur
-            </span>
-          </motion.div>
-
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             About Hamirpur
           </h1>
           <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            The eco-friendly educational hub nestled in the serene Himalayan
-            valleys
+            Set in the peaceful hills of Himachal Pradesh, Hamirpur offers a
+            clean, calm, and welcoming environment for all who visit NIT
+            Hamirpur. With its friendly community and natural beauty, the city
+            creates the perfect backdrop for learning, growth, and new
+            beginnings.
           </p>
         </motion.div>
       </section>
@@ -119,9 +110,6 @@ export default function AboutCityPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
-              Quick Facts
-            </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               City Overview
             </h2>
@@ -177,7 +165,7 @@ export default function AboutCityPage() {
           >
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
+                <div className="flex items-center gap-5">
                   <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed">
                     Hamirpur, the district headquarter, is situated at an
@@ -194,7 +182,7 @@ export default function AboutCityPage() {
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-center gap-5">
                   <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed">
                     Hamirpur City is surrounded by pine tree forest and has a
@@ -206,7 +194,7 @@ export default function AboutCityPage() {
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
+                <div className="flex items-center gap-5">
                   <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed">
                     During winter, the climate is cold but pleasant when woolens
@@ -219,7 +207,7 @@ export default function AboutCityPage() {
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-center gap-5">
                   <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed">
                     It is a major junction on National Highway 3 while National
@@ -245,9 +233,6 @@ export default function AboutCityPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
-              Find Us
-            </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Location Map
             </h2>
@@ -277,115 +262,6 @@ export default function AboutCityPage() {
               ></iframe>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      <section className="relative py-24 px-6 bg-gradient-to-b from-white via-gray-50/50 to-white">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
-              Why Hamirpur
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              City Highlights
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              What makes Hamirpur an ideal place for education and growth
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{
-                y: -8,
-                transition: { type: 'spring', stiffness: 300 },
-              }}
-              className="group relative bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              <div className="relative">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Sparkles className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#800000] transition-colors">
-                  Clean & Green
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  An eco-friendly district known for its clean environment and
-                  sustainable practices
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              whileHover={{
-                y: -8,
-                transition: { type: 'spring', stiffness: 300 },
-              }}
-              className="group relative bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              <div className="relative">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <BookOpen className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#800000] transition-colors">
-                  High Literacy
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  A premier educational hub with renowned institutions and high
-                  literacy rates
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{
-                y: -8,
-                transition: { type: 'spring', stiffness: 300 },
-              }}
-              className="group relative bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              <div className="relative">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Map className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#800000] transition-colors">
-                  Well Connected
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Strategic junction of NH-3 & NH-103 with excellent road
-                  connectivity
-                </p>
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 

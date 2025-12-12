@@ -184,9 +184,6 @@ export default function HistoryPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
-              Journey Through Time
-            </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Timeline
             </h2>
@@ -290,7 +287,7 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      <section className="relative py-20 px-6 bg-white">
+      <section className="relative py-24 px-6 bg-gradient-to-b from-white via-gray-50/50 to-white">
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial="hidden"
@@ -298,10 +295,10 @@ export default function HistoryPage() {
             viewport={{ once: true }}
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
             <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
-              Transformation
+              Transformation Story
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Journey of Excellence
@@ -318,49 +315,71 @@ export default function HistoryPage() {
               viewport={{ once: true }}
               variants={fadeInLeft}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#631012] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              className="group relative bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-[#631012]/10 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-[#631012]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                    />
-                  </svg>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <svg
+                      className="w-7 h-7 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="inline-block px-3 py-1 bg-[#800000]/10 text-[#800000] text-xs font-bold rounded-full mb-1">
+                      1986
+                    </span>
+                    <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#800000] transition-colors">
+                      The Beginning
+                    </h3>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800">
-                  The Beginning
-                </h3>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-[#631012] rounded-full"></div>
-                  <p className="text-gray-700">
-                    <span className="font-semibold">2 Departments:</span> Civil
-                    & Electrical Engineering
-                  </p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-[#631012] rounded-full"></div>
-                  <p className="text-gray-700">
-                    <span className="font-semibold">60 Students</span> in the
-                    first batch
-                  </p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-[#631012] rounded-full"></div>
-                  <p className="text-gray-700">
-                    <span className="font-semibold">Regional Status:</span> REC
-                    Hamirpur
-                  </p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-bold text-gray-900">
+                        2 Departments:
+                      </span>{' '}
+                      Civil & Electrical Engineering
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-bold text-gray-900">
+                        60 Students
+                      </span>{' '}
+                      admitted in the inaugural batch
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-bold text-gray-900">
+                        Regional Status:
+                      </span>{' '}
+                      Established as REC Hamirpur
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-bold text-gray-900">Vision:</span>{' '}
+                      Quality technical education in the Himalayan region
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -371,47 +390,73 @@ export default function HistoryPage() {
               viewport={{ once: true }}
               variants={fadeInRight}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-xl p-8 border-l-4 border-[#631012] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              className="group relative bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-[#631012]/10 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-[#631012]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                    />
-                  </svg>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <svg
+                      className="w-7 h-7 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="inline-block px-3 py-1 bg-[#800000]/10 text-[#800000] text-xs font-bold rounded-full mb-1">
+                      2025
+                    </span>
+                    <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#800000] transition-colors">
+                      Today
+                    </h3>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800">Today</h3>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-[#631012] rounded-full"></div>
-                  <p className="text-gray-700">
-                    <span className="font-semibold">Multiple Programs:</span>{' '}
-                    UG, PG & Doctoral
-                  </p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-[#631012] rounded-full"></div>
-                  <p className="text-gray-700">
-                    <span className="font-semibold">Diverse Disciplines:</span>{' '}
-                    Engineering & Sciences
-                  </p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-[#631012] rounded-full"></div>
-                  <p className="text-gray-700">
-                    <span className="font-semibold">National Importance:</span>{' '}
-                    Premier Technical Institution
-                  </p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-bold text-gray-900">
+                        20+ Departments:
+                      </span>{' '}
+                      Engineering, Sciences & Management
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-bold text-gray-900">
+                        5000+ Students
+                      </span>{' '}
+                      pursuing UG, PG & Doctoral programs
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-bold text-gray-900">
+                        National Importance:
+                      </span>{' '}
+                      Premier Technical Institution of India
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700 leading-relaxed">
+                      <span className="font-bold text-gray-900">
+                        Excellence:
+                      </span>{' '}
+                      Research, Innovation & Academic Leadership
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -423,10 +468,12 @@ export default function HistoryPage() {
             viewport={{ once: true }}
             variants={fadeUp}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="bg-gradient-to-r from-[#631012] to-[#8B1E1E] rounded-2xl shadow-2xl p-8 md:p-10 text-white"
+            className="bg-gradient-to-r from-[#800000] to-[#8B1E1E] rounded-3xl shadow-2xl p-10 md:p-12 text-white relative overflow-hidden"
           >
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+
+            <div className="relative flex flex-col md:flex-row items-center gap-6">
+              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -442,16 +489,19 @@ export default function HistoryPage() {
                 </svg>
               </div>
               <div className="flex-1 text-center md:text-left">
-                <h4 className="text-2xl font-bold mb-3">
-                  Continuing the Legacy
+                <h4 className="text-2xl md:text-3xl font-bold mb-4">
+                  Continuing the Legacy of Excellence
                 </h4>
-                <p className="text-white/90 leading-relaxed">
-                  The transformation from REC to NIT and its recognition as an
-                  Institute of National Importance marks significant milestones
-                  in our journey toward academic excellence. Today, we continue
-                  to contribute to the nation&apos;s technological advancement
-                  through quality education, cutting-edge research, and
-                  innovation that shapes the future.
+                <p className="text-white/90 leading-relaxed text-lg">
+                  From a modest beginning with just 2 departments and 60
+                  students to becoming one of India&apos;s premier technical
+                  institutions, our journey reflects unwavering commitment to
+                  excellence. The transformation from REC to NIT and recognition
+                  as an Institute of National Importance marks pivotal
+                  milestones. Today, with 20+ departments, 5000+ students, and
+                  world-class research facilities, we continue to shape the
+                  future through cutting-edge education, groundbreaking
+                  research, and innovation that serves the nation and beyond.
                 </p>
               </div>
             </div>
