@@ -14,7 +14,7 @@ import Downloads from './slidebar/downloads/downloads';
 function Page() {
   return (
     <>
-      <div id="special" className="w-full relative ">
+      <div id="special" className="w-full relative">
         <div className="bg-white   box   ">
           <div className=" item-1   bg-[#631012]">
             <div className="max-w-7xl mx-auto flex items-center justify-end gap-6">

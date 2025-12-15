@@ -1,4 +1,4 @@
-import Page from './components/header31';
+import Nav from './components/header31';
 import Aboutus from './homepage/aboutus/aboutus';
 import Footer from './components/footer';
 import Event from './homepage/event/event';
@@ -14,8 +14,8 @@ export default function Home() {
     <div className="min-h-screen relative">
       {/* Header and Hero section */}
       <div className="h-full flex flex-col">
-        <div className="sticky top-0 left-0 w-screen">
-          <Page />
+        <div className="absolute top-0 left-0 w-screen z-50">
+          <Nav />
         </div>
         <div className="flex-1 relative z-0">
           <Hero />
