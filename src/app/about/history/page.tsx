@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Page from '../../components/header31';
+import Page from '../../components/header';
 import Footer from '../../components/footer';
 
 const fadeUp = {

@@ -1,4 +1,4 @@
-import Nav from './components/header31';
+import Nav from './components/header';
 import Aboutus from './homepage/aboutus/aboutus';
 import Footer from './components/footer';
 import Event from './homepage/event/event';

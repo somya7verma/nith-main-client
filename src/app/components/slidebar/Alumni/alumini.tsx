@@ -58,7 +58,11 @@ function Alumni() {
       {
         section: 'Portal',
         links: [
-          { title: 'Alumni Network', href: '/alumni/network', hasIcon: true },
+          {
+            title: 'Alumni Portal',
+            href: 'https://alumni.nith.ac.in/',
+            hasIcon: true,
+          },
         ],
       },
     ],
