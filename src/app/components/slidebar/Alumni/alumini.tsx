@@ -5,7 +5,7 @@ function Alumni() {
     leftColumn: [
       { title: 'Activities', href: '/alumni/activities' },
       { title: 'Functionaries', href: '/alumni/functionaries' },
-      { title: 'Alumni Related Notices', href: '/alumni/related-notices' },
+      { title: 'Alumni Newsroom', href: '/alumni/related-notices' },
       { title: 'Alumni Related MoU', href: '/alumni/related-mou' },
       { title: 'Alumni Assist', href: '/alumni/assist' },
     ],
