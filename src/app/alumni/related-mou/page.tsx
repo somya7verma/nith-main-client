@@ -477,8 +477,7 @@ export default function AlumniRelatedMoU() {
                         transition={{ duration: 0.3, delay: index * 0.05 }}
                         className="bg-white rounded-xl shadow-sm p-5 hover:shadow-md transition-shadow duration-300"
                       >
-                        {/* Serial Number Badge */}
-                        <div className="flex items-start gap-3 mb-3">
+                        <div className="flex items-center justify-start gap-3 mb-3">
                           <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#631012]/10 text-[#631012] text-sm font-semibold flex items-center justify-center">
                             {(currentPage - 1) * ITEMS_PER_PAGE + index + 1}
                           </span>
@@ -489,7 +488,6 @@ export default function AlumniRelatedMoU() {
                           </div>
                         </div>
 
-                        {/* Date */}
                         <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 ml-11">
                           <svg
                             className="w-4 h-4"
@@ -507,7 +505,6 @@ export default function AlumniRelatedMoU() {
                           <span>Drafted on: {formatDate(mou.draftedDate)}</span>
                         </div>
 
-                        {/* Action Buttons */}
                         <div className="flex gap-3 ml-11">
                           <button
                             onClick={() => handleRead(mou.documentUrl)}
@@ -565,7 +562,6 @@ export default function AlumniRelatedMoU() {
               )}
             </div>
 
-            {/* Pagination */}
             {!loading && mous.length > ITEMS_PER_PAGE && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -578,7 +574,6 @@ export default function AlumniRelatedMoU() {
                 </p>
 
                 <div className="flex items-center gap-2 order-1 sm:order-2">
-                  {/* Previous Button */}
                   <button
                     onClick={() =>
                       setCurrentPage((prev) => Math.max(prev - 1, 1))
@@ -602,7 +597,6 @@ export default function AlumniRelatedMoU() {
                     </svg>
                   </button>
 
-                  {/* Page Numbers */}
                   <div className="hidden sm:flex items-center gap-1">
                     {getPageNumbers().map((page, idx) =>
                       typeof page === 'number' ? (
@@ -625,12 +619,10 @@ export default function AlumniRelatedMoU() {
                     )}
                   </div>
 
-                  {/* Mobile Page Indicator */}
                   <span className="sm:hidden px-4 py-2 text-sm font-medium text-gray-700">
                     {currentPage} / {totalPages}
                   </span>
 
-                  {/* Next Button */}
                   <button
                     onClick={() =>
                       setCurrentPage((prev) => Math.min(prev + 1, totalPages))
@@ -657,7 +649,6 @@ export default function AlumniRelatedMoU() {
               </motion.div>
             )}
 
-            {/* Additional Info Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
