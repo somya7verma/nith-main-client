@@ -1,5 +1,12 @@
 import React from 'react';
 
+interface LinkItem {
+  title: string;
+  href: string;
+  hasIcon?: boolean;
+  disabled?: boolean;
+}
+
 function Alumni() {
   const alumniSections = {
     leftColumn: [
@@ -19,10 +26,12 @@ function Alumni() {
             href: '/alumni/registration',
             hasIcon: true,
           },
+          // disabling this link kyuki mujhe samajh nhi aara yha kya bnao
           {
             title: 'Alumni Local Chapters of NITH',
             href: '/alumni/local-chapters',
             hasIcon: true,
+            disabled: true,
           },
           {
             title: 'Annual Alumni Meet of NITH',
@@ -95,8 +104,17 @@ function Alumni() {
                 {section.links.map((link, linkIdx) => (
                   <a
                     key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                    href={(link as LinkItem).disabled ? undefined : link.href}
+                    className={`block px-4 py-2 text-sm transition-colors ${
+                      (link as LinkItem).disabled
+                        ? 'text-gray-400 cursor-not-allowed'
+                        : 'text-black hover:bg-gray-200 cursor-pointer'
+                    }`}
+                    onClick={
+                      (link as LinkItem).disabled
+                        ? (e) => e.preventDefault()
+                        : undefined
+                    }
                   >
                     {link.hasIcon && <span className="mr-2">›</span>}
                     {link.title}
@@ -120,8 +138,17 @@ function Alumni() {
                 {section.links.map((link, linkIdx) => (
                   <a
                     key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                    href={(link as LinkItem).disabled ? undefined : link.href}
+                    className={`block px-4 py-2 text-sm transition-colors ${
+                      (link as LinkItem).disabled
+                        ? 'text-gray-400 cursor-not-allowed'
+                        : 'text-black hover:bg-gray-200 cursor-pointer'
+                    }`}
+                    onClick={
+                      (link as LinkItem).disabled
+                        ? (e) => e.preventDefault()
+                        : undefined
+                    }
                   >
                     {link.hasIcon && <span className="mr-2">›</span>}
                     {link.title}
@@ -145,8 +172,17 @@ function Alumni() {
                 {section.links.map((link, linkIdx) => (
                   <a
                     key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                    href={(link as LinkItem).disabled ? undefined : link.href}
+                    className={`block px-4 py-2 text-sm transition-colors ${
+                      (link as LinkItem).disabled
+                        ? 'text-gray-400 cursor-not-allowed'
+                        : 'text-black hover:bg-gray-200 cursor-pointer'
+                    }`}
+                    onClick={
+                      (link as LinkItem).disabled
+                        ? (e) => e.preventDefault()
+                        : undefined
+                    }
                   >
                     {link.hasIcon && <span className="mr-2">›</span>}
                     {link.title}
