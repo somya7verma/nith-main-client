@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Header31 from '../../components/header31';
+import Header31 from '../../components/header';
 import Footer from '../../components/footer';
 import { Sparkles } from 'lucide-react';
 

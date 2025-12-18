@@ -9,3 +9,8 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+body{
+  width: 100vw;
+  overflow-x: hidden;
+}

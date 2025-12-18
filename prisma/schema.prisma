@@ -122,3 +122,16 @@ model Galley{
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt     @db.Timestamp(6)
 }
+
+model DistinguishedAlumni {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  batch       String   @db.VarChar(100)
+  photo       String?  @db.Text
+  achievement String   @db.VarChar(500)
+  department  String?  @db.VarChar(255)
+  linkedIn    String?  @db.VarChar(255)
+
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @updatedAt     @db.Timestamp(6)
+}
