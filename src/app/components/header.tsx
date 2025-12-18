@@ -11,10 +11,12 @@ import Faculty from './slidebar/Faculty/faculty';
 import Alumni from './slidebar/Alumni/alumini';
 import Downloads from './slidebar/downloads/downloads';
 
+import Link from 'next/link';
+
 function Page() {
   return (
     <>
-      <div id="special" className="w-full relative ">
+      <div id="special" className="w-full relative">
         <div className="bg-white   box   ">
           <div className=" item-1   bg-[#631012]">
             <div className="max-w-7xl mx-auto flex items-center justify-end gap-6">
@@ -43,7 +45,9 @@ function Page() {
 
           <div className="">
             <div className="rounded-full h-35 w-31   flex justify-center items-center absolute z-50 left-4 top-0">
-              <img src="l.png" alt="" className="h-25 w-25 " />
+              <Link href="/">
+                <img src="/l.png" alt="" className="h-25 w-25 " />
+              </Link>
             </div>
             <div className=" clipi h-100 w-300 bg-[#631012] absolute z-0 left-[-715] top-1 flex justify-end items-end">
               <div className=" clipi h-41 w-1 bg-[#631012]   "></div>
@@ -52,7 +56,7 @@ function Page() {
           </div>
 
           <div className="   bg-white">
-            <div className=" flex flex-col justify-center items-end ">
+            <div className=" flex flex-col justify-center items-end p-4">
               <h1 className="text-2xl font-bold text-gray-800 leading-tight py-4 mr-4">
                 National Institute of Technology, Hamirpur
               </h1>
@@ -62,7 +66,7 @@ function Page() {
             </div>
           </div>
         </div>
-        <div className="flex justify-end mb-0.5 ">
+        <div className="flex justify-end mb-0.5">
           <div className="flex justify-center items-center rounf h-10 w-[85%] rounded-tl-full bg-[#631012] gap-4 text-white">
             <div className="flex items-center gap-8 py-0 text-sm text-white">
               <div id="abouth" className="relative group">
@@ -113,11 +117,6 @@ function Page() {
                 </span>
               </div>
 
-              <div id="downloadsh" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Downloads
-                </span>
-              </div>
               <div id="downloadsh" className="relative group">
                 <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
                   Downloads

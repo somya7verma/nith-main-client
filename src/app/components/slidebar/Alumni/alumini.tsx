@@ -1,23 +1,48 @@
 import React from 'react';
 
+interface LinkItem {
+  title: string;
+  href: string;
+  hasIcon?: boolean;
+  disabled?: boolean;
+}
+
 function Alumni() {
   const alumniSections = {
     leftColumn: [
-      { title: 'Activities', href: '#' },
-      { title: 'Functionaries', href: '#' },
-      { title: 'Alumni Related Notices', href: '#' },
-      { title: 'Alumni Related MoU', href: '#' },
-      { title: 'Alumni Assist', href: '#' },
+      { title: 'Activities', href: '/alumni/activities' },
+      { title: 'Functionaries', href: '/alumni/functionaries' },
+      { title: 'Alumni Newsroom', href: '/alumni/related-notices' },
+      { title: 'Alumni Related MoU', href: '/alumni/related-mou' },
+      { title: 'Alumni Assist', href: '/alumni/assist' },
     ],
     secondColumn: [
       {
         section: 'Alumni Affairs Activities',
         links: [
-          { title: 'List of Alumni', href: '#', hasIcon: true },
-          { title: 'Alumni Registration', href: '#', hasIcon: true },
-          { title: 'Alumni Local Chapters of NITH', href: '#', hasIcon: true },
-          { title: 'Annual Alumni Meet of NITH', href: '#', hasIcon: true },
-          { title: 'Distinguished Alumni of NITH', href: '#', hasIcon: true },
+          { title: 'List of Alumni', href: '/alumni/list', hasIcon: true },
+          {
+            title: 'Alumni Registration',
+            href: '/alumni/registration',
+            hasIcon: true,
+          },
+          // disabling this link kyuki mujhe samajh nhi aara yha kya bnao
+          {
+            title: 'Alumni Local Chapters of NITH',
+            href: '/alumni/local-chapters',
+            hasIcon: true,
+            disabled: true,
+          },
+          {
+            title: 'Annual Alumni Meet of NITH',
+            href: '/alumni/annual-meet',
+            hasIcon: true,
+          },
+          {
+            title: 'Distinguished Alumni of NITH',
+            href: '/alumni/distinguished',
+            hasIcon: true,
+          },
         ],
       },
     ],
@@ -25,15 +50,29 @@ function Alumni() {
       {
         section: 'Resource Generation Activities',
         links: [
-          { title: 'Endowment Fund Generation', href: '#', hasIcon: true },
-          { title: 'Awards Initiatives', href: '#', hasIcon: true },
+          {
+            title: 'Endowment Fund Generation',
+            href: '/alumni/endowment-fund',
+            hasIcon: true,
+          },
+          {
+            title: 'Awards Initiatives',
+            href: '/alumni/awards-initiatives',
+            hasIcon: true,
+          },
         ],
       },
     ],
     rightColumn: [
       {
         section: 'Portal',
-        links: [{ title: 'Alumni Network', href: '#', hasIcon: true }],
+        links: [
+          {
+            title: 'Alumni Portal',
+            href: 'https://alumni.nith.ac.in/',
+            hasIcon: true,
+          },
+        ],
       },
     ],
   };
@@ -65,8 +104,17 @@ function Alumni() {
                 {section.links.map((link, linkIdx) => (
                   <a
                     key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                    href={(link as LinkItem).disabled ? undefined : link.href}
+                    className={`block px-4 py-2 text-sm transition-colors ${
+                      (link as LinkItem).disabled
+                        ? 'text-gray-400 cursor-not-allowed'
+                        : 'text-black hover:bg-gray-200 cursor-pointer'
+                    }`}
+                    onClick={
+                      (link as LinkItem).disabled
+                        ? (e) => e.preventDefault()
+                        : undefined
+                    }
                   >
                     {link.hasIcon && <span className="mr-2">›</span>}
                     {link.title}
@@ -90,8 +138,17 @@ function Alumni() {
                 {section.links.map((link, linkIdx) => (
                   <a
                     key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                    href={(link as LinkItem).disabled ? undefined : link.href}
+                    className={`block px-4 py-2 text-sm transition-colors ${
+                      (link as LinkItem).disabled
+                        ? 'text-gray-400 cursor-not-allowed'
+                        : 'text-black hover:bg-gray-200 cursor-pointer'
+                    }`}
+                    onClick={
+                      (link as LinkItem).disabled
+                        ? (e) => e.preventDefault()
+                        : undefined
+                    }
                   >
                     {link.hasIcon && <span className="mr-2">›</span>}
                     {link.title}
@@ -115,8 +172,17 @@ function Alumni() {
                 {section.links.map((link, linkIdx) => (
                   <a
                     key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                    href={(link as LinkItem).disabled ? undefined : link.href}
+                    className={`block px-4 py-2 text-sm transition-colors ${
+                      (link as LinkItem).disabled
+                        ? 'text-gray-400 cursor-not-allowed'
+                        : 'text-black hover:bg-gray-200 cursor-pointer'
+                    }`}
+                    onClick={
+                      (link as LinkItem).disabled
+                        ? (e) => e.preventDefault()
+                        : undefined
+                    }
                   >
                     {link.hasIcon && <span className="mr-2">›</span>}
                     {link.title}

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Header31 from '@/app/components/header31';
+import Header31 from '@/app/components/header';
 import Footer from '@/app/components/footer';
 import {
   Target,
