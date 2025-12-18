@@ -7,7 +7,6 @@ import Image from 'next/image';
 import Nav from '@/app/components/header';
 import Footer from '@/app/components/footer';
 
-// Type definitions
 interface PastMeet {
   id: number;
   year: string;
@@ -32,7 +31,6 @@ interface GalleryImage {
   caption: string;
 }
 
-// Sample data - Replace with API calls in production
 const upcomingMeet = {
   title: 'Annual Alumni Meet 2025',
   date: 'March 15-17, 2025',
@@ -191,7 +189,6 @@ export default function AnnualAlumniMeet() {
     <>
       <Nav />
       <div className="min-h-screen bg-gray-50">
-        {/* Breadcrumb */}
         <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
           <div className="max-w-7xl mx-auto">
             <nav className="flex items-center space-x-2 text-sm text-gray-600">
@@ -211,7 +208,6 @@ export default function AnnualAlumniMeet() {
           </div>
         </div>
 
-        {/* Hero Section */}
         <section className="bg-gradient-to-br from-[#631012] via-[#7a1a1d] to-[#4a0c0e] py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
@@ -231,7 +227,6 @@ export default function AnnualAlumniMeet() {
           </div>
         </section>
 
-        {/* About the Annual Alumni Meet */}
         <section className="py-12 md:py-16 px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -274,7 +269,6 @@ export default function AnnualAlumniMeet() {
           </div>
         </section>
 
-        {/* Upcoming Annual Alumni Meet - Highlight Section */}
         <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -294,7 +288,6 @@ export default function AnnualAlumniMeet() {
               <div className="bg-gradient-to-br from-[#631012] to-[#4a0c0e] rounded-2xl shadow-xl overflow-hidden">
                 <div className="p-8 md:p-12">
                   <div className="grid md:grid-cols-2 gap-8 items-center">
-                    {/* Left side - Content */}
                     <div className="text-white space-y-6">
                       <div>
                         <span className="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-4">
@@ -361,21 +354,8 @@ export default function AnnualAlumniMeet() {
                           View Schedule
                         </button>
                       </div>
-
-                      {upcomingMeet.registrationOpen && (
-                        <div className="flex items-center gap-2 pt-2">
-                          <span className="relative flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                          </span>
-                          <span className="text-sm text-green-200">
-                            Registration is now open!
-                          </span>
-                        </div>
-                      )}
                     </div>
 
-                    {/* Right side - Visual element */}
                     <div className="hidden md:block">
                       <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
                         <div className="aspect-video bg-white/20 rounded-lg flex items-center justify-center">
@@ -405,7 +385,6 @@ export default function AnnualAlumniMeet() {
           </div>
         </section>
 
-        {/* Event Schedule/Program Overview */}
         <section className="py-12 md:py-16 px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -468,7 +447,6 @@ export default function AnnualAlumniMeet() {
                   </table>
                 </div>
 
-                {/* Mobile-friendly card view */}
                 <div className="md:hidden divide-y divide-gray-200">
                   {schedule.map((item, index) => (
                     <div key={index} className="p-4 hover:bg-gray-50">
@@ -531,7 +509,6 @@ export default function AnnualAlumniMeet() {
           </div>
         </section>
 
-        {/* Past Annual Alumni Meets */}
         <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -558,7 +535,6 @@ export default function AnnualAlumniMeet() {
                     className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
                   >
                     <div className="grid md:grid-cols-12 gap-0">
-                      {/* Year badge */}
                       <div className="md:col-span-2 bg-gradient-to-br from-[#631012] to-[#4a0c0e] p-6 flex flex-col items-center justify-center text-white">
                         <div className="text-5xl font-bold mb-2">
                           {meet.year}
@@ -575,7 +551,6 @@ export default function AnnualAlumniMeet() {
                         )}
                       </div>
 
-                      {/* Content */}
                       <div className="md:col-span-10 p-6">
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                           <div>
@@ -632,7 +607,6 @@ export default function AnnualAlumniMeet() {
           </div>
         </section>
 
-        {/* Event Highlights & Gallery */}
         <section className="py-12 md:py-16 px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -649,7 +623,6 @@ export default function AnnualAlumniMeet() {
                 </p>
               </div>
 
-              {/* Year filter */}
               <div className="flex justify-center gap-3 mb-8 flex-wrap">
                 <button
                   onClick={() => setSelectedYear(null)}
@@ -676,7 +649,6 @@ export default function AnnualAlumniMeet() {
                 ))}
               </div>
 
-              {/* Gallery Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {galleryImages
                   .filter(
@@ -692,7 +664,6 @@ export default function AnnualAlumniMeet() {
                       onClick={() => setSelectedImage(image.id)}
                     >
                       <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                        {/* Placeholder - Replace with actual images */}
                         <div className="absolute inset-0 flex items-center justify-center">
                           <svg
                             className="w-16 h-16 text-gray-400"
@@ -708,7 +679,6 @@ export default function AnnualAlumniMeet() {
                             />
                           </svg>
                         </div>
-                        {/* Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                             <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium mb-2">
@@ -731,7 +701,6 @@ export default function AnnualAlumniMeet() {
           </div>
         </section>
 
-        {/* Contact & Participation Information */}
         <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="max-w-5xl mx-auto">
             <motion.div
@@ -749,7 +718,6 @@ export default function AnnualAlumniMeet() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {/* Contact Information */}
                 <div className="bg-white rounded-xl shadow-sm p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-[#631012] rounded-full flex items-center justify-center">
@@ -844,7 +812,6 @@ export default function AnnualAlumniMeet() {
                   </div>
                 </div>
 
-                {/* Quick Links */}
                 <div className="bg-white rounded-xl shadow-sm p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-[#631012] rounded-full flex items-center justify-center">
@@ -952,7 +919,6 @@ export default function AnnualAlumniMeet() {
                 </div>
               </div>
 
-              {/* Call to Action Banner */}
               <div className="mt-8 bg-gradient-to-r from-[#631012] to-[#4a0c0e] rounded-xl p-8 text-center text-white">
                 <h3 className="text-2xl font-bold mb-3">
                   Stay Connected with NITH Alumni

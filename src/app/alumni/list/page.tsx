@@ -706,67 +706,87 @@ export default function ListOfAlumni() {
             {/* Pagination */}
             {!loading && filteredAlumni.length > 0 && totalPages > 1 && (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="mt-8 flex justify-center items-center gap-2"
+                className="mt-8 flex justify-center"
               >
-                <button
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.max(prev - 1, 1))
-                  }
-                  disabled={currentPage === 1}
-                  className={`px-4 py-2 rounded-xl font-medium transition-all duration-200 ${
-                    currentPage === 1
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-white text-gray-700 hover:bg-[#631012] hover:text-white shadow-sm'
-                  }`}
-                >
-                  Previous
-                </button>
+                <div className="inline-flex items-center gap-1 bg-white rounded-xl shadow-sm p-2">
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(prev - 1, 1))
+                    }
+                    disabled={currentPage === 1}
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      currentPage === 1
+                        ? 'text-gray-300 cursor-not-allowed'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-[#631012]'
+                    }`}
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                    <span className="hidden sm:inline">Previous</span>
+                  </button>
 
-                <div className="hidden sm:flex gap-2">
-                  {getPageNumbers().map((page, index) =>
-                    typeof page === 'number' ? (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentPage(page)}
-                        className={`w-10 h-10 rounded-xl font-medium transition-all duration-200 ${
-                          currentPage === page
-                            ? 'bg-[#631012] text-white shadow-lg shadow-[#631012]/25'
-                            : 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm'
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    ) : (
-                      <span
-                        key={index}
-                        className="w-10 h-10 flex items-center justify-center text-gray-400"
-                      >
-                        {page}
-                      </span>
-                    )
-                  )}
+                  <div className="flex items-center gap-1 px-2">
+                    {getPageNumbers().map((page, index) => (
+                      <React.Fragment key={index}>
+                        {page === '...' ? (
+                          <span className="px-3 py-2 text-gray-400">...</span>
+                        ) : (
+                          <button
+                            onClick={() => setCurrentPage(page as number)}
+                            className={`w-10 h-10 rounded-lg text-sm font-medium transition-all ${
+                              currentPage === page
+                                ? 'bg-[#631012] text-white shadow-md'
+                                : 'text-gray-600 hover:bg-gray-100'
+                            }`}
+                          >
+                            {page}
+                          </button>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                    }
+                    disabled={currentPage === totalPages}
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      currentPage === totalPages
+                        ? 'text-gray-300 cursor-not-allowed'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-[#631012]'
+                    }`}
+                  >
+                    <span className="hidden sm:inline">Next</span>
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
                 </div>
-
-                <div className="sm:hidden text-gray-600 px-4">
-                  Page {currentPage} of {totalPages}
-                </div>
-
-                <button
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                  }
-                  disabled={currentPage === totalPages}
-                  className={`px-4 py-2 rounded-xl font-medium transition-all duration-200 ${
-                    currentPage === totalPages
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-white text-gray-700 hover:bg-[#631012] hover:text-white shadow-sm'
-                  }`}
-                >
-                  Next
-                </button>
               </motion.div>
             )}
           </div>

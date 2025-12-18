@@ -302,52 +302,32 @@ export default function AwardsInitiatives() {
                   <motion.div
                     key={category.id}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + index * 0.1 }}
-                    whileHover={{ y: -8 }}
-                    className="relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden group border border-gray-100"
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                    className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
                   >
-                    <div className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-gray-50 group-hover:bg-[#631012] flex items-center justify-center transition-all duration-300 z-10">
-                      <span className="text-sm font-bold text-gray-400 group-hover:text-white transition-colors">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
+                    <div className="w-12 h-12 rounded-xl bg-[#631012] text-white flex items-center justify-center mb-4">
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d={category.icon}
+                        />
+                      </svg>
                     </div>
-
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#631012]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    <div className="relative p-6 pb-8">
-                      <div className="mb-6">
-                        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#631012] to-[#7a1a1d] flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                          <svg
-                            className="w-8 h-8 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={1.5}
-                              d={category.icon}
-                            />
-                          </svg>
-                        </div>
-                      </div>
-
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#631012] transition-colors leading-tight min-h-[3.5rem]">
-                        {category.title}
-                      </h3>
-
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {category.description}
-                      </p>
-                    </div>
-
-                    <div className="h-1.5 bg-gradient-to-r from-[#631012] via-[#7a1a1d] to-[#4a0c0e] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      {category.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {category.description}
+                    </p>
                   </motion.div>
                 ))}
               </div>

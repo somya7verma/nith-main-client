@@ -567,23 +567,22 @@ export default function AlumniRelatedMoU() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+                className="mt-8 flex justify-center"
               >
-                <p className="text-sm text-gray-600 order-2 sm:order-1">
-                  Page {currentPage} of {totalPages}
-                </p>
-
-                <div className="flex items-center gap-2 order-1 sm:order-2">
+                <div className="inline-flex items-center gap-1 bg-white rounded-xl shadow-sm p-2">
                   <button
                     onClick={() =>
                       setCurrentPage((prev) => Math.max(prev - 1, 1))
                     }
                     disabled={currentPage === 1}
-                    className="p-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 cursor-pointer"
-                    aria-label="Previous page"
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      currentPage === 1
+                        ? 'text-gray-300 cursor-not-allowed'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-[#631012]'
+                    }`}
                   >
                     <svg
-                      className="w-5 h-5"
+                      className="w-4 h-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -595,44 +594,44 @@ export default function AlumniRelatedMoU() {
                         d="M15 19l-7-7 7-7"
                       />
                     </svg>
+                    <span className="hidden sm:inline">Previous</span>
                   </button>
 
-                  <div className="hidden sm:flex items-center gap-1">
-                    {getPageNumbers().map((page, idx) =>
-                      typeof page === 'number' ? (
-                        <button
-                          key={idx}
-                          onClick={() => setCurrentPage(page)}
-                          className={`w-10 h-10 rounded-lg text-sm font-medium transition-colors duration-200 cursor-pointer ${
-                            currentPage === page
-                              ? 'bg-[#631012] text-white'
-                              : 'text-gray-600 hover:bg-gray-100'
-                          }`}
-                        >
-                          {page}
-                        </button>
-                      ) : (
-                        <span key={idx} className="px-2 text-gray-400">
-                          {page}
-                        </span>
-                      )
-                    )}
+                  <div className="flex items-center gap-1 px-2">
+                    {getPageNumbers().map((page, index) => (
+                      <React.Fragment key={index}>
+                        {page === '...' ? (
+                          <span className="px-3 py-2 text-gray-400">...</span>
+                        ) : (
+                          <button
+                            onClick={() => setCurrentPage(page as number)}
+                            className={`w-10 h-10 rounded-lg text-sm font-medium transition-all ${
+                              currentPage === page
+                                ? 'bg-[#631012] text-white shadow-md'
+                                : 'text-gray-600 hover:bg-gray-100'
+                            }`}
+                          >
+                            {page}
+                          </button>
+                        )}
+                      </React.Fragment>
+                    ))}
                   </div>
-
-                  <span className="sm:hidden px-4 py-2 text-sm font-medium text-gray-700">
-                    {currentPage} / {totalPages}
-                  </span>
 
                   <button
                     onClick={() =>
                       setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                     }
                     disabled={currentPage === totalPages}
-                    className="p-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 cursor-pointer"
-                    aria-label="Next page"
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      currentPage === totalPages
+                        ? 'text-gray-300 cursor-not-allowed'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-[#631012]'
+                    }`}
                   >
+                    <span className="hidden sm:inline">Next</span>
                     <svg
-                      className="w-5 h-5"
+                      className="w-4 h-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

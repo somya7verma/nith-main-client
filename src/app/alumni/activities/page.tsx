@@ -404,33 +404,8 @@ export default function Activities() {
                           className="hover:bg-gray-50/80 transition-colors duration-200 group"
                         >
                           <td className="px-6 py-5 whitespace-nowrap">
-                            <div className="flex items-center gap-3">
-                              <div className="w-14 h-16 rounded-xl overflow-hidden shadow-sm border border-gray-100 group-hover:shadow-md group-hover:border-[#631012]/20 transition-all duration-300">
-                                <div className="h-5 bg-gradient-to-r from-[#631012] to-[#7a1a1d] flex items-center justify-center">
-                                  <span className="text-[10px] font-semibold text-white uppercase tracking-wider">
-                                    {new Date(activity.date).toLocaleDateString(
-                                      'en-US',
-                                      { month: 'short' }
-                                    )}
-                                  </span>
-                                </div>
-                                <div className="h-11 bg-white flex flex-col items-center justify-center">
-                                  <span className="text-xl font-bold text-gray-800 leading-none">
-                                    {new Date(activity.date).getDate()}
-                                  </span>
-                                  <span className="text-[10px] text-gray-400 font-medium">
-                                    {new Date(activity.date).getFullYear()}
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="hidden xl:flex flex-col">
-                                <span className="text-xs text-gray-400">
-                                  {new Date(activity.date).toLocaleDateString(
-                                    'en-US',
-                                    { weekday: 'long' }
-                                  )}
-                                </span>
-                              </div>
+                            <div className="text-sm text-gray-900">
+                              {formatDate(activity.date)}
                             </div>
                           </td>
                           <td className="px-6 py-5">
