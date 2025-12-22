@@ -2,31 +2,63 @@ import React from 'react';
 
 function Administration() {
   const administrationSections = {
-    leftColumn: [{ title: 'Visitor', href: '#' }],
+    leftColumn: [{ title: 'Visitor', href: '/administration/visitor' }],
     secondColumn: [
       {
         section: 'Chairperson',
         links: [
-          { title: 'Chairperson Message/Profile', href: '#', hasIcon: true },
-          { title: 'Former Chairpersons', href: '#', hasIcon: true },
+          {
+            title: 'Chairperson Message/Profile',
+            href: '/administration/chairperson',
+            hasIcon: true,
+          },
+          {
+            title: 'Former Chairpersons',
+            href: '/administration/chairperson/former',
+            hasIcon: true,
+          },
         ],
       },
       {
         section: 'Deans/Associate Deans',
-        links: [],
+        links: [
+          {
+            title: 'Deans & Associate Deans',
+            href: '/administration/deans',
+            hasIcon: true,
+          },
+        ],
       },
       {
         section: 'Institute Coordinator',
-        links: [],
+        links: [
+          {
+            title: 'Institute Coordinators',
+            href: '/administration/institute-coordinator',
+            hasIcon: true,
+          },
+        ],
       },
     ],
     thirdColumn: [
       {
         section: 'Director',
         links: [
-          { title: 'Director', href: '#', hasIcon: true },
-          { title: 'Former Directors/Principals', href: '#', hasIcon: true },
-          { title: 'Director Office', href: '#', hasIcon: true },
+          {
+            title: 'Director',
+            href: '/administration/director',
+            hasIcon: true,
+          },
+          {
+            title: 'Former Directors/Principals',
+            href: '/administration/director/former',
+            hasIcon: true,
+          },
+          {
+            title: 'Director Office',
+            href: '/administration/director/office',
+            hasIcon: true,
+          },
         ],
       },
       {
@@ -69,7 +101,7 @@ function Administration() {
         ))}
         <div className="mt-8">
           <a
-            href="#"
+            href="/administration/vigilance"
             className="block text-black font-semibold text-sm hover:text-gray-600 transition-colors"
           >
             Chief Vigilance Officer

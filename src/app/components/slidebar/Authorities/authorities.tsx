@@ -1,45 +1,48 @@
-import React from 'react';
+import Link from 'next/link';
+
+const authoritiesSections = {
+  firstColumn: [
+    {
+      section: 'Board of Governors (BOG)',
+      links: [
+        { title: 'Composition of BOG', href: '/authorities/bog/composition' },
+        { title: 'Minutes of BOG', href: '/authorities/bog/minutes' },
+      ],
+    },
+  ],
+  secondColumn: [
+    {
+      section: 'Finance Committee (FC)',
+      links: [
+        { title: 'Composition of FC', href: '/authorities/fc/composition' },
+        { title: 'Minutes of FC', href: '/authorities/fc/minutes' },
+      ],
+    },
+  ],
+  thirdColumn: [
+    {
+      section: 'Building Works Committee (BWC)',
+      links: [
+        { title: 'Composition of BWC', href: '/authorities/bwc/composition' },
+        { title: 'Minutes of BWC', href: '/authorities/bwc/minutes' },
+      ],
+    },
+  ],
+  fourthColumn: [
+    {
+      section: 'Senate',
+      links: [
+        {
+          title: 'Composition of Senate',
+          href: '/authorities/senate/composition',
+        },
+        { title: 'Minutes of Senate', href: '/authorities/senate/minutes' },
+      ],
+    },
+  ],
+};
 
 function Authorities() {
-  const authoritiesSections = {
-    firstColumn: [
-      {
-        section: 'Board of Governors (BOG)',
-        links: [
-          { title: 'Composition of BOG', href: '#', hasIcon: true },
-          { title: 'Minutes of BOG', href: '#', hasIcon: true },
-        ],
-      },
-    ],
-    secondColumn: [
-      {
-        section: 'Finance Committee (FC)',
-        links: [
-          { title: 'Composition of FC', href: '#', hasIcon: true },
-          { title: 'Minutes of FC', href: '#', hasIcon: true },
-        ],
-      },
-    ],
-    thirdColumn: [
-      {
-        section: 'Building Works Committee (BWC)',
-        links: [
-          { title: 'Composition of BWC', href: '#', hasIcon: true },
-          { title: 'Minutes of BWC', href: '#', hasIcon: true },
-        ],
-      },
-    ],
-    fourthColumn: [
-      {
-        section: 'Senate',
-        links: [
-          { title: 'Composition of Senate', href: '#', hasIcon: true },
-          { title: 'Minutes of Senate', href: '#', hasIcon: true },
-        ],
-      },
-    ],
-  };
-
   return (
     <div className="grid grid-cols-4 gap-8">
       {/* First Column - Board of Governors */}
@@ -52,14 +55,14 @@ function Authorities() {
             {section.links && section.links.length > 0 && (
               <div className="space-y-1">
                 {section.links.map((link, linkIdx) => (
-                  <a
+                  <Link
                     key={linkIdx}
                     href={link.href}
                     className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
                   >
-                    {link.hasIcon && <span className="mr-2">›</span>}
+                    <span className="mr-2">›</span>
                     {link.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
@@ -77,14 +80,14 @@ function Authorities() {
             {section.links && section.links.length > 0 && (
               <div className="space-y-1">
                 {section.links.map((link, linkIdx) => (
-                  <a
+                  <Link
                     key={linkIdx}
                     href={link.href}
                     className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
                   >
-                    {link.hasIcon && <span className="mr-2">›</span>}
+                    <span className="mr-2">›</span>
                     {link.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
@@ -102,14 +105,14 @@ function Authorities() {
             {section.links && section.links.length > 0 && (
               <div className="space-y-1">
                 {section.links.map((link, linkIdx) => (
-                  <a
+                  <Link
                     key={linkIdx}
                     href={link.href}
                     className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
                   >
-                    {link.hasIcon && <span className="mr-2">›</span>}
+                    <span className="mr-2">›</span>
                     {link.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
@@ -127,14 +130,14 @@ function Authorities() {
             {section.links && section.links.length > 0 && (
               <div className="space-y-1">
                 {section.links.map((link, linkIdx) => (
-                  <a
+                  <Link
                     key={linkIdx}
                     href={link.href}
                     className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
                   >
-                    {link.hasIcon && <span className="mr-2">›</span>}
+                    <span className="mr-2">›</span>
                     {link.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
