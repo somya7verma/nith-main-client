@@ -2,7 +2,7 @@ import React from 'react';
 
 function Administration() {
   const administrationSections = {
-    leftColumn: [{ title: 'Visitor', href: '#' }],
+    leftColumn: [{ title: 'Visitor', href: '/administration/visitor' }],
     secondColumn: [
       {
         section: 'Chairperson',
@@ -69,7 +69,7 @@ function Administration() {
         ))}
         <div className="mt-8">
           <a
-            href="#"
+            href="/administration/vigilance"
             className="block text-black font-semibold text-sm hover:text-gray-600 transition-colors"
           >
             Chief Vigilance Officer
