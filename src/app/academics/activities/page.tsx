@@ -29,7 +29,6 @@ export default function Page() {
     <>
       <Nav />
 
-      {/* Breadcrumb / Subheader */}
       <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto">
           <nav className="flex items-center space-x-2 text-sm text-gray-600">
@@ -40,19 +39,13 @@ export default function Page() {
               Home
             </Link>
             <span>›</span>
-            <Link
-              href="/academics"
-              className="hover:text-[#800000] transition-colors duration-200"
-            >
-              Academics
-            </Link>
+            <span className="text-gray-400">Academics</span>
             <span>›</span>
             <span className="text-[#800000] font-medium">Activities</span>
           </nav>
         </div>
       </div>
 
-      {/* Hero */}
       <section className="bg-gradient-to-br from-[#631012] via-[#7a1a1d] to-[#4a0c0e] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -74,19 +67,18 @@ export default function Page() {
 
       <main className="py-10 md:py-14 px-4 md:px-6 bg-white">
         <div className="max-w-7xl mx-auto space-y-8">
-          {/* Intro card */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gray-50 rounded-2xl shadow-sm p-6 md:p-8"
+            className="bg-white rounded-2xl shadow-sm p-6 md:p-8"
           >
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0">
-                <div className="h-10 w-10 rounded-md bg-[#631012] flex items-center justify-center text-white">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
+              <div className="md:col-span-3 flex items-start gap-4">
+                <div className="h-12 w-12 rounded-md bg-[#631012] flex items-center justify-center text-white shadow">
                   <svg
-                    className="w-5 h-5"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -99,22 +91,49 @@ export default function Page() {
                     />
                   </svg>
                 </div>
+                <div>
+                  <h3 className="text-sm md:text-base font-semibold text-gray-800 uppercase tracking-wider">
+                    ACTIVITIES
+                  </h3>
+                </div>
               </div>
-              <div>
-                <h3 className="text-sm font-semibold text-gray-700 uppercase">
-                  ACTIVITIES
-                </h3>
-                <p className="mt-3 text-gray-700">
-                  As per the schedule ‘C’ of NIT statutes the duties and
-                  responsibilities of the Dean (Academic) is to advise the
-                  Director in:
-                </p>
+
+              <div className="md:col-span-9">
+                <div className="border-l-4 border-[#631012] bg-gray-50 rounded-md p-4 md:p-6">
+                  <p className="text-gray-700 leading-relaxed">
+                    As per the schedule ‘C’ of NIT statutes the duties and
+                    responsibilities of the Dean (Academic) is to advise the
+                    Director in:
+                  </p>
+                </div>
+
+                <div className="mt-3 flex items-center gap-3">
+                  <a
+                    href="#responsibilities"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-[#631012] hover:underline"
+                  >
+                    View Responsibilities
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Responsibilities grid */}
           <motion.section
+            id="responsibilities"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -149,7 +168,6 @@ export default function Page() {
             </div>
           </motion.section>
 
-          {/* Supporting Sections: Governance flow + Quick links */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <motion.div
               initial={{ opacity: 0, y: 8 }}
