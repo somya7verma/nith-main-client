@@ -5,16 +5,18 @@ function Academic() {
     leftColumn: [
       { title: 'Activities', href: '/academics/activities' },
       { title: 'Functionaries', href: '/academics/functionaries' },
-      { title: 'Calender', href: '/academics/calendar' },
+      { title: 'Academic Calender', href: '/academics/calendar' },
       {
-        title: 'Odd Semester 2025-26',
+        title: 'Odd Semester Calendar 2025-26',
         href: '/academics/odd-semester-2025-26',
         hasIcon: true,
+        disabled: true,
       },
       {
-        title: 'Even Semester 2025-26',
+        title: 'Even Semester Calendar 2025-26',
         href: '/academics/even-semester-2025-26',
         hasIcon: true,
+        disabled: true,
       },
       { title: 'Academic Notices', href: '/academics/academic-notices' },
       { title: 'NAD Cell', href: '/academics/nad-cell' },
@@ -162,16 +164,27 @@ function Academic() {
     <div className="grid grid-cols-3 gap-8">
       {/* Left Column */}
       <div className="space-y-2">
-        {academicSections.leftColumn.map((item, index) => (
-          <a
-            key={index}
-            href={item.href}
-            className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-          >
-            {item.hasIcon && <span className="mr-2">›</span>}
-            {item.title}
-          </a>
-        ))}
+        {academicSections.leftColumn.map((item, index) =>
+          item.disabled ? (
+            <div
+              key={index}
+              aria-disabled="true"
+              className="block px-4 py-2 text-gray-400 text-sm cursor-not-allowed select-none"
+            >
+              {item.hasIcon && <span className="mr-2">›</span>}
+              {item.title}
+            </div>
+          ) : (
+            <a
+              key={index}
+              href={item.href}
+              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+            >
+              {item.hasIcon && <span className="mr-2">›</span>}
+              {item.title}
+            </a>
+          )
+        )}
       </div>
 
       {/* Center Column */}
