@@ -101,6 +101,7 @@ function Academic() {
             title: 'Certificate regarding Divisions/Percentage',
             href: '/academics/divisions-percentage-certificate',
             hasIcon: true,
+            disabled: true,
           },
           {
             title: 'Contact for Certification matters',
