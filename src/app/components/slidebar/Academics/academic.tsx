@@ -36,6 +36,7 @@ function Academic() {
             title: 'Admissions Desk',
             href: '/academics/admissions-desk',
             hasIcon: true,
+            disabled: true,
           },
           {
             title: 'Registration 2025-26',
@@ -195,16 +196,27 @@ function Academic() {
               {section.section}
             </h3>
             <div className="space-y-1">
-              {section.links.map((link, linkIdx) => (
-                <a
-                  key={linkIdx}
-                  href={link.href}
-                  className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-                >
-                  {link.hasIcon && <span className="mr-2">›</span>}
-                  {link.title}
-                </a>
-              ))}
+              {section.links.map((link, linkIdx) =>
+                link.disabled ? (
+                  <div
+                    key={linkIdx}
+                    aria-disabled="true"
+                    className="block px-4 py-2 text-gray-400 text-sm cursor-not-allowed select-none"
+                  >
+                    {link.hasIcon && <span className="mr-2">›</span>}
+                    {link.title}
+                  </div>
+                ) : (
+                  <a
+                    key={linkIdx}
+                    href={link.href}
+                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                  >
+                    {link.hasIcon && <span className="mr-2">›</span>}
+                    {link.title}
+                  </a>
+                )
+              )}
             </div>
           </div>
         ))}
