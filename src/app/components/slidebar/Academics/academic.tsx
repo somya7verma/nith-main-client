@@ -57,28 +57,36 @@ function Academic() {
             title: 'Examination Schedules',
             href: '/academics/examination-schedules',
             hasIcon: true,
+            disabled: true,
           },
           {
             title: 'Examination Guidelines',
             href: '/academics/examination-guidelines',
             hasIcon: true,
+            disabled: true,
           },
           {
             title: 'Evaluation Schedules',
             href: '/academics/evaluation-schedules',
             hasIcon: true,
+            disabled: true,
           },
           {
             title: 'Evaluation Guidelines',
             href: '/academics/evaluation-guidelines',
             hasIcon: true,
+            disabled: true,
           },
         ],
       },
       {
         section: 'Results & Certificates',
         links: [
-          { title: 'Results', href: '/academics/results', hasIcon: true },
+          {
+            title: 'Results',
+            href: 'http://results.nith.ac.in/',
+            hasIcon: true,
+          },
           {
             title: 'Guidelines for Certificates Issuance',
             href: '/academics/certificates-issuance-guidelines',
