@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Downloads = () => {
   return (
@@ -6,19 +7,19 @@ const Downloads = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 gap-6 max-w-2xl">
           {/* Downloads for Students */}
-          <a
-            href="/downloads/students"
+          <Link
+            href="/Download_routes/Download-for-students"
             className="flex items-center justify-between p-6 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group"
           >
             <span className="text-xl font-medium">Downloads for Students</span>
             <span className="text-black text-3xl group-hover:translate-x-2 transition-transform duration-200">
               ›
             </span>
-          </a>
+          </Link>
 
           {/* Downloads for Faculty & Staff */}
-          <a
-            href="/downloads/faculty-staff"
+          <Link
+            href="/Download_routes/Download-for-Faculty"
             className="flex items-center justify-between p-6 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group"
           >
             <span className="text-xl font-medium">
@@ -27,18 +28,18 @@ const Downloads = () => {
             <span className="text-black text-3xl group-hover:translate-x-2 transition-transform duration-200">
               ›
             </span>
-          </a>
+          </Link>
 
           {/* Miscellaneous Downloads */}
-          <a
-            href="/downloads/miscellaneous"
+          <Link
+            href="/Download_routes/Miscellaneous-Downloads"
             className="flex items-center justify-between p-6 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group"
           >
             <span className="text-xl font-medium">Miscellaneous Downloads</span>
             <span className="text-black text-3xl group-hover:translate-x-2 transition-transform duration-200">
               ›
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
