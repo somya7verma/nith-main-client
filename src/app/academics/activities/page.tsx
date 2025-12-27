@@ -74,8 +74,8 @@ export default function Page() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-2xl shadow-sm p-6 md:p-8"
           >
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
-              <div className="md:col-span-3 flex items-start gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+              <div className="md:col-span-3 flex items-center gap-4">
                 <div className="h-12 w-12 rounded-md bg-[#631012] flex items-center justify-center text-white shadow">
                   <svg
                     className="w-6 h-6"
@@ -99,34 +99,12 @@ export default function Page() {
               </div>
 
               <div className="md:col-span-9">
-                <div className="border-l-4 border-[#631012] bg-gray-50 rounded-md p-4 md:p-6">
-                  <p className="text-gray-700 leading-relaxed">
-                    As per the schedule ‘C’ of NIT statutes the duties and
-                    responsibilities of the Dean (Academic) is to advise the
-                    Director in:
+                <div className="bg-white rounded-lg border border-gray-200 p-4 md:p-6">
+                  <p className="text-gray-700 leading-relaxed mb-2">
+                    As per Schedule C of the Institute Statutes, the Dean
+                    (Academic) advises the Director on key academic matters and
+                    governance.
                   </p>
-                </div>
-
-                <div className="mt-3 flex items-center gap-3">
-                  <a
-                    href="#responsibilities"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-[#631012] hover:underline"
-                  >
-                    View Responsibilities
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
             </div>
@@ -147,20 +125,11 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {responsibilities.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <div className="mt-1 flex-shrink-0 text-[#631012]">
-                    <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4"
-                      />
-                    </svg>
+                  <div className="mt-1 flex-shrink-0">
+                    <span
+                      className="inline-block w-2.5 h-2.5 bg-[#631012] rounded-full mt-2"
+                      aria-hidden="true"
+                    ></span>
                   </div>
                   <p className="text-gray-700">{item}</p>
                 </div>
@@ -168,13 +137,13 @@ export default function Page() {
             </div>
           </motion.section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6">
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45 }}
-              className="lg:col-span-2 bg-white rounded-2xl shadow-sm p-6"
+              className="bg-white rounded-2xl shadow-sm p-6"
             >
               <h4 className="text-lg font-semibold text-gray-800 mb-4">
                 Academic Governance Flow
@@ -249,98 +218,7 @@ export default function Page() {
               </p>
             </motion.div>
 
-            <motion.aside
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: 0.05 }}
-              className="bg-white rounded-2xl shadow-sm p-6"
-            >
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">
-                Quick Links
-              </h4>
-              <div className="grid grid-cols-1 gap-3">
-                <Link
-                  href="/academics/academic-notices"
-                  className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
-                >
-                  <svg
-                    className="w-5 h-5 text-[#631012]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3M3 21h18"
-                    />
-                  </svg>
-                  <span className="text-gray-700">Academic Calendar</span>
-                </Link>
-
-                <Link
-                  href="/academics/examination-guidelines"
-                  className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
-                >
-                  <svg
-                    className="w-5 h-5 text-[#631012]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-3.866 0-7 3.134-7 7v1h14v-1c0-3.866-3.134-7-7-7z"
-                    />
-                  </svg>
-                  <span className="text-gray-700">Examination Rules</span>
-                </Link>
-
-                <Link
-                  href="/academics/course-structure-syllabus"
-                  className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
-                >
-                  <svg
-                    className="w-5 h-5 text-[#631012]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-3.866 0-7 3.134-7 7v1h14v-1c0-3.866-3.134-7-7-7z"
-                    />
-                  </svg>
-                  <span className="text-gray-700">Syllabi</span>
-                </Link>
-
-                <Link
-                  href="/academics/convocation"
-                  className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-50 transition-colors"
-                >
-                  <svg
-                    className="w-5 h-5 text-[#631012]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 14l9-5-9-5-9 5 9 5z"
-                    />
-                  </svg>
-                  <span className="text-gray-700">Convocation Details</span>
-                </Link>
-              </div>
-            </motion.aside>
+            {/* Quick Links removed as requested */}
           </div>
         </div>
       </main>
