@@ -63,7 +63,13 @@ function Administration() {
       },
       {
         section: 'Head of Departments',
-        links: [],
+        links: [
+          {
+            title: 'Head of Departments',
+            href: '/administration/head-of-departments',
+            hasIcon: true,
+          },
+        ],
       },
       {
         title: 'Faculty Incharges',
