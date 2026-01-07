@@ -73,20 +73,34 @@ function Administration() {
       },
       {
         title: 'Faculty Incharges',
-        href: '#',
+        href: '/administration/faculty-incharges',
       },
     ],
     rightColumn: [
       {
         section: 'Registrar',
         links: [
-          { title: 'Registrar', href: '#', hasIcon: true },
-          { title: 'Registrar Office', href: '#', hasIcon: true },
+          {
+            title: 'Registrar',
+            href: '/administration/registrar',
+            hasIcon: true,
+          },
+          {
+            title: 'Registrar Office',
+            href: '/administration/registrar/office',
+            hasIcon: true,
+          },
         ],
       },
       {
         section: 'Nodal Officers',
-        links: [],
+        links: [
+          {
+            title: 'Nodal Officers',
+            href: '/administration/nodal-officers',
+            hasIcon: true,
+          },
+        ],
       },
     ],
   };
@@ -168,9 +182,18 @@ function Administration() {
           } else {
             return (
               <div key={idx}>
-                <h3 className="font-semibold text-black mb-2 text-sm">
-                  {item.title}
-                </h3>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                  >
+                    {item.title}
+                  </a>
+                ) : (
+                  <h3 className="font-semibold text-black mb-2 text-sm">
+                    {item.title}
+                  </h3>
+                )}
               </div>
             );
           }
