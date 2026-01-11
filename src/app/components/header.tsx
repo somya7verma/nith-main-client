@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import './header.css';
 import Aboutnith from './slidebar/aboutnith/aboutnith';
 import Authorities from './slidebar/Authorities/authorities';
@@ -10,213 +10,288 @@ import Student from './slidebar/Student/student';
 import Faculty from './slidebar/Faculty/faculty';
 import Alumni from './slidebar/Alumni/alumini';
 import Downloads from './slidebar/downloads/downloads';
-
 import Link from 'next/link';
 
 function Page() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const[mobop,setmobop]=useState(false)
+
   return (
     <>
-      <div id="special" className="w-full relative">
-        <div className="bg-white   box   ">
-          <div className=" item-1   bg-[#631012]">
-            <div className="max-w-7xl mx-auto flex items-center justify-end gap-6">
-              <div className="flex items-center gap-4 text-xs text-white  ">
-                <button className="hover:underline">A+</button>
-                <button className="hover:underline">A-</button>
-                <button className="hover:underline">Toggle Contrast</button>
-                <button className="hover:underline">Grey Scale</button>
-                <button className="hover:underline">Reset</button>
+      <div id="special" className="w-full">
+        {/* Top bar: Accessibility + Links (responsive layout) */}
+        <div className="bg-white">
+          <div className="items-1 h-8 p-1 bg-[#631012] relative z-50  ">
+            <div className="hidden lg:flex justify-end gap-6 lg:gap-8 flex-1 text-sm  text-white mr-9">
+              <div id="Aplus" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">A+</span>
               </div>
-
-              <div className="flex items-center gap-4 ml-20">
-                <nav className="hidden sm:flex items-center gap-4 text-xs text-white">
-                  <a className="hover:underline">Home</a>
-                  <a className="hover:underline">Internet</a>
-                  <a className="hover:underline">eOffice</a>
-                  <a className="hover:underline">Directory</a>
-                  <a className="hover:underline">Faculty Portfolio</a>
-                </nav>
-                <div className="border border-white rounded px-2 py-1 text-xs text-white">
-                  English
-                </div>
+              <div id="Aminus" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">A-</span>
               </div>
-            </div>
-          </div>
-
-          <div className="">
-            <div className="rounded-full h-35 w-31   flex justify-center items-center absolute z-50 left-4 top-0">
-              <Link href="/">
-                <img src="/l.png" alt="" className="h-25 w-25 " />
-              </Link>
-            </div>
-            <div className=" clipi h-100 w-300 bg-[#631012] absolute z-0 left-[-715] top-1 flex justify-end items-end">
-              <div className=" clipi h-41 w-1 bg-[#631012]   "></div>
-            </div>
-            <div className="w-40 h-28.5 rounded-b-full bg-[#631012] absolute z-30 left-[0] "></div>
-          </div>
-
-          <div className="   bg-white">
-            <div className=" flex flex-col justify-center items-end p-4">
-              <h1 className="text-2xl font-bold text-gray-800 leading-tight py-4 mr-4">
-                National Institute of Technology, Hamirpur
-              </h1>
-              <p className="text-sm text-gray-600 italic mr-4 -mt-4">
-                (An institute of national importance)
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-end mb-0.5">
-          <div className="flex justify-center items-center rounf h-10 w-[85%] rounded-tl-full bg-[#631012] gap-4 text-white">
-            <div className="flex items-center gap-8 py-0 text-sm text-white">
-              <div id="abouth" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  About NITH
-                </span>
+              <div id="toggle" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Toggle Contrast</span>
               </div>
-
-              <div id="authoritiesh" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Authorities
-                </span>
+              <div id="grey" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Grey Scale</span>
               </div>
-
-              <div id="administrationh" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Administration
-                </span>
+              <div id="reset" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Reset</span>
               </div>
-
-              <div id="departmentsh" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Departments
-                </span>
+              <div id="home" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Home</span>
               </div>
-
-              <div id="academicsh" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Academics
-                </span>
+              <div id="internet" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Internet</span>
               </div>
-
-              <div id="studenth" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Student
-                </span>
+              <div id="office" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">eOffice</span>
               </div>
-
-              <div id="facultyh" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Faculty
-                </span>
+              <div id="directory" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Directory</span>
               </div>
-
-              <div id="alumnih" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Alumni
-                </span>
+              <div id="portfolio" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Faculty Portfolio</span>
               </div>
-
-              <div id="downloadsh" className="relative group">
-                <span className="hover:underline hover:text-yellow-300 transition-all duration-500 cursor-pointer">
-                  Downloads
-                </span>
+              <div id="english" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">English</span>
               </div>
             </div>
+
+            {/* Mobile hamburger */}
+            <div className="flex justify-end w-full">
+  <button
+    className="lg:hidden mr-3 flex flex-col justify-center gap-1 p-1 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded"
+    onClick={() => setmobop(!mobop)}
+    aria-label="Toggle menu"
+  >
+    <span className="w-5 h-0.5 bg-white rounded" />
+    <span className="w-5 h-0.5 bg-white rounded" />
+    <span className="w-5 h-0.5 bg-white rounded" />
+  </button>
+</div>
+
           </div>
         </div>
 
-        {/* Dropdown Menus */}
+        {/* Mobile menu */}
+        {mobop && (
+          <div className="  lg:hidden w-full bg-[#631012] text-white px-4 py-4 space-y-2 text-sm border-t border-[#631012]/50 relative z-50">
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">A+</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">A-</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Toggle Contrast</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Grey Scale</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Reset</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Home</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Internet</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">eOffice</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Directory</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Faculty Portfolio</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">English</button>
+          </div>
+        )}
+
+        {/* Desktop Dropdown Panels (responsive width) */}
         <div
           id="about"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
+          className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-b-lg border border-gray-200"
           style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
+         >
+
+
+          <div className="p-6 sm:p-8 md:p-12">
             <Aboutnith />
           </div>
-        </div>
-
-        <div
+         </div>
+         {/* Repeat for other dropdowns with same classes */}
+         <div
           id="authorities"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
+          className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-b-lg border border-gray-200"
           style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
+         >
+          <div className="p-6 sm:p-8 md:p-12">
             <Authorities />
           </div>
+        
+          
         </div>
+        <div className=''>
+           <div className="rounded-full h-35 w-31   flex justify-center items-center absolute z-50 left-4 top-0">
+              <Link href="/">
+                <img src="/l.png" alt="" className="h-20 w-20   " />
+              </Link>
+            </div>
+           <div>
+  <div className="flex -mt-5">
+    <div
+      className="
+        w-[500px] sm:w-[500px] md:w-[500px] lg:w-[400px] xl:w-[500px]
+        h-[145px] lg:h-[220px]
+        bg-[#631012]
+        clipi
+      "
+    >
+      {/* Content */}
+    </div>
+  </div>
+</div>
 
-        <div
-          id="administration"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
-          style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
-            <Administration />
+
+            {/* Title section */}
+           <div className="bg-white    ">
+            <div className="flex flex-col items-end   gap-1   ">
+              <div className="-mt-25 items-end lg:-mt-35">  {/* Valid: 24=6rem, 12=3rem, 8=2rem */}
+
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 pl-75 pr-2   xl:w-full   items-end  ">
+                  National Institute of Technology, Hamirpur
+                </h1>
+                {/* <p className="text-sm text-gray-600 italic  ">
+                  (An institute of national importance)
+                </p> */}
+              </div>
+            </div>
+            </div>
+          </div>
+</div>
+        {/* Main Navigation Bar */}
+        <div className=' sm:mb-10 lg:-mt-15 '>
+         <div className="w-full flex justify-end ">
+          <div className="   h-9 flex items-center rounded-tl-full bg-[#631012] px-4 sm:px-6 gap-4 text-white relative">
+            {/* Desktop menu */}
+            <div className="hidden lg:flex  gap-6 lg:gap-10 flex-1 text-sm  justify-end">
+              <div id="abouth" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">About NITH</span>
+              </div>
+              <div id="authoritiesh" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Authorities</span>
+              </div>
+              <div id="administrationh" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Administration</span>
+              </div>
+              <div id="departmentsh" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Departments</span>
+              </div>
+              <div id="academicsh" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Academics</span>
+              </div>
+              <div id="studenth" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Student</span>
+              </div>
+              <div id="facultyh" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Faculty</span>
+              </div>
+              <div id="alumnih" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Alumni</span>
+              </div>
+              <div id="downloadsh" className="relative group cursor-pointer">
+                <span className="hover:underline hover:text-yellow-300 transition-all duration-500">Downloads</span>
+              </div>
+            </div>
+
+            {/* Mobile hamburger */}
+            <button
+              className="lg:hidden flex flex-col justify-center gap-1 p-1 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              <span className="w-5 h-0.5 bg-white rounded" />
+              <span className="w-5 h-0.5 bg-white rounded" />
+              <span className="w-5 h-0.5 bg-white rounded" />
+            </button>
           </div>
         </div>
 
-        <div
-          id="departments"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
-          style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
-            <Department />
+        {/* Mobile menu */}
+        {mobileOpen && (
+          <div className="  lg:hidden w-full bg-[#631012] text-white px-4 py-4  text-sm border-t border-[#631012]/50 -mt-10">
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">About NITH</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Authorities</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Administration</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Departments</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Academics</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Student</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Faculty</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Alumni</button>
+            <button className="block w-full text-left py-2 hover:text-yellow-300 transition-colors">Downloads</button>
           </div>
+        )}
         </div>
+        {/* Desktop Dropdown Panels (responsive width) */}
+        {/* Desktop Dropdown Panels */}
+<div
+  id="about"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Aboutnith />
+</div>
 
-        <div
-          id="academics"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
-          style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
-            <Academic />
-          </div>
-        </div>
+<div
+  id="authorities"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Authorities />
+</div>
 
-        <div
-          id="student"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
-          style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
-            <Student />
-          </div>
-        </div>
+<div
+  id="administration"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Administration />
+</div>
 
-        <div
-          id="faculty"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
-          style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
-            <Faculty />
-          </div>
-        </div>
+<div
+  id="departments"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Department />
+</div>
 
-        <div
-          id="alumni"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
-          style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
-            <Alumni />
-          </div>
-        </div>
+<div
+  id="academics"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Academic />
+</div>
 
-        <div
-          id="downloads"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
-          style={{ zIndex: 2147483647 }}
-        >
-          <div className="py-8 px-12">
-            <Downloads />
-          </div>
-        </div>
-      </div>
+<div
+  id="student"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Student />
+</div>
+
+<div
+  id="faculty"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Faculty />
+</div>
+
+<div
+  id="alumni"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Alumni />
+</div>
+
+<div
+  id="downloads"
+  className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-[95vw] max-w-7xl mx-auto bg-white/95 backdrop-blur-xl text-black shadow-2xl border border-gray-200 rounded-xl overflow-y-auto max-h-[70vh] p-6 sm:p-8 md:p-12"
+  style={{ zIndex: 1000 }}
+>
+  <Downloads />
+</div>
+
+        {/* ... same pattern for administration, departments, academics, student, faculty, alumni, downloads ... */}
+      
     </>
   );
 }
