@@ -15,7 +15,7 @@ export default async function Hero() {
   return (
     <>
       {/* Hero Section - Full Screen */}
-      <section className="relative w-full h-screen overflow-hidden">
+      <section className="relative w-full h-screen overflow-hidden mt-53">
         {/* Background Image with Subtle Parallax */}
         <div className="absolute inset-0">
           <Image
