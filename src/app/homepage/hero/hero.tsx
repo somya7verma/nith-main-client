@@ -54,18 +54,6 @@ export default async function Hero() {
             </div>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-fade-in [animation-delay:1200ms] opacity-0 [animation-fill-mode:forwards]">
-          <div className="flex flex-col items-center gap-2">
-            <div className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-2">
-              <div className="w-1.5 h-3 bg-white/60 rounded-full animate-bounce"></div>
-            </div>
-            <p className="text-white/50 text-xs uppercase tracking-widest">
-              Scroll
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* Quick Links Section - Separate from Hero */}
