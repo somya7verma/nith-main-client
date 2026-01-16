@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import Nav from '@/app/components/header';
+import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
 
 interface NewsItem {
@@ -321,7 +321,7 @@ export default function AlumniNewsroom() {
 
   return (
     <>
-      <Nav />
+      <Header31 />
       <div className="min-h-screen bg-gray-50">
         <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
           <div className="max-w-7xl mx-auto">

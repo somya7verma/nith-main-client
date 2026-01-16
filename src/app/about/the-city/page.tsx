@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Header31 from '@/app/components/header';
+import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
+import { useEffect, useState } from 'react';
+import { getAboutNithData } from '../api/api';
 import { Sparkles, MapPin, Mountain, Route, BookOpen, Map } from 'lucide-react';
 
 const fadeUp = {
@@ -51,6 +53,36 @@ export default function AboutCityPage() {
     },
   ];
 
+  const [connectivityData, setConnectivityData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch data on component mount (ID 2 = The City)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const response = await getAboutNithData(2);
+
+        if (response.success && response.data) {
+          setConnectivityData(response.data);
+        } else {
+          setError('City information not found');
+        }
+      } catch (err) {
+        setError('Failed to load city data');
+        console.error('City fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Header31 />
@@ -90,13 +122,20 @@ export default function AboutCityPage() {
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             About Hamirpur
           </h1>
-          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Set in the peaceful hills of Himachal Pradesh, Hamirpur offers a
-            clean, calm, and welcoming environment for all who visit NIT
-            Hamirpur. With its friendly community and natural beauty, the city
-            creates the perfect backdrop for learning, growth, and new
-            beginnings.
-          </p>
+          {connectivityData?.description ? (
+            <div
+              className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light"
+              dangerouslySetInnerHTML={{ __html: connectivityData.description }}
+            />
+          ) : (
+            <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+              Set in the peaceful hills of Himachal Pradesh, Hamirpur offers a
+              clean, calm, and welcoming environment for all who visit NIT
+              Hamirpur. With its friendly community and natural beauty, the city
+              creates the perfect backdrop for learning, growth, and new
+              beginnings.
+            </p>
+          )}
         </motion.div>
       </section>
 

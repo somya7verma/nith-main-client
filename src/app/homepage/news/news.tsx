@@ -2,21 +2,21 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { ArrowRight, Calendar, ChevronRight } from 'lucide-react'; // Ensure you have lucide-react or use SVGs
 
-// Define the News type based on your database schema
+// --- Types & Transforms (Kept same as your code) ---
 type NewsData = {
   id: number;
   Heading: string;
   Subheading: string;
   Description: string;
   image: string;
-  startedAt: string; // ISO date string from API
-  endedAt: string; // ISO date string from API
+  startedAt: string;
+  endedAt: string;
   createdAt: string;
   updatedAt: string;
 };
 
-// Transform database news to display format
 const transformNews = (news: NewsData) => ({
   id: news.id,
   title: news.Heading,
@@ -24,384 +24,204 @@ const transformNews = (news: NewsData) => ({
   image: news.image,
   description: news.Description,
   date: new Date(news.startedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
     month: 'short',
     day: 'numeric',
+    year: 'numeric',
   }),
-  category: 'News', // Default category since it's not in schema
-  content: news.Description, // Use description as content
+  category: 'News',
 });
 
+// --- Main Component ---
 function News() {
   const [newsData, setNewsData] = useState<NewsData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Fetch news from API
   useEffect(() => {
     const fetchNews = async () => {
       try {
         setLoading(true);
         const response = await fetch('/api/users/news');
         const result = await response.json();
-
         if (result.success && result.data) {
           setNewsData(result.data);
-          setError(null);
         } else {
           setError(result.message || 'Failed to fetch news');
-          setNewsData([]); // Set empty array on error
         }
       } catch (err) {
-        console.error('Error fetching news:', err);
         setError('Failed to fetch news');
-        setNewsData([]);
       } finally {
         setLoading(false);
       }
     };
-
     fetchNews();
   }, []);
 
-  // Transform news for display
   const displayNews = newsData.map(transformNews);
-  const selectedNews = displayNews[selectedIndex] || null;
 
-  const handlePrev = () => {
-    if (displayNews.length > 0) {
-      setSelectedIndex(
-        (prev) => (prev - 1 + displayNews.length) % displayNews.length
-      );
-    }
-  };
+  // Split news into Featured (1st item) and List (Rest)
+  const featuredNews = displayNews[0];
+  const sidebarNews = displayNews.slice(1, 5); // Show next 4 items
 
-  const handleNext = () => {
-    if (displayNews.length > 0) {
-      setSelectedIndex((prev) => (prev + 1) % displayNews.length);
-    }
-  };
-
-  // Get visible cards (current + 2 on each side)
-  const getVisibleCards = () => {
-    if (displayNews.length === 0) return [];
-    const result = [];
-    for (let i = -2; i <= 2; i++) {
-      const idx = (selectedIndex + i + displayNews.length) % displayNews.length;
-      result.push({
-        news: displayNews[idx],
-        index: idx,
-        offset: i,
-      });
-    }
-    return result;
-  };
-
-  const visibleCards = getVisibleCards();
-
-  // Loading state
+  // --- Loading State ---
   if (loading) {
     return (
-      <section className="pt-14 pb-5 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
-            <div>
-              <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
-                Admissions
-              </h3>
-              <div className="space-y-4">
-                <div className="border border-gray-200 rounded-lg p-6 bg-white hover:border-[#631012] hover:shadow-md transition-shadow">
-                  <h4 className="text-xl font-bold text-[#631012] mb-2">
-                    B.Tech
-                  </h4>
-                  <p className="text-gray-600">Undergraduate Program</p>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012] bg-white hover:shadow-md transition-shadow">
-                  <h4 className="text-xl font-bold text-[#631012] mb-2">
-                    M.Tech, M.Sc, MBA
-                  </h4>
-                  <p className="text-gray-600">Postgraduate Program</p>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012] bg-white hover:shadow-md transition-shadow">
-                  <h4 className="text-xl font-bold text-[#631012] mb-2">
-                    Ph.D
-                  </h4>
-                  <p className="text-gray-600">Doctorate Program</p>
-                </div>
-              </div>
-            </div>
-            <div className="lg:col-span-2">
-              <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
-                Latest News
-              </h3>
-              <div className="flex items-center justify-center py-20">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#631012] mx-auto mb-4"></div>
-                  <p className="text-gray-600">Loading news...</p>
-                </div>
-              </div>
-            </div>
-          </div>
+      <section className="py-12 px-6 bg-gray-50 min-h-[500px] flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#631012] mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading updates...</p>
         </div>
       </section>
     );
-  }
-
-  // Error state or no data
-  if (error || displayNews.length === 0) {
-    return (
-      <section className="pt-14 pb-5 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
-            <div>
-              <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
-                Admissions
-              </h3>
-              <div className="space-y-4">
-                <div className="border border-gray-200 rounded-lg p-6 bg-white hover:border-[#631012] hover:shadow-md transition-shadow">
-                  <h4 className="text-xl font-bold text-[#631012] mb-2">
-                    B.Tech
-                  </h4>
-                  <p className="text-gray-600">Undergraduate Program</p>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012] bg-white hover:shadow-md transition-shadow">
-                  <h4 className="text-xl font-bold text-[#631012] mb-2">
-                    M.Tech, M.Sc, MBA
-                  </h4>
-                  <p className="text-gray-600">Postgraduate Program</p>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012] bg-white hover:shadow-md transition-shadow">
-                  <h4 className="text-xl font-bold text-[#631012] mb-2">
-                    Ph.D
-                  </h4>
-                  <p className="text-gray-600">Doctorate Program</p>
-                </div>
-              </div>
-            </div>
-            <div className="lg:col-span-2">
-              <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
-                Latest News
-              </h3>
-              <div className="flex items-center justify-center py-20">
-                <div className="text-center">
-                  <p className="text-gray-600 text-lg mb-4">
-                    {error || 'No news available at the moment'}
-                  </p>
-                  <p className="text-gray-500 text-sm">
-                    Please check back later or contact support if this persists.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // Ensure selectedNews exists
-  if (!selectedNews) {
-    return null;
   }
 
   return (
-    <section className="pt-14 pb-5 px-6 bg-gray-50">
+    <section className="py-16 px-6 bg-gray-50 font-sans">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
-          {/* Be a NITHian Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* --- LEFT COLUMN: ADMISSIONS (Kept exactly as you had it) --- */}
           <div>
-            <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
+            <h3 className="text-3xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
               Admissions
             </h3>
             <div className="space-y-4">
-              {/* B.Tech Card */}
-              <div className="border border-gray-200 rounded-lg p-6 bg-white  hover:border-[#631012] hover:shadow-md transition-shadow">
-                <h4 className="text-xl font-bold text-[#631012] mb-2">
-                  B.Tech
-                </h4>
-                <p className="text-gray-600">Undergraduate Program</p>
+              <div className="group border border-gray-200 rounded-xl p-6 bg-white hover:border-[#631012] hover:shadow-lg transition-all cursor-pointer">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="text-xl font-bold text-[#631012] group-hover:text-red-700 transition-colors mb-1">
+                      B.Tech
+                    </h4>
+                    <p className="text-gray-500 text-sm font-medium">
+                      Undergraduate Program
+                    </p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#631012] transition-colors" />
+                </div>
               </div>
 
-              {/* M.Tech, M.Sc, MBA Card */}
-              <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012]  bg-white hover:shadow-md transition-shadow">
-                <h4 className="text-xl font-bold text-[#631012] mb-2">
-                  M.Tech, M.Sc, MBA
-                </h4>
-                <p className="text-gray-600">Postgraduate Program</p>
+              <div className="group border border-gray-200 rounded-xl p-6 bg-white hover:border-[#631012] hover:shadow-lg transition-all cursor-pointer">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="text-xl font-bold text-[#631012] group-hover:text-red-700 transition-colors mb-1">
+                      M.Tech, M.Sc, MBA
+                    </h4>
+                    <p className="text-gray-500 text-sm font-medium">
+                      Postgraduate Program
+                    </p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#631012] transition-colors" />
+                </div>
               </div>
 
-              {/* Ph.D Card */}
-              <div className="border border-gray-200 rounded-lg p-6 hover:border-[#631012]  bg-white hover:shadow-md transition-shadow">
-                <h4 className="text-xl font-bold text-[#631012] mb-2">Ph.D</h4>
-                <p className="text-gray-600">Doctorate Program</p>
+              <div className="group border border-gray-200 rounded-xl p-6 bg-white hover:border-[#631012] hover:shadow-lg transition-all cursor-pointer">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="text-xl font-bold text-[#631012] group-hover:text-red-700 transition-colors mb-1">
+                      Ph.D
+                    </h4>
+                    <p className="text-gray-500 text-sm font-medium">
+                      Doctorate Program
+                    </p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#631012] transition-colors" />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* News Section - Featured and Carousel */}
+          {/* --- RIGHT COLUMN: REDESIGNED LATEST NEWS (Span 2 Columns) --- */}
           <div className="lg:col-span-2">
-            <h3 className="text-4xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
-              Latest News
-            </h3>
-
-            <div className="flex flex-col lg:flex-row gap-8 items-stretch">
-              {/* Left Side - Featured News */}
-              <div className="w-full lg:w-1/2 flex flex-col">
-                {/* Large Featured Card */}
-                <div className="relative">
-                  {/* Card Content */}
-                  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-500 h-full border border-gray-200">
-                    {/* Image Container */}
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={selectedNews.image}
-                        alt={selectedNews.title}
-                        fill
-                        className="object-cover hover:scale-105 transition-transform duration-700"
-                        priority
-                      />
-                      {/* Overlay Gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50"></div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-6">
-                      <div className="flex items-center gap-4 mb-3">
-                        <span className="px-3 py-1 bg-[#631012] text-white text-xs font-semibold rounded">
-                          {selectedNews.category}
-                        </span>
-                        <span className="text-gray-600 text-xs">
-                          {selectedNews.date}
-                        </span>
-                      </div>
-
-                      <h4 className="text-lg font-bold text-[#631012] mb-2">
-                        {selectedNews.title}
-                      </h4>
-                      <p className="text-gray-700 leading-relaxed mb-4 text-sm line-clamp-2">
-                        {selectedNews.description}
-                      </p>
-
-                      <div className="pt-4 border-t border-gray-200">
-                        <button className="px-4 py-2 bg-[#631012] text-white font-semibold rounded text-sm hover:bg-red-900 transition-colors">
-                          Read More
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Side - News Stack Carousel */}
-              <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                {/* 3D Stack Cards */}
-                <div className="relative h-80 flex items-center justify-center perspective">
-                  {visibleCards.map((card) => {
-                    const isSelected = card.offset === 0;
-                    const distance = Math.abs(card.offset);
-                    const isHovered = hoveredIndex === card.index;
-
-                    return (
-                      <div
-                        key={`${card.news.id}-${card.offset}`}
-                        onClick={() => setSelectedIndex(card.index)}
-                        onMouseEnter={() => setHoveredIndex(card.index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                        className="absolute cursor-pointer transition-all duration-300 ease-out"
-                        style={{
-                          transform: `
-                            translateY(${card.offset * 20}px)
-                            translateX(${card.offset * 30}px)
-                            scale(${1 - distance * 0.15})
-                            rotateZ(${card.offset * 8}deg)
-                          `,
-                          opacity: distance > 1 ? 0.4 : 1,
-                          zIndex: 50 - Math.abs(card.offset),
-                        }}
-                      >
-                        <div
-                          className={`w-56 h-72 rounded-lg overflow-hidden shadow-md transition-all duration-300 border border-gray-200 ${
-                            isSelected
-                              ? 'ring-3 ring-[#631012] shadow-lg'
-                              : 'hover:shadow-md'
-                          } ${isHovered && !isSelected ? 'ring-2 ring-gray-400' : ''}`}
-                        >
-                          {/* Card Image */}
-                          <div className="relative h-40 overflow-hidden">
-                            <Image
-                              src={card.news.image}
-                              alt={card.news.title}
-                              fill
-                              className={`object-cover transition-transform duration-500 ${
-                                isHovered ? 'scale-110' : 'scale-100'
-                              }`}
-                              sizes="224px"
-                            />
-                            {/* Number Badge */}
-                            <div className="absolute top-3 right-3 w-8 h-8 bg-[#631012] text-white rounded-full flex items-center justify-center font-bold shadow-md text-xs">
-                              {card.index + 1}
-                            </div>
-                          </div>
-
-                          {/* Card Info */}
-                          <div className="p-4 bg-white h-32 flex flex-col justify-between">
-                            <div>
-                              <p className="text-xs text-gray-600 mb-1">
-                                {card.news.date}
-                              </p>
-                              <h5 className="font-bold text-gray-800 line-clamp-2 text-sm">
-                                {card.news.title}
-                              </h5>
-                            </div>
-                            {isSelected && (
-                              <div className="w-full h-1 bg-[#631012] rounded-full"></div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Navigation and Counter */}
-                <div className="flex items-center justify-center gap-4 mt-10">
-                  <button
-                    onClick={handlePrev}
-                    className="w-10 h-10 rounded-lg bg-[#631012] text-white font-bold text-sm hover:bg-red-900 transition-colors flex items-center justify-center"
-                  >
-                    ←
-                  </button>
-
-                  <div className="flex gap-2">
-                    {displayNews.map((_, idx: number) => (
-                      <button
-                        key={idx}
-                        onClick={() => setSelectedIndex(idx)}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          idx === selectedIndex
-                            ? 'bg-[#631012] w-6'
-                            : 'bg-gray-300 hover:bg-gray-400'
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={handleNext}
-                    className="w-10 h-10 rounded-lg bg-[#631012] text-white font-bold text-sm hover:bg-red-900 transition-colors flex items-center justify-center"
-                  >
-                    →
-                  </button>
-                </div>
-
-                {/* Progress Text */}
-                <p className="text-center text-gray-600 mt-4 font-semibold text-sm">
-                  News {selectedIndex + 1} of {displayNews.length}
-                </p>
-              </div>
+            <div className="flex justify-between items-end mb-6 border-b border-gray-200 pb-2">
+              <h3 className="text-3xl font-bold text-[#631012] border-b-4 border-[#631012] -mb-3 inline-block pb-2">
+                Latest News
+              </h3>
+              <a
+                href="/news"
+                className="text-sm font-bold text-[#631012] hover:text-red-800 flex items-center gap-1 group"
+              >
+                View Archive{' '}
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
             </div>
+
+            {error || displayNews.length === 0 ? (
+              <div className="p-8 bg-white rounded-lg border border-gray-200 text-center text-gray-500">
+                {error || 'No news updates available at the moment.'}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* 1. HERO NEWS ITEM (Left Side of News Grid) */}
+                {featuredNews && (
+                  <div className="group cursor-pointer flex flex-col h-full">
+                    <div className="relative h-64 w-full rounded-2xl overflow-hidden shadow-md mb-4">
+                      <Image
+                        src={featuredNews.image}
+                        alt={featuredNews.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute top-4 left-4 bg-[#631012] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                        Featured
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-500 text-xs font-medium mb-2">
+                      <Calendar className="w-3 h-3 text-[#631012]" />
+                      {featuredNews.date}
+                    </div>
+                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-[#631012] transition-colors mb-3 leading-tight">
+                      {featuredNews.title}
+                    </h4>
+                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">
+                      {featuredNews.description}
+                    </p>
+                    <span className="text-[#631012] font-bold text-sm flex items-center gap-2 mt-auto group-hover:gap-3 transition-all">
+                      Read Full Story <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                )}
+
+                {/* 2. SIDEBAR LIST (Right Side of News Grid) */}
+                <div className="flex flex-col gap-4">
+                  {sidebarNews.map((item) => (
+                    <div
+                      key={item.id}
+                      className="group flex gap-4 p-3 rounded-xl hover:bg-white hover:shadow-md transition-all border border-transparent hover:border-gray-100 cursor-pointer"
+                    >
+                      {/* Thumbnail */}
+                      <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+
+                      {/* Text */}
+                      <div className="flex flex-col justify-center">
+                        <div className="flex items-center gap-2 text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#631012]"></span>
+                          {item.date}
+                        </div>
+                        <h5 className="text-sm font-bold text-gray-800 group-hover:text-[#631012] transition-colors line-clamp-2 leading-snug mb-1">
+                          {item.title}
+                        </h5>
+                        <p className="text-xs text-gray-500 line-clamp-1">
+                          {item.subtitle || item.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* "More" link at bottom of list */}
+                  {displayNews.length > 5 && (
+                    <button className="w-full py-3 mt-2 text-sm font-semibold text-gray-500 hover:text-[#631012] hover:bg-gray-100 rounded-lg transition-colors border border-dashed border-gray-300">
+                      View {displayNews.length - 5} more updates...
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

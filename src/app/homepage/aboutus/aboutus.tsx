@@ -49,8 +49,8 @@ function Aboutus() {
       {/* Decorative gradient blob */}
       <div className="absolute top-10 right-10 w-48 h-48 bg-[#631012]/20 rounded-full blur-3xl opacity-30"></div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+      <div className="w-full mx-auto relative z-10">
+        <div className="  gap-12 items-center">
           {/* Left side - About Us content */}
           <motion.div
             className="md:col-span-1"
@@ -80,7 +80,7 @@ function Aboutus() {
             </motion.h2>
 
             {aboutDesc ? (
-              <p className="text-gray-700 leading-relaxed text-md mt-4">
+              <p className="text-gray-700 leading-relaxed  text-md mt-4">
                 {aboutDesc}
               </p>
             ) : (
@@ -95,44 +95,6 @@ function Aboutus() {
                 intake of 30 students in each.
               </div>
             )}
-          </motion.div>
-
-          {/* Right side - Stats with animation */}
-          <motion.div
-            className="md:col-span-2 grid grid-cols-2 lg:grid-cols-3 gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ staggerChildren: 0.2 }}
-          >
-            {data.map((p, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 hover:-translate-y-2"
-                variants={fadeUp}
-                transition={{
-                  duration: 0.6,
-                  ease: 'easeOut',
-                  delay: index * 0.1,
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  transition: { type: 'spring', stiffness: 200 },
-                }}
-              >
-                <motion.div
-                  className="text-3xl font-bold text-[#631012] mb-2"
-                  whileInView={{
-                    opacity: [0, 1],
-                    scale: [0.8, 1],
-                    transition: { duration: 0.5, delay: index * 0.15 },
-                  }}
-                >
-                  {p.n}
-                </motion.div>
-                <div className="text-lg font-medium text-gray-800">{p.d}</div>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
       </div>

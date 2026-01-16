@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import Nav from '@/app/components/header';
+import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
 
 interface DownloadsItem {
@@ -21,7 +21,8 @@ const initialDownloadsData: DownloadsItem[] = [
   {
     id: 1,
     title: 'NITH Downloads Association Announces Annual Meet 2025',
-    description: 'The NIT Hamirpur Downloads Association is pleased to announce the Annual Downloads Meet scheduled for March 2025. All registered Downloads are cordially invited to participate in this grand event celebrating our shared legacy.',
+    description:
+      'The NIT Hamirpur Downloads Association is pleased to announce the Annual Downloads Meet scheduled for March 2025. All registered Downloads are cordially invited to participate in this grand event celebrating our shared legacy.',
     image: '/Downloads/Downloads-meet.jpg',
     date: '2025-01-15',
     slug: 'annual-meet-2025',
@@ -30,7 +31,8 @@ const initialDownloadsData: DownloadsItem[] = [
   {
     id: 2,
     title: 'Distinguished Downloads Award Nominations Open',
-    description: 'Nominations are now open for the Distinguished Downloads Award 2025. The award recognizes outstanding contributions by NITH Downloads in their respective fields. Submit your nominations before the deadline.',
+    description:
+      'Nominations are now open for the Distinguished Downloads Award 2025. The award recognizes outstanding contributions by NITH Downloads in their respective fields. Submit your nominations before the deadline.',
     image: '/Downloads/award.jpg',
     date: '2025-01-12',
     slug: 'distinguished-Downloads-award-2025',
@@ -57,7 +59,8 @@ const DownloadsSkeleton = () => (
 );
 
 export default function Downloads() {
-  const [downloads, setDownloads] = useState<DownloadsItem[]>(initialDownloadsData);
+  const [downloads, setDownloads] =
+    useState<DownloadsItem[]>(initialDownloadsData);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -99,9 +102,24 @@ export default function Downloads() {
       if (currentPage <= 3) {
         pages.push(1, 2, 3, 4, '...', totalPages);
       } else if (currentPage >= totalPages - 2) {
-        pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        pages.push(
+          1,
+          '...',
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages
+        );
       } else {
-        pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+        pages.push(
+          1,
+          '...',
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          '...',
+          totalPages
+        );
       }
     }
     return pages;
@@ -109,13 +127,16 @@ export default function Downloads() {
 
   return (
     <>
-      <Nav/>
+      <Header31 />
       <div className="min-h-screen bg-gray-50">
         {/* Breadcrumb */}
         <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
           <div className="max-w-7xl mx-auto">
             <nav className="flex items-center space-x-2 text-sm text-gray-600">
-              <Link href="/" className="hover:text-[#800000] transition-colors duration-200">
+              <Link
+                href="/"
+                className="hover:text-[#800000] transition-colors duration-200"
+              >
                 Home
               </Link>
               <span>›</span>
@@ -133,9 +154,12 @@ export default function Downloads() {
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Downloads</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Downloads
+              </h1>
               <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
-                Latest Downloads, announcements, and updates from the NITH Downloads community.
+                Latest Downloads, announcements, and updates from the NITH
+                Downloads community.
               </p>
             </motion.div>
           </div>
@@ -150,16 +174,22 @@ export default function Downloads() {
               transition={{ duration: 0.5 }}
               className="bg-white rounded-2xl shadow-sm p-6 mb-8"
             >
-              <span className="font-semibold text-gray-700">Total Downloads: {downloads.length}</span>
+              <span className="font-semibold text-gray-700">
+                Total Downloads: {downloads.length}
+              </span>
             </motion.div>
 
             <div className="w-full">
               <div className="mb-6">
                 <p className="text-gray-600">
                   Showing{' '}
-                  <span className="font-semibold text-[#631012]">{paginatedDownloads.length}</span>{' '}
+                  <span className="font-semibold text-[#631012]">
+                    {paginatedDownloads.length}
+                  </span>{' '}
                   of{' '}
-                  <span className="font-semibold">{filteredDownloads.length}</span>{' '}
+                  <span className="font-semibold">
+                    {filteredDownloads.length}
+                  </span>{' '}
                   Downloads items
                 </p>
               </div>
@@ -173,7 +203,12 @@ export default function Downloads() {
                   className="bg-white rounded-2xl shadow-sm p-12 text-center"
                 >
                   <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-                    <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-10 h-10 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -182,8 +217,12 @@ export default function Downloads() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No Downloads available</h3>
-                  <p className="text-gray-500 mb-6">There are no Downloads items available.</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    No Downloads available
+                  </h3>
+                  <p className="text-gray-500 mb-6">
+                    There are no Downloads items available.
+                  </p>
                 </motion.div>
               ) : (
                 <div className="space-y-4">
@@ -201,7 +240,12 @@ export default function Downloads() {
                           <div className="sm:w-48 md:w-56 flex-shrink-0">
                             <div className="relative h-48 sm:h-full w-full bg-gray-100">
                               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#631012]/10 to-[#631012]/5">
-                                <svg className="w-12 h-12 text-[#631012]/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg
+                                  className="w-12 h-12 text-[#631012]/30"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
                                   <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -216,14 +260,25 @@ export default function Downloads() {
                           <div className="flex-1 p-5 sm:p-6 flex flex-col">
                             <div className="flex-1">
                               <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#631012] transition-colors line-clamp-2">
-                                <Link href={`/Downloads/Downloads/${item.slug}`}>{item.title}</Link>
+                                <Link
+                                  href={`/Downloads/Downloads/${item.slug}`}
+                                >
+                                  {item.title}
+                                </Link>
                               </h3>
-                              <p className="text-gray-600 text-sm line-clamp-2 mb-4">{item.description}</p>
+                              <p className="text-gray-600 text-sm line-clamp-2 mb-4">
+                                {item.description}
+                              </p>
                             </div>
 
                             <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
                               <div className="flex items-center gap-2 text-sm text-gray-500">
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
                                   <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -254,7 +309,12 @@ export default function Downloads() {
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
                                   >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M9 5l7 7-7 7"
+                                    />
                                   </svg>
                                 </Link>
                               </div>
@@ -276,7 +336,9 @@ export default function Downloads() {
                 >
                   <div className="inline-flex items-center gap-1 bg-white rounded-xl shadow-sm p-2">
                     <button
-                      onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                      onClick={() =>
+                        setCurrentPage((prev) => Math.max(prev - 1, 1))
+                      }
                       disabled={currentPage === 1}
                       className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                         currentPage === 1
@@ -284,15 +346,27 @@ export default function Downloads() {
                           : 'text-gray-600 hover:bg-gray-100 hover:text-[#631012]'
                       }`}
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 19l-7-7 7-7"
+                        />
                       </svg>
                       <span className="hidden sm:inline">Previous</span>
                     </button>
                     <div className="flex items-center gap-1 px-2">
                       {getPageNumbers().map((page, index) =>
                         page === '...' ? (
-                          <span key={index} className="px-3 py-2 text-gray-400">...</span>
+                          <span key={index} className="px-3 py-2 text-gray-400">
+                            ...
+                          </span>
                         ) : (
                           <button
                             key={index}
@@ -309,7 +383,9 @@ export default function Downloads() {
                       )}
                     </div>
                     <button
-                      onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                      onClick={() =>
+                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                      }
                       disabled={currentPage === totalPages}
                       className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                         currentPage === totalPages
@@ -318,8 +394,18 @@ export default function Downloads() {
                       }`}
                     >
                       <span className="hidden sm:inline">Next</span>
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
                       </svg>
                     </button>
                   </div>
@@ -329,7 +415,7 @@ export default function Downloads() {
           </div>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

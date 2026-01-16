@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import Nav from '@/app/components/header';
+import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
 
 interface AlumniData {
@@ -422,7 +422,7 @@ export default function ListOfAlumni() {
 
   return (
     <>
-      <Nav />
+      <Header31 />
       <div className="min-h-screen bg-gray-50">
         {/* Breadcrumb */}
         <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">

@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Header31 from '@/app/components/header';
+import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
+import { getAboutNithData } from '../api/api';
+import { useEffect, useState } from 'react';
 import {
   Target,
   Lightbulb,
@@ -127,6 +129,35 @@ const roadmap = [
 ];
 
 export default function GoalsPage() {
+  const [connectivityData, setConnectivityData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch data on component mount (ID 4 = Goals)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const response = await getAboutNithData(4);
+
+        if (response.success && response.data) {
+          setConnectivityData(response.data);
+        } else {
+          setError('Goals information not found');
+        }
+      } catch (err) {
+        setError('Failed to load goals data');
+        console.error('Goals fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
   return (
     <div className="min-h-screen bg-white">
       <Header31 />
@@ -166,11 +197,18 @@ export default function GoalsPage() {
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             Our Goals
           </h1>
-          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Defining our long-term vision of excellence in education, research,
-            and societal growth through innovation, sustainability, and
-            inclusive development.
-          </p>
+          {connectivityData?.description ? (
+            <div
+              className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light"
+              dangerouslySetInnerHTML={{ __html: connectivityData.description }}
+            />
+          ) : (
+            <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+              Defining our long-term vision of excellence in education,
+              research, and societal growth through innovation, sustainability,
+              and inclusive development.
+            </p>
+          )}
         </motion.div>
       </section>
 

@@ -5,8 +5,11 @@ const authoritiesSections = {
     {
       section: 'Board of Governors (BOG)',
       links: [
-        { title: 'Composition of BOG', href: '/authorities/bog/composition' },
-        { title: 'Minutes of BOG', href: '/authorities/bog/minutes' },
+        {
+          title: 'Composition of BOG',
+          href: 'https://nith.ac.in/uploads/topics/17642163716028.pdf',
+        },
+        { title: 'Minutes of BOG', href: '/authorities/minutesofbg' },
       ],
     },
   ],
@@ -14,8 +17,11 @@ const authoritiesSections = {
     {
       section: 'Finance Committee (FC)',
       links: [
-        { title: 'Composition of FC', href: '/authorities/fc/composition' },
-        { title: 'Minutes of FC', href: '/authorities/fc/minutes' },
+        {
+          title: 'Composition of FC',
+          href: 'https://nith.ac.in/uploads/topics/17642162991410.pdf',
+        },
+        { title: 'Minutes of FC', href: '/authorities/minutesofc' },
       ],
     },
   ],
@@ -23,8 +29,11 @@ const authoritiesSections = {
     {
       section: 'Building Works Committee (BWC)',
       links: [
-        { title: 'Composition of BWC', href: '/authorities/bwc/composition' },
-        { title: 'Minutes of BWC', href: '/authorities/bwc/minutes' },
+        {
+          title: 'Composition of BWC',
+          href: 'https://nith.ac.in/uploads/topics/16624339297916.pdf',
+        },
+        { title: 'Minutes of BWC', href: '/authorities/minutesbwc' },
       ],
     },
   ],
@@ -36,7 +45,7 @@ const authoritiesSections = {
           title: 'Composition of Senate',
           href: '/authorities/senate/composition',
         },
-        { title: 'Minutes of Senate', href: '/authorities/senate/minutes' },
+        { title: 'Minutes of Senate', href: '/authorities/minutesswc' },
       ],
     },
   ],

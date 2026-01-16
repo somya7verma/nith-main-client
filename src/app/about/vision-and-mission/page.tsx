@@ -2,8 +2,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Header31 from '../../components/header';
+import Header31 from '../../components/header3';
 import Footer from '../../components/footer';
+import { getAboutNithData } from '../api/api';
+import { useEffect, useState } from 'react';
 import {
   Sparkles,
   Eye,
@@ -102,6 +104,36 @@ export default function VisionMissionPage() {
     },
   ];
 
+  const [connectivityData, setConnectivityData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch data on component mount (ID 3 = Vision & Mission)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const response = await getAboutNithData(3);
+
+        if (response.success && response.data) {
+          setConnectivityData(response.data);
+        } else {
+          setError('Vision & Mission information not found');
+        }
+      } catch (err) {
+        setError('Failed to load vision & mission data');
+        console.error('Vision & Mission fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Header31 />
@@ -141,10 +173,17 @@ export default function VisionMissionPage() {
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             Guiding Principles
           </h1>
-          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Our vision and mission define our commitment to academic excellence,
-            research innovation, and holistic human development
-          </p>
+          {connectivityData?.description ? (
+            <div
+              className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light"
+              dangerouslySetInnerHTML={{ __html: connectivityData.description }}
+            />
+          ) : (
+            <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+              Our vision and mission define our commitment to academic
+              excellence, research innovation, and holistic human development
+            </p>
+          )}
         </motion.div>
       </section>
 

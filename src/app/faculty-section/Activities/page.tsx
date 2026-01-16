@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import Nav from '@/app/components/header';
+import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
 
 type ActivityCategory =
@@ -122,15 +122,14 @@ const ITEMS_PER_PAGE = 10;
 
 export default function Activities() {
   const [activitiesData] = useState<Activity[]>(initialActivitiesData);
-  const [activeCategory, setActiveCategory] =
-    useState<ActivityCategory>('All');
+  const [activeCategory, setActiveCategory] = useState<ActivityCategory>('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
   const filteredActivities = useMemo(() => {
     if (activeCategory === 'All') return activitiesData;
     return activitiesData.filter(
-      (activity) => activity.category === activeCategory,
+      (activity) => activity.category === activeCategory
     );
   }, [activeCategory, activitiesData]);
 
@@ -168,7 +167,7 @@ export default function Activities() {
           totalPages - 3,
           totalPages - 2,
           totalPages - 1,
-          totalPages,
+          totalPages
         );
       } else {
         pages.push(
@@ -178,7 +177,7 @@ export default function Activities() {
           currentPage,
           currentPage + 1,
           '...',
-          totalPages,
+          totalPages
         );
       }
     }
@@ -187,7 +186,7 @@ export default function Activities() {
 
   return (
     <>
-      <Nav />
+      <Header31 />
       <div className="min-h-screen bg-gray-50">
         {/* Breadcrumb */}
         <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
@@ -405,7 +404,7 @@ export default function Activities() {
                       className="p-5 cursor-pointer"
                       onClick={() =>
                         setExpandedCard(
-                          expandedCard === activity.id ? null : activity.id,
+                          expandedCard === activity.id ? null : activity.id
                         )
                       }
                     >
@@ -414,11 +413,12 @@ export default function Activities() {
                           <div className="w-14 h-16 rounded-xl overflow-hidden shadow-sm border border-gray-100 flex-shrink-0">
                             <div className="h-5 bg-gradient-to-r from-[#631012] to-[#7a1a1d] flex items-center justify-center">
                               <span className="text-[10px] font-semibold text-white uppercase tracking-wider">
-                                {new Date(
-                                  activity.date,
-                                ).toLocaleDateString('en-US', {
-                                  month: 'short',
-                                })}
+                                {new Date(activity.date).toLocaleDateString(
+                                  'en-US',
+                                  {
+                                    month: 'short',
+                                  }
+                                )}
                               </span>
                             </div>
                             <div className="h-11 bg-white flex flex-col items-center justify-center">
@@ -435,11 +435,12 @@ export default function Activities() {
                               {activity.title}
                             </h3>
                             <p className="text-xs text-gray-400 mt-0.5">
-                              {new Date(
-                                activity.date,
-                              ).toLocaleDateString('en-US', {
-                                weekday: 'long',
-                              })}
+                              {new Date(activity.date).toLocaleDateString(
+                                'en-US',
+                                {
+                                  weekday: 'long',
+                                }
+                              )}
                             </p>
                           </div>
                         </div>
@@ -591,18 +592,13 @@ export default function Activities() {
                   <div className="flex items-center gap-1 px-2">
                     {getPageNumbers().map((page, index) =>
                       page === '...' ? (
-                        <span
-                          key={index}
-                          className="px-3 py-2 text-gray-400"
-                        >
+                        <span key={index} className="px-3 py-2 text-gray-400">
                           ...
                         </span>
                       ) : (
                         <motion.button
                           key={index}
-                          onClick={() =>
-                            setCurrentPage(page as number)
-                          }
+                          onClick={() => setCurrentPage(page as number)}
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                           className={`w-10 h-10 rounded-lg text-sm font-medium transition-all ${
@@ -613,15 +609,13 @@ export default function Activities() {
                         >
                           {page}
                         </motion.button>
-                      ),
+                      )
                     )}
                   </div>
 
                   <button
                     onClick={() =>
-                      setCurrentPage((prev) =>
-                        Math.min(prev + 1, totalPages),
-                      )
+                      setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                     }
                     disabled={currentPage === totalPages}
                     className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${

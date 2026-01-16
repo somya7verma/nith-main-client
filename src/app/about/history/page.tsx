@@ -2,8 +2,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Page from '../../components/header';
+import Header31 from '../../components/header3';
 import Footer from '../../components/footer';
+import { getAboutNithData } from '../api/api';
+import { useEffect, useState } from 'react';
 
 const fadeUp = {
   hidden: {
@@ -77,9 +79,38 @@ const timelineEvents: TimelineEvent[] = [
 ];
 
 export default function HistoryPage() {
+  const [connectivityData, setConnectivityData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch data on component mount (ID 1 = History)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const response = await getAboutNithData(1);
+
+        if (response.success && response.data) {
+          setConnectivityData(response.data);
+        } else {
+          setError('History information not found');
+        }
+      } catch (err) {
+        setError('Failed to load history data');
+        console.error('History fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
   return (
     <div className="min-h-screen bg-gray-50">
-      <Page />
+      <Header31 />
 
       <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto">
@@ -116,10 +147,17 @@ export default function HistoryPage() {
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             Our History
           </h1>
-          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            From our establishment in 1986 to becoming an Institute of National
-            Importance — a journey of excellence and growth.
-          </p>
+          {connectivityData?.description ? (
+            <div
+              className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light"
+              dangerouslySetInnerHTML={{ __html: connectivityData.description }}
+            />
+          ) : (
+            <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+              From our establishment in 1986 to becoming an Institute of
+              National Importance — a journey of excellence and growth.
+            </p>
+          )}
         </motion.div>
       </section>
 

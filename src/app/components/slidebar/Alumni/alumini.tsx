@@ -12,24 +12,34 @@ function Alumni() {
     leftColumn: [
       { title: 'Activities', href: '/alumni/activities' },
       { title: 'Functionaries', href: '/alumni/functionaries' },
-      { title: 'Alumni Newsroom', href: '/alumni/related-notices' },
-      { title: 'Alumni Related MoU', href: '/alumni/related-mou' },
+      {
+        title: 'Alumni Notices',
+        href: 'https://alumni.nith.ac.in/newsroom.dz',
+      },
+      {
+        title: 'Alumni Related MoU',
+        href: 'https://nith.ac.in/uploads/topics/mouepack16939083811860.pdf',
+      },
       { title: 'Alumni Assist', href: '/alumni/assist' },
     ],
     secondColumn: [
       {
         section: 'Alumni Affairs Activities',
         links: [
-          { title: 'List of Alumni', href: '/alumni/list', hasIcon: true },
+          {
+            title: 'List of Alumni',
+            href: 'https://alumni.nith.ac.in/members.dz',
+            hasIcon: true,
+          },
           {
             title: 'Alumni Registration',
-            href: '/alumni/registration',
+            href: 'https://alumni.nith.ac.in/user/signup.dz',
             hasIcon: true,
           },
           // disabling this link kyuki mujhe samajh nhi aara yha kya bnao
           {
             title: 'Alumni Local Chapters of NITH',
-            href: '/alumni/local-chapters',
+            href: 'https://alumni.nith.ac.in/chapters.dz',
             hasIcon: true,
             disabled: true,
           },
