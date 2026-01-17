@@ -1,209 +1,163 @@
 import React from 'react';
+import Link from 'next/link';
+import {
+  ChevronRight,
+  ArrowUpRight,
+  Users,
+  Globe,
+  Gem,
+  Lock,
+  ExternalLink,
+} from 'lucide-react';
 
-interface LinkItem {
-  title: string;
-  href: string;
-  hasIcon?: boolean;
-  disabled?: boolean;
-}
-
-function Alumni() {
-  const alumniSections = {
-    leftColumn: [
-      { title: 'Activities', href: '/alumni/activities' },
+const alumniData = [
+  {
+    id: '01',
+    category: 'Engagement',
+    icon: Users,
+    links: [
+      { title: 'Alumni Activities', href: '/alumni/activities' },
       { title: 'Functionaries', href: '/alumni/functionaries' },
       {
         title: 'Alumni Notices',
         href: 'https://alumni.nith.ac.in/newsroom.dz',
+        isExternal: true,
       },
       {
         title: 'Alumni Related MoU',
         href: 'https://nith.ac.in/uploads/topics/mouepack16939083811860.pdf',
+        isExternal: true,
       },
       { title: 'Alumni Assist', href: '/alumni/assist' },
     ],
-    secondColumn: [
+  },
+  {
+    id: '02',
+    category: 'Network',
+    icon: Globe,
+    links: [
       {
-        section: 'Alumni Affairs Activities',
-        links: [
-          {
-            title: 'List of Alumni',
-            href: 'https://alumni.nith.ac.in/members.dz',
-            hasIcon: true,
-          },
-          {
-            title: 'Alumni Registration',
-            href: 'https://alumni.nith.ac.in/user/signup.dz',
-            hasIcon: true,
-          },
-          // disabling this link kyuki mujhe samajh nhi aara yha kya bnao
-          {
-            title: 'Alumni Local Chapters of NITH',
-            href: 'https://alumni.nith.ac.in/chapters.dz',
-            hasIcon: true,
-            disabled: true,
-          },
-          {
-            title: 'Annual Alumni Meet of NITH',
-            href: '/alumni/annual-meet',
-            hasIcon: true,
-          },
-          {
-            title: 'Distinguished Alumni of NITH',
-            href: '/alumni/distinguished',
-            hasIcon: true,
-          },
-        ],
+        title: 'List of Alumni',
+        href: 'https://alumni.nith.ac.in/members.dz',
+        isExternal: true,
+      },
+      {
+        title: 'Alumni Registration',
+        href: 'https://alumni.nith.ac.in/user/signup.dz',
+        isExternal: true,
+      },
+      {
+        title: 'Local Chapters',
+        href: 'https://alumni.nith.ac.in/chapters.dz',
+        disabled: true,
+      },
+      { title: 'Annual Alumni Meet', href: '/alumni/annual-meet' },
+      { title: 'Distinguished Alumni', href: '/alumni/distinguished' },
+    ],
+  },
+  {
+    id: '03',
+    category: 'Impact & Access',
+    icon: Gem,
+    links: [
+      { title: 'Endowment Fund', href: '/alumni/endowment-fund' },
+      { title: 'Awards Initiatives', href: '/alumni/awards-initiatives' },
+      {
+        title: 'Alumni Portal',
+        href: 'https://alumni.nith.ac.in/',
+        isExternal: true,
       },
     ],
-    thirdColumn: [
-      {
-        section: 'Resource Generation Activities',
-        links: [
-          {
-            title: 'Endowment Fund Generation',
-            href: '/alumni/endowment-fund',
-            hasIcon: true,
-          },
-          {
-            title: 'Awards Initiatives',
-            href: '/alumni/awards-initiatives',
-            hasIcon: true,
-          },
-        ],
-      },
-    ],
-    rightColumn: [
-      {
-        section: 'Portal',
-        links: [
-          {
-            title: 'Alumni Portal',
-            href: 'https://alumni.nith.ac.in/',
-            hasIcon: true,
-          },
-        ],
-      },
-    ],
-  };
+  },
+];
 
+function Alumni() {
   return (
-    <div className="grid grid-cols-4 gap-8">
-      {/* Left Column */}
-      <div className="space-y-2">
-        {alumniSections.leftColumn.map((item, index) => (
-          <a
-            key={index}
-            href={item.href}
-            className="block text-black font-medium text-sm hover:text-gray-600 transition-colors py-1"
-          >
-            {item.title}
-          </a>
-        ))}
-      </div>
-
-      {/* Second Column */}
-      <div className="space-y-6">
-        {alumniSections.secondColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-3 text-sm">
-              {section.section}
-            </h3>
-            {section.links && section.links.length > 0 && (
-              <div className="space-y-1">
-                {section.links.map((link, linkIdx) => (
-                  <a
-                    key={linkIdx}
-                    href={(link as LinkItem).disabled ? undefined : link.href}
-                    className={`block px-4 py-2 text-sm transition-colors ${
-                      (link as LinkItem).disabled
-                        ? 'text-gray-400 cursor-not-allowed'
-                        : 'text-black hover:bg-gray-200 cursor-pointer'
-                    }`}
-                    onClick={
-                      (link as LinkItem).disabled
-                        ? (e) => e.preventDefault()
-                        : undefined
-                    }
-                  >
-                    {link.hasIcon && <span className="mr-2">›</span>}
-                    {link.title}
-                  </a>
-                ))}
+    <section className="w-full  bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* The Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+          {alumniData.map((column) => (
+            <div key={column.id} className="flex flex-col">
+              {/* Column Header */}
+              <div className="flex items-center gap-3 mb-6 group/header">
+                <span className="font-mono text-xl text-gray-200 group-hover/header:text-[#800000] transition-colors duration-300">
+                  {column.id}
+                </span>
+                <div className="flex items-center gap-2 border-l-2 border-[#800000] pl-3">
+                  <column.icon
+                    size={16}
+                    className="text-gray-400 group-hover/header:text-gray-900 transition-colors"
+                  />
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-gray-800">
+                    {column.category}
+                  </h3>
+                </div>
               </div>
-            )}
-          </div>
-        ))}
-      </div>
 
-      {/* Third Column */}
-      <div className="space-y-6">
-        {alumniSections.thirdColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-3 text-sm">
-              {section.section}
-            </h3>
-            {section.links && section.links.length > 0 && (
-              <div className="space-y-1">
-                {section.links.map((link, linkIdx) => (
-                  <a
-                    key={linkIdx}
-                    href={(link as LinkItem).disabled ? undefined : link.href}
-                    className={`block px-4 py-2 text-sm transition-colors ${
-                      (link as LinkItem).disabled
-                        ? 'text-gray-400 cursor-not-allowed'
-                        : 'text-black hover:bg-gray-200 cursor-pointer'
-                    }`}
-                    onClick={
-                      (link as LinkItem).disabled
-                        ? (e) => e.preventDefault()
-                        : undefined
-                    }
-                  >
-                    {link.hasIcon && <span className="mr-2">›</span>}
-                    {link.title}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+              {/* Links List */}
+              <ul className="space-y-1">
+                {column.links.map((link, index) => {
+                  // Handle Disabled State
+                  if (link.disabled) {
+                    return (
+                      <li
+                        key={index}
+                        className="flex items-center justify-between py-2 px-2 opacity-50 cursor-not-allowed select-none"
+                      >
+                        <div className="flex items-center gap-3">
+                          <Lock size={12} className="text-gray-400" />
+                          <span className="text-sm font-medium text-gray-400">
+                            {link.title}
+                          </span>
+                        </div>
+                      </li>
+                    );
+                  }
 
-      {/* Right Column */}
-      <div className="space-y-6">
-        {alumniSections.rightColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-3 text-sm">
-              {section.section}
-            </h3>
-            {section.links && section.links.length > 0 && (
-              <div className="space-y-1">
-                {section.links.map((link, linkIdx) => (
-                  <a
-                    key={linkIdx}
-                    href={(link as LinkItem).disabled ? undefined : link.href}
-                    className={`block px-4 py-2 text-sm transition-colors ${
-                      (link as LinkItem).disabled
-                        ? 'text-gray-400 cursor-not-allowed'
-                        : 'text-black hover:bg-gray-200 cursor-pointer'
-                    }`}
-                    onClick={
-                      (link as LinkItem).disabled
-                        ? (e) => e.preventDefault()
-                        : undefined
-                    }
-                  >
-                    {link.hasIcon && <span className="mr-2">›</span>}
-                    {link.title}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+                  // Handle Active State
+                  return (
+                    <li key={index}>
+                      <Link
+                        href={link.href}
+                        target={link.isExternal ? '_blank' : '_self'}
+                        rel={link.isExternal ? 'noopener noreferrer' : ''}
+                        className="flex items-center justify-between group/link py-2 px-2 rounded-r hover:bg-gray-50 transition-all duration-300"
+                      >
+                        <div className="flex items-center gap-3">
+                          {/* Use ExternalLink icon if external, else Chevron */}
+                          {link.isExternal ? (
+                            <ExternalLink
+                              size={14}
+                              className="text-gray-300 group-hover/link:text-[#800000] transition-colors"
+                            />
+                          ) : (
+                            <ChevronRight
+                              size={14}
+                              className="text-gray-300 group-hover/link:text-[#800000] transition-colors"
+                            />
+                          )}
+
+                          <span className="text-sm font-medium text-gray-600 group-hover/link:text-black transition-colors">
+                            {link.title}
+                          </span>
+                        </div>
+
+                        {/* Hover Indicator */}
+                        <ArrowUpRight
+                          size={12}
+                          className="opacity-0 -translate-x-2 text-[#800000] group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300"
+                        />
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

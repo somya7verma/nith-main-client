@@ -1,159 +1,119 @@
+import React from 'react';
 import Link from 'next/link';
+import { FileText, ChevronRight, ArrowUpRight } from 'lucide-react';
 
-const authoritiesSections = {
-  firstColumn: [
-    {
-      section: 'Board of Governors (BOG)',
-      links: [
-        {
-          title: 'Composition of BOG',
-          href: 'https://nith.ac.in/uploads/topics/17642163716028.pdf',
-        },
-        { title: 'Minutes of BOG', href: '/authorities/minutesofbg' },
-      ],
-    },
-  ],
-  secondColumn: [
-    {
-      section: 'Finance Committee (FC)',
-      links: [
-        {
-          title: 'Composition of FC',
-          href: 'https://nith.ac.in/uploads/topics/17642162991410.pdf',
-        },
-        { title: 'Minutes of FC', href: '/authorities/minutesofc' },
-      ],
-    },
-  ],
-  thirdColumn: [
-    {
-      section: 'Building Works Committee (BWC)',
-      links: [
-        {
-          title: 'Composition of BWC',
-          href: 'https://nith.ac.in/uploads/topics/16624339297916.pdf',
-        },
-        { title: 'Minutes of BWC', href: '/authorities/minutesbwc' },
-      ],
-    },
-  ],
-  fourthColumn: [
-    {
-      section: 'Senate',
-      links: [
-        {
-          title: 'Composition of Senate',
-          href: '/authorities/senate/composition',
-        },
-        { title: 'Minutes of Senate', href: '/authorities/minutesswc' },
-      ],
-    },
-  ],
-};
+const authoritiesData = [
+  {
+    title: 'Board of Governors (BOG)',
+    code: '01',
+    links: [
+      {
+        title: 'Composition of BOG',
+        href: 'https://nith.ac.in/uploads/topics/17642163716028.pdf',
+      },
+      { title: 'Minutes of BOG', href: '/authorities/minutesofbg' },
+    ],
+  },
+  {
+    title: 'Finance Committee (FC)',
+    code: '02',
+    links: [
+      {
+        title: 'Composition of FC',
+        href: 'https://nith.ac.in/uploads/topics/17642162991410.pdf',
+      },
+      { title: 'Minutes of FC', href: '/authorities/minutesofc' },
+    ],
+  },
+  {
+    title: 'Building Works Committee (BWC)',
+    code: '03',
+    links: [
+      {
+        title: 'Composition of BWC',
+        href: 'https://nith.ac.in/uploads/topics/16624339297916.pdf',
+      },
+      { title: 'Minutes of BWC', href: '/authorities/minutesbwc' },
+    ],
+  },
+  {
+    title: 'Senate',
+    code: '04',
+    links: [
+      {
+        title: 'Composition of Senate',
+        href: '/authorities/senate/composition',
+      },
+      { title: 'Minutes of Senate', href: '/authorities/minutesswc' },
+    ],
+  },
+];
 
 function Authorities() {
   return (
-    <div className="grid grid-cols-4 gap-8">
-      {/* First Column - Board of Governors */}
-      <div className="space-y-4">
-        {authoritiesSections.firstColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-3 text-sm">
-              {section.section}
-            </h3>
-            {section.links && section.links.length > 0 && (
-              <div className="space-y-1">
-                {section.links.map((link, linkIdx) => (
-                  <Link
-                    key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-                  >
-                    <span className="mr-2">›</span>
-                    {link.title}
-                  </Link>
-                ))}
+    <section className="w-full  bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Responsive Grid: 1 col mobile, 2 col tablet, 4 col desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+          {authoritiesData.map((section) => (
+            <div key={section.title} className="group flex flex-col">
+              {/* Column Header with Futuristic Accent */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="font-mono text-xl text-gray-200 group-hover:text-[#800000] transition-colors duration-300">
+                  {section.code}
+                </span>
+                <h3 className="text-sm font-bold uppercase tracking-wider text-gray-800 border-l-2 border-[#800000] pl-3">
+                  {section.title.split('(')[0]}
+                  {/* Shows "Board of Governors" without the (BOG) to keep it clean */}
+                </h3>
               </div>
-            )}
-          </div>
-        ))}
-      </div>
 
-      {/* Second Column - Finance Committee */}
-      <div className="space-y-4">
-        {authoritiesSections.secondColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-3 text-sm">
-              {section.section}
-            </h3>
-            {section.links && section.links.length > 0 && (
-              <div className="space-y-1">
-                {section.links.map((link, linkIdx) => (
-                  <Link
-                    key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-                  >
-                    <span className="mr-2">›</span>
-                    {link.title}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+              {/* Links List */}
+              <ul className="space-y-3">
+                {section.links.map((link) => {
+                  const isPdf = link.href.endsWith('.pdf');
 
-      {/* Third Column - Building Works Committee */}
-      <div className="space-y-4">
-        {authoritiesSections.thirdColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-3 text-sm">
-              {section.section}
-            </h3>
-            {section.links && section.links.length > 0 && (
-              <div className="space-y-1">
-                {section.links.map((link, linkIdx) => (
-                  <Link
-                    key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-                  >
-                    <span className="mr-2">›</span>
-                    {link.title}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+                  return (
+                    <li key={link.title}>
+                      <Link
+                        href={link.href}
+                        target={isPdf ? '_blank' : '_self'} // Open PDFs in new tab
+                        className="flex items-center justify-between group/link py-2 border-b border-gray-50 hover:border-gray-200 transition-all duration-300"
+                      >
+                        <div className="flex items-center gap-3">
+                          {/* Icon changes based on file type */}
+                          {isPdf ? (
+                            <FileText
+                              size={14}
+                              className="text-gray-400 group-hover/link:text-[#800000] transition-colors"
+                            />
+                          ) : (
+                            <ChevronRight
+                              size={14}
+                              className="text-gray-400 group-hover/link:text-[#800000] transition-colors"
+                            />
+                          )}
 
-      {/* Fourth Column - Senate */}
-      <div className="space-y-4">
-        {authoritiesSections.fourthColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-3 text-sm">
-              {section.section}
-            </h3>
-            {section.links && section.links.length > 0 && (
-              <div className="space-y-1">
-                {section.links.map((link, linkIdx) => (
-                  <Link
-                    key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-                  >
-                    <span className="mr-2">›</span>
-                    {link.title}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+                          <span className="text-xs font-medium text-gray-600 group-hover/link:text-black group-hover/link:translate-x-1 transition-all duration-300">
+                            {link.title}
+                          </span>
+                        </div>
+
+                        {/* Hover Indicator */}
+                        <ArrowUpRight
+                          size={12}
+                          className="opacity-0 -translate-x-2 text-[#800000] group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300"
+                        />
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

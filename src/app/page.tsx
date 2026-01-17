@@ -8,6 +8,7 @@ import Achieve from './homepage/achievements/achieve';
 import Director from './homepage/directormessage/director';
 import Gallery from './homepage/gallery/gallery';
 import Hero from './homepage/hero/hero';
+import Academics from './homepage/academics/page';
 
 export default function Home() {
   return (
@@ -40,6 +41,9 @@ export default function Home() {
         {/* Placement and Event sections */}
 
         {/* News section */}
+        <section>
+          <Academics></Academics>
+        </section>
 
         {/* Achievements section */}
         <section id="achievements">
