@@ -1,25 +1,30 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Nav from "@/app/components/header";
-import Footer from "@/app/components/footer";
+import { useState } from 'react';
+import Header31 from '@/app/components/header3';
+import Footer from '@/app/components/footer';
 
 const CATEGORIES = [
-  "All Categories",
-  "Academics",
-  "Student Welfare",
-  "Faculty Welfare",
-  "Cultural Activities",
-  "Technical Activities",
+  'All Categories',
+  'Academics',
+  'Student Welfare',
+  'Faculty Welfare',
+  'Cultural Activities',
+  'Technical Activities',
 ] as const;
 
 type Category = (typeof CATEGORIES)[number];
 
-type RoleType = "Dean" | "Sub-Dean" | "Associate Dean" | "Coordinator" | "Other";
+type RoleType =
+  | 'Dean'
+  | 'Sub-Dean'
+  | 'Associate Dean'
+  | 'Coordinator'
+  | 'Other';
 
 type Role = {
   id: string;
-  category: Exclude<Category, "All Categories">;
+  category: Exclude<Category, 'All Categories'>;
   roleType: RoleType;
   name: string;
   designation: string;
@@ -30,109 +35,109 @@ type Role = {
 
 const INITIAL_ROLES: Role[] = [
   {
-    id: "1",
-    category: "Academics",
-    roleType: "Dean",
-    name: "Dr. Rohan Mehta",
-    designation: "Mechanical Engineering",
-    email: "dean.academics@nitth.ac.in",
-    facultyId: "FI03",
-    since: "Since August 15, 2023",
+    id: '1',
+    category: 'Academics',
+    roleType: 'Dean',
+    name: 'Dr. Rohan Mehta',
+    designation: 'Mechanical Engineering',
+    email: 'dean.academics@nitth.ac.in',
+    facultyId: 'FI03',
+    since: 'Since August 15, 2023',
   },
   {
-    id: "2",
-    category: "Academics",
-    roleType: "Associate Dean",
-    name: "Dr. Anjali Sharma",
-    designation: "Computer Science Engineering",
-    email: "ad.academics@nitth.ac.in",
-    facultyId: "FI04",
-    since: "Since August 15, 2023",
+    id: '2',
+    category: 'Academics',
+    roleType: 'Associate Dean',
+    name: 'Dr. Anjali Sharma',
+    designation: 'Computer Science Engineering',
+    email: 'ad.academics@nitth.ac.in',
+    facultyId: 'FI04',
+    since: 'Since August 15, 2023',
   },
   {
-    id: "3",
-    category: "Student Welfare",
-    roleType: "Dean",
-    name: "Dr. Neeraj Gupta",
-    designation: "Electrical Engineering",
-    email: "dean.sw@nitth.ac.in",
-    facultyId: "SW01",
-    since: "Since July 10, 2022",
+    id: '3',
+    category: 'Student Welfare',
+    roleType: 'Dean',
+    name: 'Dr. Neeraj Gupta',
+    designation: 'Electrical Engineering',
+    email: 'dean.sw@nitth.ac.in',
+    facultyId: 'SW01',
+    since: 'Since July 10, 2022',
   },
   {
-    id: "4",
-    category: "Student Welfare",
-    roleType: "Associate Dean",
-    name: "Dr. Priya Verma",
-    designation: "Civil Engineering",
-    email: "ad.sw@nitth.ac.in",
-    facultyId: "SW02",
-    since: "Since July 10, 2022",
+    id: '4',
+    category: 'Student Welfare',
+    roleType: 'Associate Dean',
+    name: 'Dr. Priya Verma',
+    designation: 'Civil Engineering',
+    email: 'ad.sw@nitth.ac.in',
+    facultyId: 'SW02',
+    since: 'Since July 10, 2022',
   },
   {
-    id: "5",
-    category: "Faculty Welfare",
-    roleType: "Dean",
-    name: "Dr. Sushil Chauhan",
-    designation: "Faculty Welfare Office",
-    email: "dean.fw@nitth.ac.in",
-    facultyId: "FW01",
-    since: "Since January 01, 2024",
+    id: '5',
+    category: 'Faculty Welfare',
+    roleType: 'Dean',
+    name: 'Dr. Sushil Chauhan',
+    designation: 'Faculty Welfare Office',
+    email: 'dean.fw@nitth.ac.in',
+    facultyId: 'FW01',
+    since: 'Since January 01, 2024',
   },
   {
-    id: "6",
-    category: "Faculty Welfare",
-    roleType: "Associate Dean",
-    name: "Dr. Naveen Chauhan",
-    designation: "Faculty Activity & Support",
-    email: "ad.fw@nitth.ac.in",
-    facultyId: "FW02",
-    since: "Since January 01, 2024",
+    id: '6',
+    category: 'Faculty Welfare',
+    roleType: 'Associate Dean',
+    name: 'Dr. Naveen Chauhan',
+    designation: 'Faculty Activity & Support',
+    email: 'ad.fw@nitth.ac.in',
+    facultyId: 'FW02',
+    since: 'Since January 01, 2024',
   },
   {
-    id: "7",
-    category: "Cultural Activities",
-    roleType: "Coordinator",
-    name: "Dr. Neetu Kapoor",
-    designation: "Faculty Incharge (Cultural Activities)",
-    email: "culture@nitth.ac.in",
-    facultyId: "CA01",
-    since: "Since March 01, 2023",
+    id: '7',
+    category: 'Cultural Activities',
+    roleType: 'Coordinator',
+    name: 'Dr. Neetu Kapoor',
+    designation: 'Faculty Incharge (Cultural Activities)',
+    email: 'culture@nitth.ac.in',
+    facultyId: 'CA01',
+    since: 'Since March 01, 2023',
   },
   {
-    id: "8",
-    category: "Cultural Activities",
-    roleType: "Coordinator",
-    name: "Dr. Arjun Rao",
-    designation: "Humanities & Social Sciences",
-    email: "culture2@nitth.ac.in",
-    facultyId: "CA02",
-    since: "Since March 01, 2023",
+    id: '8',
+    category: 'Cultural Activities',
+    roleType: 'Coordinator',
+    name: 'Dr. Arjun Rao',
+    designation: 'Humanities & Social Sciences',
+    email: 'culture2@nitth.ac.in',
+    facultyId: 'CA02',
+    since: 'Since March 01, 2023',
   },
   {
-    id: "9",
-    category: "Technical Activities",
-    roleType: "Coordinator",
-    name: "Dr. Mehak Bansal",
-    designation: "Computer Science & Engineering",
-    email: "technical@nitth.ac.in",
-    facultyId: "TA01",
-    since: "Since November 01, 2022",
+    id: '9',
+    category: 'Technical Activities',
+    roleType: 'Coordinator',
+    name: 'Dr. Mehak Bansal',
+    designation: 'Computer Science & Engineering',
+    email: 'technical@nitth.ac.in',
+    facultyId: 'TA01',
+    since: 'Since November 01, 2022',
   },
   {
-    id: "10",
-    category: "Technical Activities",
-    roleType: "Coordinator",
-    name: "Dr. Vivek Sharma",
-    designation: "Electronics & Communication",
-    email: "technical2@nitth.ac.in",
-    facultyId: "TA02",
-    since: "Since November 01, 2022",
+    id: '10',
+    category: 'Technical Activities',
+    roleType: 'Coordinator',
+    name: 'Dr. Vivek Sharma',
+    designation: 'Electronics & Communication',
+    email: 'technical2@nitth.ac.in',
+    facultyId: 'TA02',
+    since: 'Since November 01, 2022',
   },
 ];
 
 type CategorySectionProps = {
-  label: Exclude<Category, "All Categories">;
+  label: Exclude<Category, 'All Categories'>;
   roles: Role[];
 };
 
@@ -163,9 +168,7 @@ function CategorySection({ label, roles }: CategorySectionProps) {
                 <h3 className="mt-3 text-[15px] font-semibold text-gray-900">
                   {role.name}
                 </h3>
-                <p className="text-[12px] text-gray-600">
-                  {role.designation}
-                </p>
+                <p className="text-[12px] text-gray-600">{role.designation}</p>
               </div>
 
               <div className="mt-4 space-y-1 text-[12px] text-gray-600">
@@ -199,16 +202,16 @@ function CategorySection({ label, roles }: CategorySectionProps) {
 
 export default function FacultyRolesPage() {
   const [activeCategory, setActiveCategory] =
-    useState<Category>("All Categories");
+    useState<Category>('All Categories');
 
   const filteredRoles =
-    activeCategory === "All Categories"
+    activeCategory === 'All Categories'
       ? INITIAL_ROLES
       : INITIAL_ROLES.filter((r) => r.category === activeCategory);
 
   return (
     <>
-      <Nav />
+      <Header31 />
 
       <main className="min-h-screen bg-[#f4f2f1] px-8 py-10 text-[13px] text-gray-800">
         {/* Header */}
@@ -238,11 +241,11 @@ export default function FacultyRolesPage() {
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={[
-                    "rounded-md border px-4 py-1 text-[12px] font-medium transition",
+                    'rounded-md border px-4 py-1 text-[12px] font-medium transition',
                     active
-                      ? "border-[#7c1717] bg-[#7c1717] text-white"
-                      : "border-gray-200 bg-[#f9f7f6] text-gray-700 hover:bg-gray-100",
-                  ].join(" ")}
+                      ? 'border-[#7c1717] bg-[#7c1717] text-white'
+                      : 'border-gray-200 bg-[#f9f7f6] text-gray-700 hover:bg-gray-100',
+                  ].join(' ')}
                 >
                   {cat}
                 </button>
@@ -254,12 +257,12 @@ export default function FacultyRolesPage() {
         {/* Sections for each assignment type */}
         {(
           [
-            "Academics",
-            "Student Welfare",
-            "Faculty Welfare",
-            "Cultural Activities",
-            "Technical Activities",
-          ] as Exclude<Category, "All Categories">[]
+            'Academics',
+            'Student Welfare',
+            'Faculty Welfare',
+            'Cultural Activities',
+            'Technical Activities',
+          ] as Exclude<Category, 'All Categories'>[]
         ).map((cat) => (
           <CategorySection
             key={cat}

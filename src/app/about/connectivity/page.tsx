@@ -2,9 +2,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Header31 from '../../components/header';
+import Header31 from '../../components/header3';
 import Footer from '../../components/footer';
 import { Sparkles } from 'lucide-react';
+import { getAboutNithData } from '../api/api';
+import { useEffect, useState } from 'react';
 
 const TrainIcon = () => (
   <svg
@@ -128,6 +130,35 @@ export default function ConnectivityPage() {
         'The campus is just 4 km from the main bus stand on the Hamirpur–Tauni Devi road.',
     },
   ];
+  const [connectivityData, setConnectivityData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // NEW: Fetch data on component mount (ID 6 = Connectivity)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const response = await getAboutNithData(6); // ID 6 for Connectivity
+
+        if (response.success && response.data) {
+          setConnectivityData(response.data);
+        } else {
+          setError('Connectivity information not found');
+        }
+      } catch (err) {
+        setError('Failed to load connectivity data');
+        console.error('Connectivity fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -180,11 +211,18 @@ export default function ConnectivityPage() {
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             Connectivity
           </h1>
-          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Well connected to all major cities through rail, air, and road
-            networks — situated amidst serene hills while offering excellent
-            accessibility
-          </p>
+          {connectivityData?.description ? (
+            <div
+              className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light"
+              dangerouslySetInnerHTML={{ __html: connectivityData.description }}
+            />
+          ) : (
+            <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+              Well connected to all major cities through rail, air, and road
+              networks — situated amidst serene hills while offering excellent
+              accessibility
+            </p>
+          )}
         </motion.div>
       </section>
 

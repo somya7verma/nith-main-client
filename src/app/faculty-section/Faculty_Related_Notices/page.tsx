@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import Nav from '@/app/components/header';
+import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
 
 interface NewsItem {
@@ -28,7 +28,8 @@ const initialNewsData: NewsItem[] = [
   {
     id: 1,
     title: 'NITH Faculty Association Announces Annual Meet 2025',
-    description: 'The NIT Hamirpur Faculty Association is pleased to announce the Annual Faculty Meet scheduled for March 2025. All registered Faculty are cordially invited to participate in this grand event celebrating our shared legacy.',
+    description:
+      'The NIT Hamirpur Faculty Association is pleased to announce the Annual Faculty Meet scheduled for March 2025. All registered Faculty are cordially invited to participate in this grand event celebrating our shared legacy.',
     image: '/news/Faculty-meet.jpg',
     date: '2025-01-15',
     category: 'Events',
@@ -37,7 +38,8 @@ const initialNewsData: NewsItem[] = [
   {
     id: 2,
     title: 'Distinguished Faculty Award Nominations Open',
-    description: 'Nominations are now open for the Distinguished Faculty Award 2025. The award recognizes outstanding contributions by NITH Faculty in their respective fields. Submit your nominations before the deadline.',
+    description:
+      'Nominations are now open for the Distinguished Faculty Award 2025. The award recognizes outstanding contributions by NITH Faculty in their respective fields. Submit your nominations before the deadline.',
     image: '/news/award.jpg',
     date: '2025-01-12',
     category: 'Awards',
@@ -93,7 +95,10 @@ export default function FacultyNewsroom() {
     });
     return Array.from(archiveMap.values()).sort((a, b) => {
       if (a.year !== b.year) return b.year - a.year;
-      return new Date(`${b.month} 1, ${b.year}`).getMonth() - new Date(`${a.month} 1, ${a.year}`).getMonth();
+      return (
+        new Date(`${b.month} 1, ${b.year}`).getMonth() -
+        new Date(`${a.month} 1, ${a.year}`).getMonth()
+      );
     });
   };
 
@@ -153,9 +158,24 @@ export default function FacultyNewsroom() {
       if (currentPage <= 3) {
         pages.push(1, 2, 3, 4, '...', totalPages);
       } else if (currentPage >= totalPages - 2) {
-        pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        pages.push(
+          1,
+          '...',
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages
+        );
       } else {
-        pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+        pages.push(
+          1,
+          '...',
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          '...',
+          totalPages
+        );
       }
     }
     return pages;
@@ -163,13 +183,16 @@ export default function FacultyNewsroom() {
 
   return (
     <>
-      <Nav />
+      <Header31 />
       <div className="min-h-screen bg-gray-50">
         {/* Breadcrumb */}
         <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
           <div className="max-w-7xl mx-auto">
             <nav className="flex items-center space-x-2 text-sm text-gray-600">
-              <Link href="/" className="hover:text-[#800000] transition-colors duration-200">
+              <Link
+                href="/"
+                className="hover:text-[#800000] transition-colors duration-200"
+              >
                 Home
               </Link>
               <span>›</span>
@@ -189,9 +212,12 @@ export default function FacultyNewsroom() {
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Faculty Notices</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Faculty Notices
+              </h1>
               <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
-                Latest news, announcements, and updates from the NITH Faculty Notices.
+                Latest news, announcements, and updates from the NITH Faculty
+                Notices.
               </p>
             </motion.div>
           </div>
@@ -207,7 +233,9 @@ export default function FacultyNewsroom() {
               className="bg-white rounded-2xl shadow-sm p-6 mb-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"
             >
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-semibold text-gray-700">Total Notices: {news.length}</span>
+                <span className="font-semibold text-gray-700">
+                  Total Notices: {news.length}
+                </span>
                 {selectedArchive && (
                   <>
                     <span className="text-gray-600">| Showing from:</span>
@@ -223,7 +251,11 @@ export default function FacultyNewsroom() {
             <div className="flex flex-col lg:flex-row gap-8">
               <div className="lg:w-[70%]">
                 {selectedArchive && (
-                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-6 flex items-center gap-3">
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-6 flex items-center gap-3"
+                  >
                     <span className="text-gray-600">Showing news from:</span>
                     <span className="px-3 py-1.5 bg-[#631012] text-white rounded-lg text-sm font-medium">
                       {archives.find((a) => a.key === selectedArchive)?.month}{' '}
@@ -241,7 +273,9 @@ export default function FacultyNewsroom() {
                 <div className="mb-6">
                   <p className="text-gray-600">
                     Showing{' '}
-                    <span className="font-semibold text-[#631012]">{paginatedNews.length}</span>{' '}
+                    <span className="font-semibold text-[#631012]">
+                      {paginatedNews.length}
+                    </span>{' '}
                     of{' '}
                     <span className="font-semibold">{filteredNews.length}</span>{' '}
                     news items
@@ -257,7 +291,12 @@ export default function FacultyNewsroom() {
                     className="bg-white rounded-2xl shadow-sm p-12 text-center"
                   >
                     <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-                      <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="w-10 h-10 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -266,8 +305,12 @@ export default function FacultyNewsroom() {
                         />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">No news available</h3>
-                    <p className="text-gray-500 mb-6">There are no news items for the selected period.</p>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      No news available
+                    </h3>
+                    <p className="text-gray-500 mb-6">
+                      There are no news items for the selected period.
+                    </p>
                     {selectedArchive && (
                       <button
                         onClick={() => handleArchiveClick(null)}
@@ -311,14 +354,23 @@ export default function FacultyNewsroom() {
 
                               <div className="flex-1">
                                 <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#631012] transition-colors line-clamp-2">
-                                  <Link href={`/faculty/notices/${item.slug}`}>{item.title}</Link>
+                                  <Link href={`/faculty/notices/${item.slug}`}>
+                                    {item.title}
+                                  </Link>
                                 </h3>
-                                <p className="text-gray-600 text-sm line-clamp-2 mb-4">{item.description}</p>
+                                <p className="text-gray-600 text-sm line-clamp-2 mb-4">
+                                  {item.description}
+                                </p>
                               </div>
 
                               <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
                                 <div className="flex items-center gap-2 text-sm text-gray-500">
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
                                     <path
                                       strokeLinecap="round"
                                       strokeLinejoin="round"
@@ -339,7 +391,12 @@ export default function FacultyNewsroom() {
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
                                   >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M9 5l7 7-7 7"
+                                    />
                                   </svg>
                                 </Link>
                               </div>
@@ -360,7 +417,9 @@ export default function FacultyNewsroom() {
                   >
                     <div className="inline-flex items-center gap-1 bg-white rounded-xl shadow-sm p-2">
                       <button
-                        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                        onClick={() =>
+                          setCurrentPage((prev) => Math.max(prev - 1, 1))
+                        }
                         disabled={currentPage === 1}
                         className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                           currentPage === 1
@@ -368,15 +427,30 @@ export default function FacultyNewsroom() {
                             : 'text-gray-600 hover:bg-gray-100 hover:text-[#631012]'
                         }`}
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 19l-7-7 7-7"
+                          />
                         </svg>
                         <span className="hidden sm:inline">Previous</span>
                       </button>
                       <div className="flex items-center gap-1 px-2">
                         {getPageNumbers().map((page, index) =>
                           page === '...' ? (
-                            <span key={index} className="px-3 py-2 text-gray-400">...</span>
+                            <span
+                              key={index}
+                              className="px-3 py-2 text-gray-400"
+                            >
+                              ...
+                            </span>
                           ) : (
                             <button
                               key={index}
@@ -393,7 +467,11 @@ export default function FacultyNewsroom() {
                         )}
                       </div>
                       <button
-                        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                        onClick={() =>
+                          setCurrentPage((prev) =>
+                            Math.min(prev + 1, totalPages)
+                          )
+                        }
                         disabled={currentPage === totalPages}
                         className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                           currentPage === totalPages
@@ -402,8 +480,18 @@ export default function FacultyNewsroom() {
                         }`}
                       >
                         <span className="hidden sm:inline">Next</span>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
                         </svg>
                       </button>
                     </div>
@@ -422,7 +510,12 @@ export default function FacultyNewsroom() {
                   >
                     <div className="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
                       <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-3">
-                        <svg className="w-5 h-5 text-[#631012]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg
+                          className="w-5 h-5 text-[#631012]"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -437,7 +530,9 @@ export default function FacultyNewsroom() {
                       {loading ? (
                         <ArchiveSkeleton />
                       ) : archives.length === 0 ? (
-                        <p className="text-gray-500 text-sm text-center py-4">No archives available</p>
+                        <p className="text-gray-500 text-sm text-center py-4">
+                          No archives available
+                        </p>
                       ) : (
                         <div className="space-y-1">
                           <button
@@ -469,7 +564,9 @@ export default function FacultyNewsroom() {
                                   : 'text-gray-700 hover:bg-gray-50'
                               }`}
                             >
-                              <span className="font-medium">{archive.month} {archive.year}</span>
+                              <span className="font-medium">
+                                {archive.month} {archive.year}
+                              </span>
                               <span
                                 className={`text-sm px-2 py-0.5 rounded ${
                                   selectedArchive === archive.key

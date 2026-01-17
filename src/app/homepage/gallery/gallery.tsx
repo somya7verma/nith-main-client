@@ -122,24 +122,6 @@ function Gallery() {
             </div>
           </div>
         )}
-
-        {/* Stats footer */}
-        <div className="mt-16 pt-12 border-t border-gray-200 flex justify-around text-center">
-          <div>
-            <p className="text-3xl font-bold text-[#631012]">
-              {galleryImages.length}+
-            </p>
-            <p className="text-gray-600 text-sm mt-1">Gallery Images</p>
-          </div>
-          <div>
-            <p className="text-3xl font-bold text-[#631012]">3</p>
-            <p className="text-gray-600 text-sm mt-1">Categories</p>
-          </div>
-          <div>
-            <p className="text-3xl font-bold text-[#631012]">2024</p>
-            <p className="text-gray-600 text-sm mt-1">Current Year</p>
-          </div>
-        </div>
       </div>
     </section>
   );

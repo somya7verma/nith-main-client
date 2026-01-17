@@ -1,0 +1,45 @@
+.gridan {
+    display: grid;
+    grid-template-columns: 20% 15% 30% 35%;
+    grid-template-rows: 30px 100px 40px;
+ 
+}
+
+.gridan div {
+    background-color: white;
+
+}
+
+#st{
+   grid-column: 1/-1;
+
+}
+
+#st2{
+    grid-column: 1;
+    grid-row: 2/span 2;
+}
+#st3{
+    grid-column: 2;
+    grid-row: 2/3;
+
+}
+#clipi {
+  background-color: #631012;
+  height: 100%;
+  width: 100%;
+  clip-path: polygon(0 102%, 16% 75%, 29% 57%, 42% 43%, 52% 32%, 66% 21%, 76% 13%, 86% 7%, 100% 0, 0% 0%);
+}
+#st4{
+    grid-column: 3/-1;
+    grid-row: 2;
+}
+#navbar{
+    grid-column: 2/-1;
+    grid-row: 3/4;
+ 
+}
+#navbar-child1{
+    background-color: #631012;
+clip-path: polygon(60% 14%, 88% 1%, 100% 0, 100% 100%, 68% 100%, 32% 100%, 0 100%, 16% 60%, 37% 31%);
+}

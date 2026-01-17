@@ -1,130 +1,211 @@
 import React from 'react';
 
 function Footer() {
+  // --- Data Arrays for Links ---
+
+  const rulesLinks = [
+    { name: 'Recruitment Rules', href: '#' },
+    { name: 'Employee Rules', href: '#' },
+    { name: 'Institute Rules', href: '#' },
+    { name: 'Annual Reports', href: '#' },
+    { name: 'Notices/Office Orders', href: '#' },
+    { name: 'Act & Statutes', href: '#' },
+    { name: 'Photo/Video Gallery', href: '#' },
+    { name: 'Research & Publications @ NITH', href: '#' },
+    { name: 'Media Coverage @ NITH', href: '#' },
+    { name: 'RTI', href: '#' },
+    { name: 'New Criminal Laws', href: '#' },
+  ];
+
+  const goiLinks = [
+    { name: 'DST NIDHI (i-TBI@NITH)', href: '#' },
+    { name: 'CM Startup @ NITH', href: '#' },
+    { name: 'MOOC @ NITH', href: '#' },
+    { name: 'GIAN @ NITH', href: '#' },
+    { name: 'NIRF@NITH', href: '#' },
+    { name: 'ARIIA@NITH', href: '#' },
+    { name: 'SKill India @ NITH', href: '#' },
+    { name: 'SBA @ NITH', href: '#' },
+    { name: 'UBA @ NITH', href: '#' },
+    { name: 'RAA @ NITH', href: '#' },
+    { name: 'EBSB @ NITH', href: '#' },
+    { name: 'Literacy Mission @ NITH', href: '#' },
+    { name: 'NAD @ NITH', href: '#' },
+  ];
+
+  const importantLinks = [
+    { name: 'Newsletter', href: '#' },
+    { name: 'MoE', href: '#' },
+    { name: 'PMRF', href: '#' },
+    { name: 'NIT Council', href: '#' },
+    { name: 'Digital India', href: '#' },
+    { name: 'National Career Service', href: '#' },
+    { name: 'Vittiya Saksharta Abhiyan', href: '#' },
+    { name: 'CEC', href: '#' },
+    { name: 'MyGov', href: '#' },
+    { name: 'PMNRF', href: '#' },
+    { name: 'TIFAC-CORE@NITH', href: '#' },
+    { name: 'FAQ', href: '#' },
+    { name: 'BIS', href: '#' },
+  ];
+
   return (
-    <footer className="w-full bg-gradient-to-r from-[#3d0f12] via-[#4d1a1d] to-[#5b2226] text-white py-8">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
+    <footer className="w-full bg-gradient-to-r from-[#3d0f12] via-[#4d1a1d] to-[#5b2226] text-white py-10 font-sans border-t-4 border-white/20">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="flex flex-col xl:flex-row items-start justify-between gap-12">
           {/* Left side - Logo, Institute Info, Contact, Map, Social Icons */}
-          <div className="flex-shrink-0 space-y-4 max-w-xs">
+          <div className="flex-shrink-0 space-y-6 max-w-sm">
             {/* Logo and Institute Name */}
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-4">
               <img
                 src="/logo.png"
                 alt="NITH logo"
-                className="h-12 w-12 rounded-full ring-2 ring-white bg-white p-1 flex-shrink-0"
+                className="h-16 w-16 rounded-full ring-2 ring-white/20 bg-white p-1 shadow-lg"
               />
               <div>
-                <h3 className="font-semibold text-sm leading-tight text-white">
-                  National Institute Of Technology, Hamirpur
+                <h3 className="font-bold text-lg leading-tight text-white tracking-wide">
+                  National Institute Of Technology
                 </h3>
+                <p className="text-sm font-medium text-white/80">
+                  Hamirpur, Himachal Pradesh
+                </p>
               </div>
             </div>
 
             {/* Address and Phone */}
-            <div className="space-y-2 text-xs text-gray-200">
-              <div className="flex items-center gap-2">
+            <div className="space-y-3 text-sm text-white/90">
+              <div className="flex items-start gap-3">
                 <svg
-                  className="h-4 w-4"
-                  fill="currentColor"
+                  className="h-5 w-5 text-white mt-0.5 shrink-0"
+                  fill="none"
                   viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
                 </svg>
-                <span>NIT, Hamirpur, Himachal Pradesh 177005</span>
+                <span className="leading-relaxed">
+                  NIT Hamirpur, Anu, Hamirpur,
+                  <br />
+                  Himachal Pradesh 177005, India
+                </span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <svg
-                  className="h-4 w-4"
-                  fill="currentColor"
+                  className="h-5 w-5 text-white shrink-0"
+                  fill="none"
                   viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
                 </svg>
-                <span>Phone: +91-12345-67890</span>
+                <span>+91-1972-254011</span>
               </div>
             </div>
 
             {/* Map and Social Row */}
-            <div className="flex items-start gap-3">
+            <div className="flex items-center gap-4 pt-2">
               {/* Map Thumbnail */}
-              <div className="h-16 w-20 rounded-md overflow-hidden bg-gray-100 flex-shrink-0">
+              <div className="h-20 w-28 rounded-lg overflow-hidden border border-white/30 shadow-md hover:border-white transition-colors cursor-pointer bg-white/10">
                 <img
                   src="/map-thumb.png"
-                  alt="map"
-                  className="h-full w-full object-cover"
+                  alt="Location Map"
+                  className="h-full w-full object-cover opacity-80 hover:opacity-100 transition-opacity"
                 />
               </div>
 
-              {/* Social Icons and Email */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-1">
-                  <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-semibold hover:bg-white/30 transition-colors cursor-pointer">
-                    f
-                  </div>
-                  <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-semibold hover:bg-white/30 transition-colors cursor-pointer">
-                    in
-                  </div>
-                  <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-semibold hover:bg-white/30 transition-colors cursor-pointer">
-                    x
-                  </div>
-                  <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-semibold hover:bg-white/30 transition-colors cursor-pointer">
-                    ig
-                  </div>
+              {/* Social Icons */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  {['f', 'in', 'x', 'ig'].map((icon) => (
+                    <a
+                      key={icon}
+                      href="#"
+                      className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-sm font-bold text-white hover:bg-white hover:text-[#3d0f12] transition-all duration-300 border border-white/20"
+                    >
+                      {icon}
+                    </a>
+                  ))}
                 </div>
-
-                <button className="bg-white/20 text-gray-200 rounded-full px-3 py-1 text-xs border border-white/30 hover:bg-white/30 transition-colors">
-                  Write Email
-                </button>
+                <a
+                  href="mailto:registrar@nith.ac.in"
+                  className="inline-block text-xs font-semibold text-white hover:text-white/80 transition-colors underline underline-offset-4"
+                >
+                  Write to Registrar
+                </a>
               </div>
             </div>
           </div>
 
           {/* Right side - Three columns of links */}
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 lg:max-w-2xl lg:ml-auto">
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 w-full">
+            {/* Column 1: Rules & Reports */}
             <div>
-              <h4 className="text-yellow-400 font-semibold mb-3 text-sm">
+              <h4 className="text-white font-bold mb-4 text-base border-b border-white/20 pb-2 inline-block">
                 Rules and Reports
               </h4>
-              <ul className="text-gray-200 text-xs space-y-1">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <li
-                    key={i}
-                    className="hover:text-white cursor-pointer transition-colors"
-                  >
-                    Recruitment Rule
+              <ul className="text-white/80 text-xs space-y-2.5">
+                {rulesLinks.map((link, i) => (
+                  <li key={i}>
+                    <a
+                      href={link.href}
+                      className="hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
+                    >
+                      {link.name}
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
 
+            {/* Column 2: GOI Initiatives */}
             <div>
-              <h4 className="text-yellow-400 font-semibold mb-3 text-sm">
+              <h4 className="text-white font-bold mb-4 text-base border-b border-white/20 pb-2 inline-block">
                 GOI Initiatives@nith
               </h4>
-              <ul className="text-gray-200 text-xs space-y-1">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <li
-                    key={i}
-                    className="hover:text-white cursor-pointer transition-colors"
-                  >
-                    Recruitment Rule
+              <ul className="text-white/80 text-xs space-y-2.5">
+                {goiLinks.map((link, i) => (
+                  <li key={i}>
+                    <a
+                      href={link.href}
+                      className="hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
+                    >
+                      {link.name}
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
 
+            {/* Column 3: Important Links */}
             <div>
-              <h4 className="text-yellow-400 font-semibold mb-3 text-sm">
+              <h4 className="text-white font-bold mb-4 text-base border-b border-white/20 pb-2 inline-block">
                 Important Links
               </h4>
-              <ul className="text-gray-200 text-xs space-y-1">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <li
-                    key={i}
-                    className="hover:text-white cursor-pointer transition-colors"
-                  >
-                    Recruitment Rule
+              <ul className="text-white/80 text-xs space-y-2.5">
+                {importantLinks.map((link, i) => (
+                  <li key={i}>
+                    <a
+                      href={link.href}
+                      className="hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
+                    >
+                      {link.name}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -133,8 +214,11 @@ function Footer() {
         </div>
 
         {/* Bottom message */}
-        <div className="mt-6 pt-4 text-center">
-          <p className="text-gray-300 text-xs">Thank You For Visiting Us!!!!</p>
+        <div className="mt-12 pt-6 border-t border-white/10 text-center">
+          <p className="text-white/60 text-xs tracking-wider">
+            © {new Date().getFullYear()} National Institute of Technology,
+            Hamirpur. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>
