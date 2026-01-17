@@ -271,10 +271,10 @@ function Page() {
         {/* Dropdown Menus */}
         <div
           id="about"
-          className="absolute left-1/2 -translate-x-1/2 top-full w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
+          className="absolute left-1/2 -translate-x-1/2 top-13/14 w-[90%] bg-white text-black shadow-2xl overflow-y-auto max-h-[80vh] rounded-sm"
           style={{ zIndex: 2147483647 }}
         >
-          <div className="py-8 px-12">
+          <div className="py-1 px-12">
             <Aboutnith />
           </div>
         </div>

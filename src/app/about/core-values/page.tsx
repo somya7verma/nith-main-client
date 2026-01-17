@@ -2,8 +2,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Header31 from '../../components/header';
+import Header31 from '../../components/header3';
+import { useEffect, useState } from 'react';
 import Footer from '../../components/footer';
+import { getAboutNithData } from '../api/api';
 import {
   Sparkles,
   ShieldCheck,
@@ -104,6 +106,35 @@ export default function CoreValuesPage() {
     },
   ];
 
+  const [connectivityData, setConnectivityData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const response = await getAboutNithData(5); // ID 5 for Core Values
+
+        if (response.success && response.data) {
+          setConnectivityData(response.data);
+        } else {
+          setError('Core values information not found');
+        }
+      } catch (err) {
+        setError('Failed to load core values data');
+        console.error('Core values fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Header31 />
@@ -155,15 +186,22 @@ export default function CoreValuesPage() {
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             Core Values
           </h1>
-          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            The enduring principles that guide our commitment to excellence:{' '}
-            <span className="font-semibold">Integrity</span>,{' '}
-            <span className="font-semibold">Excellence</span>,{' '}
-            <span className="font-semibold">Unity</span>,{' '}
-            <span className="font-semibold">Accountability</span>,{' '}
-            <span className="font-semibold">Inclusivity</span>, and{' '}
-            <span className="font-semibold">Empathy</span>
-          </p>
+          {connectivityData?.description ? (
+            <div
+              className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light"
+              dangerouslySetInnerHTML={{ __html: connectivityData.description }}
+            />
+          ) : (
+            <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+              The enduring principles that guide our commitment to excellence:{' '}
+              <span className="font-semibold">Integrity</span>,{' '}
+              <span className="font-semibold">Excellence</span>,{' '}
+              <span className="font-semibold">Unity</span>,{' '}
+              <span className="font-semibold">Accountability</span>,{' '}
+              <span className="font-semibold">Inclusivity</span>, and{' '}
+              <span className="font-semibold">Empathy</span>
+            </p>
+          )}
         </motion.div>
       </section>
 

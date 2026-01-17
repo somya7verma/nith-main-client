@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import Nav from '@/app/components/header';
+import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
 
 interface NewsItem {
@@ -99,22 +99,40 @@ export default function CPDARules() {
     } else if (currentPage <= 3) {
       pages.push(1, 2, 3, 4, '...', totalPages);
     } else if (currentPage >= totalPages - 2) {
-      pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+      pages.push(
+        1,
+        '...',
+        totalPages - 3,
+        totalPages - 2,
+        totalPages - 1,
+        totalPages
+      );
     } else {
-      pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+      pages.push(
+        1,
+        '...',
+        currentPage - 1,
+        currentPage,
+        currentPage + 1,
+        '...',
+        totalPages
+      );
     }
     return pages;
   };
 
   return (
     <>
-      <Nav />
+      <Header31 />
       <div className="min-h-screen bg-gray-50">
         {/* Breadcrumb */}
         <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
           <div className="max-w-7xl mx-auto">
             <nav className="flex items-center space-x-2 text-sm text-gray-600">
-              <Link href="/" className="hover:text-[#800000] transition-colors duration-200">
+              <Link
+                href="/"
+                className="hover:text-[#800000] transition-colors duration-200"
+              >
                 Home
               </Link>
               <span>›</span>
@@ -138,7 +156,8 @@ export default function CPDARules() {
                 CPDA Rules
               </h1>
               <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
-                Latest news, announcements, and updates from the NITH CPDA community.
+                Latest news, announcements, and updates from the NITH CPDA
+                community.
               </p>
             </motion.div>
           </div>
@@ -166,9 +185,7 @@ export default function CPDARules() {
                     {paginatedNews.length}
                   </span>{' '}
                   of{' '}
-                  <span className="font-semibold">
-                    {filteredNews.length}
-                  </span>{' '}
+                  <span className="font-semibold">{filteredNews.length}</span>{' '}
                   news items
                 </p>
               </div>
@@ -344,10 +361,7 @@ export default function CPDARules() {
                     <div className="flex items-center gap-1 px-2">
                       {getPageNumbers().map((page, index) =>
                         page === '...' ? (
-                          <span
-                            key={index}
-                            className="px-3 py-2 text-gray-400"
-                          >
+                          <span key={index} className="px-3 py-2 text-gray-400">
                             ...
                           </span>
                         ) : (
@@ -362,15 +376,13 @@ export default function CPDARules() {
                           >
                             {page}
                           </button>
-                        ),
+                        )
                       )}
                     </div>
 
                     <button
                       onClick={() =>
-                        setCurrentPage((prev) =>
-                          Math.min(prev + 1, totalPages),
-                        )
+                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                       }
                       disabled={currentPage === totalPages}
                       className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${

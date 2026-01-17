@@ -1,273 +1,220 @@
 import React from 'react';
+import Link from 'next/link';
+import {
+  ChevronRight,
+  ArrowUpRight,
+  CalendarDays,
+  GraduationCap,
+  BookOpen,
+  Lock,
+} from 'lucide-react';
 
-function Academic() {
-  const academicSections = {
-    leftColumn: [
-      { title: 'Activities', href: '/academics/activities' },
-      { title: 'Functionaries', href: '/academics/functionaries' },
-      { title: 'Academic Calender', href: '/academics/calendar' },
+const academicData = [
+  {
+    id: '01',
+    category: 'General Affairs',
+    icon: CalendarDays,
+    sections: [
       {
-        title: 'Odd Semester Calendar 2025-26',
-        href: '/academics/odd-semester-2025-26',
-        hasIcon: true,
-        disabled: true,
+        title: 'Resources',
+        links: [
+          { title: 'Activities', href: '/academics/activities' },
+          { title: 'Functionaries', href: '/academics/functionaries' },
+          { title: 'Academic Notices', href: '/academics/academic-notices' },
+          { title: 'NAD Cell', href: '/academics/nad-cell' },
+          { title: 'Fee Structure', href: '/academics/fee-structure' },
+          { title: 'Class Timetable', href: '/academics/class-timetable' },
+        ],
       },
       {
-        title: 'Even Semester Calendar 2025-26',
-        href: '/academics/even-semester-2025-26',
-        hasIcon: true,
-        disabled: true,
+        title: 'Calendars',
+        links: [
+          { title: 'Academic Calender', href: '/academics/calendar' },
+          { title: 'Odd Semester 2025-26', href: '#', disabled: true },
+          { title: 'Even Semester 2025-26', href: '#', disabled: true },
+        ],
       },
-      { title: 'Academic Notices', href: '/academics/academic-notices' },
-      { title: 'NAD Cell', href: '/academics/nad-cell' },
-      { title: 'Fee Structure', href: '/academics/fee-structure' },
-      { title: 'Class Timetable', href: '/academics/class-timetable' },
     ],
-    centerColumn: [
+  },
+  {
+    id: '02',
+    category: 'Lifecycle',
+    icon: GraduationCap,
+    sections: [
       {
-        section: 'Admissions & Registrations',
+        title: 'Admissions & Registrations',
         links: [
           {
             title: 'Admissions 2025-26',
             href: '/academics/admissions-2025-26',
-            hasIcon: true,
           },
-          {
-            title: 'Admissions Desk',
-            href: '/academics/admissions-desk',
-            hasIcon: true,
-            disabled: true,
-          },
+          { title: 'Admissions Desk', href: '#', disabled: true },
           {
             title: 'Registration 2025-26',
             href: '/academics/registration-2025-26',
-            hasIcon: true,
           },
           {
             title: 'International Admissions',
             href: '/academics/international-admissions',
-            hasIcon: true,
           },
         ],
       },
       {
-        section: 'Examinations & Evaluation',
+        title: 'Examinations',
         links: [
-          {
-            title: 'Examination Schedules',
-            href: '/academics/examination-schedules',
-            hasIcon: true,
-            disabled: true,
-          },
-          {
-            title: 'Examination Guidelines',
-            href: '/academics/examination-guidelines',
-            hasIcon: true,
-            disabled: true,
-          },
-          {
-            title: 'Evaluation Schedules',
-            href: '/academics/evaluation-schedules',
-            hasIcon: true,
-            disabled: true,
-          },
-          {
-            title: 'Evaluation Guidelines',
-            href: '/academics/evaluation-guidelines',
-            hasIcon: true,
-            disabled: true,
-          },
+          { title: 'Exam Schedules', href: '#', disabled: true },
+          { title: 'Exam Guidelines', href: '#', disabled: true },
+          { title: 'Evaluation Schedules', href: '#', disabled: true },
         ],
       },
       {
-        section: 'Results & Certificates',
+        title: 'Results',
         links: [
+          { title: 'View Results', href: 'http://results.nith.ac.in/' },
           {
-            title: 'Results',
-            href: 'http://results.nith.ac.in/',
-            hasIcon: true,
-          },
-          {
-            title: 'Guidelines for Certificates Issuance',
+            title: 'Certificate Issuance',
             href: '/academics/certificates-issuance-guidelines',
-            hasIcon: true,
           },
           {
-            title: 'Guidelines for Certificates Verification',
+            title: 'Certificate Verification',
             href: '/academics/certificates-verification-guidelines',
-            hasIcon: true,
-          },
-          {
-            title: 'Certificate regarding Divisions/Percentage',
-            href: '/academics/divisions-percentage-certificate',
-            hasIcon: true,
-            disabled: true,
-          },
-          {
-            title: 'Contact for Certification matters',
-            href: '/academics/certification-contact',
-            hasIcon: true,
           },
         ],
       },
     ],
-    rightColumn: [
+  },
+  {
+    id: '03',
+    category: 'Programmes',
+    icon: BookOpen,
+    sections: [
       {
-        section: 'Bachelor Programmes',
+        title: 'Bachelor (UG)',
         links: [
           {
             title: 'Bachelor Ordinances',
             href: '/academics/bachelor-ordinances',
-            hasIcon: true,
           },
           {
-            title: 'Course Structure & Syllabus',
+            title: 'Structure & Syllabus',
             href: '/academics/course-structure-syllabus',
-            hasIcon: true,
           },
-          {
-            title: 'Old UG Manual',
-            href: '/academics/old-ug-manual',
-            hasIcon: true,
-            disabled: true,
-          },
+          { title: 'Old UG Manual', href: '#', disabled: true },
         ],
       },
       {
-        section: 'Master Programmes',
+        title: 'Master (PG)',
         links: [
+          { title: 'Master Ordinances', href: '/academics/master-ordinances' },
           {
-            title: 'Master Ordinances',
-            href: '/academics/master-ordinances',
-            hasIcon: true,
-          },
-          {
-            title: 'Course Structure & Syllabus',
+            title: 'Structure & Syllabus',
             href: '/academics/course-structure-syllabus',
-            hasIcon: true,
           },
-          {
-            title: 'Old PG Manual',
-            href: '/academics/old-pg-manual',
-            hasIcon: true,
-            disabled: true,
-          },
+          { title: 'Old PG Manual', href: '#', disabled: true },
         ],
       },
       {
-        section: 'Doctoral Programmes',
+        title: 'Doctoral (PhD)',
         links: [
           {
             title: 'Doctoral Ordinances',
             href: '/academics/doctoral-ordinances',
-            hasIcon: true,
           },
-          {
-            title: 'Old PG Manual',
-            href: '/academics/old-pg-manual',
-            hasIcon: true,
-            disabled: true,
-          },
+          { title: 'Old PG Manual', href: '#', disabled: true },
         ],
       },
     ],
-  };
+  },
+];
 
+function Academic() {
   return (
-    <div className="grid grid-cols-3 gap-8">
-      {/* Left Column */}
-      <div className="space-y-2">
-        {academicSections.leftColumn.map((item, index) =>
-          item.disabled ? (
-            <div
-              key={index}
-              aria-disabled="true"
-              className="block px-4 py-2 text-gray-400 text-sm cursor-not-allowed select-none"
-            >
-              {item.hasIcon && <span className="mr-2">›</span>}
-              {item.title}
-            </div>
-          ) : (
-            <a
-              key={index}
-              href={item.href}
-              className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-            >
-              {item.hasIcon && <span className="mr-2">›</span>}
-              {item.title}
-            </a>
-          )
-        )}
-      </div>
+    <section className="w-full  bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* The Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+          {academicData.map((column) => (
+            <div key={column.id} className="flex flex-col">
+              {/* Column Header */}
+              <div className="flex items-center gap-3 mb-6 group/header">
+                <span className="font-mono text-xl text-gray-200 group-hover/header:text-[#800000] transition-colors duration-300">
+                  {column.id}
+                </span>
+                <div className="flex items-center gap-2 border-l-2 border-[#800000] pl-3">
+                  <column.icon
+                    size={16}
+                    className="text-gray-400 group-hover/header:text-gray-900 transition-colors"
+                  />
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-gray-800">
+                    {column.category}
+                  </h3>
+                </div>
+              </div>
 
-      {/* Center Column */}
-      <div className="space-y-6">
-        {academicSections.centerColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-2 text-sm">
-              {section.section}
-            </h3>
-            <div className="space-y-1">
-              {section.links.map((link, linkIdx) =>
-                link.disabled ? (
-                  <div
-                    key={linkIdx}
-                    aria-disabled="true"
-                    className="block px-4 py-2 text-gray-400 text-sm cursor-not-allowed select-none"
-                  >
-                    {link.hasIcon && <span className="mr-2">›</span>}
-                    {link.title}
-                  </div>
-                ) : (
-                  <a
-                    key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-                  >
-                    {link.hasIcon && <span className="mr-2">›</span>}
-                    {link.title}
-                  </a>
-                )
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+              {/* Sections */}
+              <div className="space-y-8">
+                {column.sections.map((section, idx) => (
+                  <div key={idx} className="group/section">
+                    {/* Sub-Section Title */}
+                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3 pl-2 border-l border-transparent group-hover/section:border-gray-200 transition-all">
+                      {section.title}
+                    </h4>
 
-      {/* Right Column */}
-      <div className="space-y-6">
-        {academicSections.rightColumn.map((section, idx) => (
-          <div key={idx}>
-            <h3 className="font-semibold text-black mb-2 text-sm">
-              {section.section}
-            </h3>
-            <div className="space-y-1">
-              {section.links.map((link, linkIdx) =>
-                link.disabled ? (
-                  <div
-                    key={linkIdx}
-                    aria-disabled="true"
-                    className="block px-4 py-2 text-gray-400 text-sm cursor-not-allowed select-none"
-                  >
-                    {link.hasIcon && <span className="mr-2">›</span>}
-                    {link.title}
+                    {/* Links List */}
+                    <ul className="space-y-1">
+                      {section.links.map((link, linkIdx) => {
+                        if (link.disabled) {
+                          // Disabled State
+                          return (
+                            <li
+                              key={linkIdx}
+                              className="flex items-center justify-between py-2 px-2 opacity-50 cursor-not-allowed select-none"
+                            >
+                              <div className="flex items-center gap-3">
+                                <Lock size={12} className="text-gray-400" />
+                                <span className="text-sm font-medium text-gray-400">
+                                  {link.title}
+                                </span>
+                              </div>
+                            </li>
+                          );
+                        }
+
+                        // Active State
+                        return (
+                          <li key={linkIdx}>
+                            <Link
+                              href={link.href}
+                              className="flex items-center justify-between group/link py-2 px-2 rounded-r hover:bg-gray-50 transition-all duration-300"
+                            >
+                              <div className="flex items-center gap-3">
+                                <ChevronRight
+                                  size={14}
+                                  className="text-gray-300 group-hover/link:text-[#800000] transition-colors"
+                                />
+                                <span className="text-sm font-medium text-gray-600 group-hover/link:text-black transition-colors">
+                                  {link.title}
+                                </span>
+                              </div>
+
+                              {/* Hover Indicator */}
+                              <ArrowUpRight
+                                size={12}
+                                className="opacity-0 -translate-x-2 text-[#800000] group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300"
+                              />
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
-                ) : (
-                  <a
-                    key={linkIdx}
-                    href={link.href}
-                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
-                  >
-                    {link.hasIcon && <span className="mr-2">›</span>}
-                    {link.title}
-                  </a>
-                )
-              )}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

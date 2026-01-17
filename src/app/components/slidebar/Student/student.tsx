@@ -1,350 +1,221 @@
 import React from 'react';
+import Link from 'next/link';
+import {
+  ChevronRight,
+  ArrowUpRight,
+  Smile,
+  Trophy,
+  Scale,
+  HandCoins,
+  Tent,
+  Guitar,
+  Cpu,
+  HeartHandshake,
+} from 'lucide-react';
+
+const studentData = [
+  {
+    id: '01',
+    category: 'Campus Life',
+    icon: Smile,
+    sections: [
+      {
+        title: 'Essentials',
+        links: [
+          { title: 'Student Activities', href: '/student/activities' },
+          { title: 'Functionaries', href: '/student/functionaries' },
+          { title: 'Student Notices', href: '/student/notices' },
+          { title: 'SGRC', href: '/student/sgrc' },
+        ],
+      },
+      {
+        title: 'Accommodation',
+        icon: Tent,
+        links: [
+          { title: 'Hostels at NITH', href: '/student/hostels-at-nith' },
+          { title: 'Hostel Management', href: '/student/hostel-management' },
+          { title: 'Hostel Booklet', href: '/student/hostel-booklet' },
+        ],
+      },
+    ],
+  },
+  {
+    id: '02',
+    category: 'Extracurriculars',
+    icon: Trophy,
+    sections: [
+      {
+        title: 'Cultural',
+        icon: Guitar,
+        links: [
+          { title: 'Clubs List', href: '/student/cultural/introduction' },
+          { title: 'Societies', href: '/student/cultural/clubs' },
+          {
+            title: "Hill'ffair (Festival)",
+            href: '/student/cultural/hillfair',
+          },
+          { title: 'SPIC MACAY', href: '/student/cultural/spic-macay' },
+        ],
+      },
+      {
+        title: 'Technical',
+        icon: Cpu,
+        links: [
+          { title: 'Clubs List', href: '/student/technical/introduction' },
+          { title: 'Nimbus (Tech Fest)', href: '/student/technical/nimbus' },
+          { title: 'Innovation', href: '/student/technical/innovation' },
+        ],
+      },
+      {
+        title: 'Sports & Wellness',
+        links: [
+          {
+            title: 'Sports Introduction',
+            href: '/student/sports/introduction',
+          },
+          { title: 'Lakaar (Sports Meet)', href: '/student/sports/lakaar' },
+          { title: 'Yoga Day', href: '/student/sports/yoga-day' },
+        ],
+      },
+      {
+        title: 'Service & Publishing',
+        links: [
+          { title: 'NSS Activities', href: '/student/nss' },
+          { title: 'NCC Activities', href: '/student/ncc' },
+          { title: 'Magazine', href: '/student/publications/magazine' },
+          {
+            title: 'News Bulletin',
+            href: '/student/publications/news-bulletin',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: '03',
+    category: 'Conduct',
+    icon: Scale,
+    sections: [
+      {
+        title: 'Discipline',
+        links: [
+          { title: 'Discipline Rules', href: '/student/discipline/rules' },
+          { title: 'Discipline Board', href: '/student/discipline/board' },
+        ],
+      },
+      {
+        title: 'Counselling',
+        links: [
+          { title: 'Counselling Rules', href: '/student/counselling/rules' },
+          { title: 'Counselling Board', href: '/student/counselling/board' },
+        ],
+      },
+      {
+        title: 'Governance',
+        links: [
+          { title: 'Student Council Rules', href: '/student/council/rules' },
+          { title: 'Student Council Board', href: '/student/council/board' },
+        ],
+      },
+      {
+        title: 'Anti-Ragging',
+        links: [
+          { title: 'Anti-Ragging Rules', href: '/student/anti-ragging/rules' },
+          {
+            title: 'Anti-Ragging Committee',
+            href: '/student/anti-ragging/committee',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: '04',
+    category: 'Welfare',
+    icon: HandCoins,
+    sections: [
+      {
+        title: 'Benefits',
+        links: [
+          { title: 'Scholarships', href: '/student/welfare/scholarships' },
+          { title: 'Prizes & Medals', href: '/student/welfare/prizes-medals' },
+          { title: 'Insurance', href: '/student/welfare/insurance' },
+        ],
+      },
+    ],
+  },
+];
 
 const Student = () => {
   return (
-    <div className="w-full h-full text-black p-8 overflow-y-auto">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-4 gap-8">
-          {/* Column 1: General Student Information */}
-          <div>
-            <div className="mb-8">
-              <a
-                href="/student/activities"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group mb-3"
-              >
-                <span className="text-base font-medium">Activities</span>
-                <span className="text-black text-xl group-hover:translate-x-2 transition-transform duration-200">
-                  ›
+    <section className="w-full  bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* The Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+          {studentData.map((column) => (
+            <div key={column.id} className="flex flex-col">
+              {/* Column Header */}
+              <div className="flex items-center gap-3 mb-6 group/header">
+                <span className="font-mono text-xl text-gray-200 group-hover/header:text-[#800000] transition-colors duration-300">
+                  {column.id}
                 </span>
-              </a>
+                <div className="flex items-center gap-2 border-l-2 border-[#800000] pl-3">
+                  <column.icon
+                    size={16}
+                    className="text-gray-400 group-hover/header:text-gray-900 transition-colors"
+                  />
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-gray-800">
+                    {column.category}
+                  </h3>
+                </div>
+              </div>
 
-              <a
-                href="/student/functionaries"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group mb-3"
-              >
-                <span className="text-base font-medium">Functionaries</span>
-                <span className="text-black text-xl group-hover:translate-x-2 transition-transform duration-200">
-                  ›
-                </span>
-              </a>
+              {/* Sections Loop */}
+              <div className="space-y-8">
+                {column.sections.map((section, idx) => (
+                  <div key={idx} className="group/section">
+                    {/* Sub-Section Title */}
+                    <div className="flex items-center gap-2 mb-3 pl-2 border-l border-transparent group-hover/section:border-gray-200 transition-all">
+                      <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                        {section.title}
+                      </h4>
+                    </div>
 
-              <a
-                href="/student/notices"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group mb-3"
-              >
-                <span className="text-base font-medium">
-                  Student Related Notices
-                </span>
-                <span className="text-black text-xl group-hover:translate-x-2 transition-transform duration-200">
-                  ›
-                </span>
-              </a>
+                    {/* Links List */}
+                    <ul className="space-y-1">
+                      {section.links.map((link) => (
+                        <li key={link.title}>
+                          <Link
+                            href={link.href}
+                            className="flex items-center justify-between group/link py-2 px-2 rounded-r hover:bg-gray-50 transition-all duration-300"
+                          >
+                            <div className="flex items-center gap-3">
+                              <ChevronRight
+                                size={14}
+                                className="text-gray-300 group-hover/link:text-[#800000] transition-colors"
+                              />
+                              <span className="text-sm font-medium text-gray-600 group-hover/link:text-black transition-colors">
+                                {link.title}
+                              </span>
+                            </div>
 
-              <a
-                href="/student/sgrc"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group mb-3"
-              >
-                <span className="text-base font-medium">SGRC</span>
-                <span className="text-black text-xl group-hover:translate-x-2 transition-transform duration-200">
-                  ›
-                </span>
-              </a>
+                            {/* Hover Indicator */}
+                            <ArrowUpRight
+                              size={12}
+                              className="opacity-0 -translate-x-2 text-[#800000] group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300"
+                            />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
-
-            {/* Student Hostels & Management */}
-            <div>
-              <h3 className="text-lg font-bold text-black mb-4 border-b border-black pb-2">
-                Student Hostels & Management
-              </h3>
-              <a
-                href="/student/hostels-at-nith"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group mb-3"
-              >
-                <span className="text-base font-medium flex items-center">
-                  <span className="text-black mr-2">›</span>
-                  Hostels at NITH
-                </span>
-              </a>
-
-              <a
-                href="/student/hostel-management"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group mb-3"
-              >
-                <span className="text-base font-medium flex items-center">
-                  <span className="text-black mr-2">›</span>
-                  Hostel Management
-                </span>
-              </a>
-
-              <a
-                href="/student/hostel-booklet"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group mb-3"
-              >
-                <span className="text-base font-medium flex items-center">
-                  <span className="text-black mr-2">›</span>
-                  Hostel Booklet
-                </span>
-              </a>
-            </div>
-          </div>
-
-          {/* Column 2: Student Activities & Sports */}
-          <div>
-            <h2 className="text-lg font-bold text-black mb-4 border-b border-black pb-2">
-              Student Activities & Sports
-            </h2>
-
-            {/* Cultural Activities & Clubs */}
-            <div className="mb-6">
-              <h3 className="text-base font-semibold text-black mb-3">
-                Cultural Activities & Clubs
-              </h3>
-              <a
-                href="/student/cultural/introduction"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Introduction & list</span>
-              </a>
-              <a
-                href="/student/cultural/clubs"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Cultural Activities & Clubs</span>
-              </a>
-              <a
-                href="/student/cultural/hillfair"
-                className="flex items-center p-2 bg-gray-100 hover:bg-gray-300 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">
-                  Annual Cultural Festival (Hill&apos;ffair)
-                </span>
-              </a>
-              <a
-                href="/student/cultural/spic-macay"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Annual SPIC MACAY Activity</span>
-              </a>
-            </div>
-
-            {/* Technical Activities & Clubs */}
-            <div className="mb-6">
-              <h3 className="text-base font-semibold text-black mb-3">
-                Technical Activities & Clubs
-              </h3>
-              <a
-                href="/student/technical/introduction"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Introduction & list</span>
-              </a>
-              <a
-                href="/student/technical/nimbus"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">
-                  Annual Technical Festival (Nimbus)
-                </span>
-              </a>
-              <a
-                href="/student/technical/innovation"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Annual Innovation Activity</span>
-              </a>
-            </div>
-
-            {/* Sports Activities & Yoga */}
-            <div className="mb-6">
-              <h3 className="text-base font-semibold text-black mb-3">
-                Sports Activities & Yoga
-              </h3>
-              <a
-                href="/student/sports/introduction"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Introduction & list</span>
-              </a>
-              <a
-                href="/student/sports/lakaar"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Annual Sports Meet (Lakaar)</span>
-              </a>
-              <a
-                href="/student/sports/yoga-day"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Annual Yoga Day</span>
-              </a>
-            </div>
-
-            {/* NSS Activities */}
-            <div className="mb-4">
-              <a
-                href="/student/nss"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group"
-              >
-                <span className="text-base font-medium text-black">
-                  NSS Activities
-                </span>
-                <span className="text-black text-xl group-hover:translate-x-2 transition-transform duration-200">
-                  ›
-                </span>
-              </a>
-            </div>
-
-            {/* NCC Activities */}
-            <div className="mb-4">
-              <a
-                href="/student/ncc"
-                className="flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 group"
-              >
-                <span className="text-base font-medium text-black">
-                  NCC Activities
-                </span>
-                <span className="text-black text-xl group-hover:translate-x-2 transition-transform duration-200">
-                  ›
-                </span>
-              </a>
-            </div>
-
-            {/* Publication Activities */}
-            <div>
-              <h3 className="text-base font-semibold text-black mb-3">
-                Publication Activities
-              </h3>
-              <a
-                href="/student/publications/magazine"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">Magazine Publication</span>
-              </a>
-              <a
-                href="/student/publications/news-bulletin"
-                className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-              >
-                <span className="text-black mr-2">›</span>
-                <span className="text-sm">News Bulletin Publication</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Column 3: Student Discipline & Counselling */}
-          <div>
-            <h2 className="text-lg font-bold text-black mb-4 border-b border-black pb-2">
-              Student Discipline & Counselling
-            </h2>
-
-            <a
-              href="/student/discipline/rules"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Discipline Rules</span>
-            </a>
-
-            <a
-              href="/student/discipline/board"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Student Discipline Board</span>
-            </a>
-
-            <a
-              href="/student/counselling/rules"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Counselling Rules</span>
-            </a>
-
-            <a
-              href="/student/counselling/board"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Student Counselling Board</span>
-            </a>
-
-            <a
-              href="/student/council/rules"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Council Rules</span>
-            </a>
-
-            <a
-              href="/student/council/board"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Student Council Board</span>
-            </a>
-
-            <a
-              href="/student/anti-ragging/rules"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Anti Ragging Rules</span>
-            </a>
-
-            <a
-              href="/student/anti-ragging/committee"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Anti Ragging Committee</span>
-            </a>
-          </div>
-
-          {/* Column 4: Student Welfare & Schemes */}
-          <div>
-            <h2 className="text-lg font-bold text-black mb-4 border-b border-black pb-2">
-              Student Welfare & Schemes
-            </h2>
-
-            <a
-              href="/student/welfare/scholarships"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Scholarships and Fellowships</span>
-            </a>
-
-            <a
-              href="/student/welfare/prizes-medals"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Prizes & Medals</span>
-            </a>
-
-            <a
-              href="/student/welfare/insurance"
-              className="flex items-center p-2 hover:bg-gray-200 rounded transition-colors duration-200 mb-2"
-            >
-              <span className="text-black mr-2">›</span>
-              <span className="text-sm">Insurance & Mediclaims</span>
-            </a>
-          </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
