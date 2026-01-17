@@ -80,7 +80,7 @@ function News() {
   }
 
   return (
-    <section className="mt-3 px-6 bg-black font-sans">
+    <section className="mt-3 p-6  font-sans ">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* --- LEFT COLUMN: ADMISSIONS (Unchanged) --- */}
@@ -134,9 +134,9 @@ function News() {
           </div>
 
           {/* --- RIGHT COLUMN: UPDATED LATEST NEWS (Span 2 Columns) --- */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2  ">
             {/* The Announcement-Style Card */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col w-full h-full">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col w-full h-full ">
               {/* Card Header (Text Only) */}
               <div className="px-8 py-6 border-b border-gray-100 flex justify-between items-center bg-white z-10">
                 <div className="flex flex-col">

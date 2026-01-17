@@ -25,9 +25,15 @@ export default function Home() {
 
       {/* Main content sections */}
       <main>
-        <section id="events">
-          <Event />
-        </section>
+        <div className="flex flex-row  ">
+          <section id="events" className="flex-1">
+            <Event />
+          </section>
+          <section className="flex-1">
+            <Academics></Academics>
+          </section>
+        </div>
+
         <section id="news">
           <News />
         </section>
@@ -41,9 +47,6 @@ export default function Home() {
         {/* Placement and Event sections */}
 
         {/* News section */}
-        <section>
-          <Academics></Academics>
-        </section>
 
         {/* Achievements section */}
         <section id="achievements">

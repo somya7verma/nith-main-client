@@ -65,7 +65,7 @@ const announcements = [
 
 export default function Announcements() {
   return (
-    <section className="w-3/4 bg-gray-50 py-12 font-sans">
+    <section className="w-full bg-gray-50 py-12 font-sans">
       {/* Container: Set to w-full to cover whole width */}
       <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* The Card Container */}
