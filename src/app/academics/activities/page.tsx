@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
@@ -34,19 +35,25 @@ export default function Page() {
       </div>
 
       <section className="relative bg-gradient-to-br from-[#800000] via-[#631012] to-[#8B1E1E] overflow-hidden">
-        <div className="relative z-10 text-center py-20 px-6 md:px-12">
-          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-4">
-            {language == 'en' ? 'ACTIVITIES' : 'गतिविधियां'}
-          </h1>
-          <p className="text-white/80 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            {language == 'en'
-              ? 'Duties and responsibilities of the Dean (Academic)'
-              : 'डीन (शैक्षणिक) के कर्तव्य और जिम्मेदारियां'}
-          </p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="relative z-10 text-center py-20 px-6 md:px-12">
+            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-4">
+              {language == 'en' ? 'ACTIVITIES' : 'गतिविधियां'}
+            </h1>
+            <p className="text-white/80 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+              {language == 'en'
+                ? 'Duties and responsibilities of the Dean (Academic)'
+                : 'डीन (शैक्षणिक) के कर्तव्य और जिम्मेदारियां'}
+            </p>
+          </div>
+        </motion.div>
       </section>
-      <section className="py-12 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
+
+      <main className="max-w-7xl mx-auto p-6 space-y-8">
+        <section className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">
             {language == 'en'
               ? 'Dean (Academic) — Duties & Responsibilities'
@@ -132,8 +139,8 @@ export default function Page() {
               </li>
             </ul>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

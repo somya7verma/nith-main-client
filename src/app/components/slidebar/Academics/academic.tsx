@@ -59,7 +59,7 @@ const academicData = [
         title2: 'कैलेंडर', // Hindi Section Title
         links: [
           {
-            title: 'Academic Calender',
+            title: 'Academic Calenders',
             title2: 'शैक्षणिक कैलेंडर',
             href: '/academics/calendar',
           },

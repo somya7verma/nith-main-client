@@ -1,9 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
 
 type Notice = {
   id: string;
@@ -35,14 +41,27 @@ export default function page() {
       </div>
 
       <section className="relative bg-gradient-to-br from-[#800000] via-[#631012] to-[#8B1E1E] overflow-hidden">
-        <div className="relative z-10 text-center py-20 px-6 md:px-12">
-          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-4">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
+
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')] opacity-5"></div>
+
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
+        >
+          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             Academic Notices
           </h1>
-          <p className="text-white/80 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
+          <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
             Institute notices related to academics (view or download PDFs)
           </p>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-12 md:py-16 px-4 md:px-6">

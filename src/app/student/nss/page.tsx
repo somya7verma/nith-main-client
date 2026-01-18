@@ -13,63 +13,33 @@ const fadeUp = {
 
 const SECTIONS = [
   {
-    key: 'vision',
-    title: 'Vision of NAD',
-    content:
-      'The National Academic Depository (NAD) aims to provide a secure, digital depository for academic awards, ensuring accessibility, authenticity and easy verification of academic records across institutions.',
-  },
-  {
     key: 'about',
-    title: 'About NAD',
+    title: 'About NSS',
     content:
-      'NAD is an online storehouse of academic awards (certificates, diplomas, degrees, mark sheets). It facilitates issuance, storage, retrieval and verification of academic documents in a digital format.',
+      'The National Service Scheme (NSS) is a public service program under the Ministry of Youth Affairs and Sports. NSS aims to develop students personality through community service and to inculcate social responsibility among youth.',
   },
   {
-    key: 'features',
-    title: 'Features of NAD',
+    key: 'objective',
+    title: 'Objective of NSS',
     content:
-      'Secure storage, instant verification, tamper-proof records, institution integration, student access and download, and support for multiple formats.',
+      '1) To understand community issues and work towards solutions. 2) To foster social responsibility and leadership. 3) To provide service experience that complements academic learning.',
   },
   {
-    key: 'benefits',
-    title: 'Benefits of NAD',
+    key: 'activities',
+    title: 'NSS Regular Activities',
     content:
-      'Ease of verification for employers, reduced paperwork for institutions, quick access for students, reduced fraud, and centralized archival of awards.',
-  },
-  {
-    key: 'roles',
-    title: 'Roles & Responsibilities',
-    content:
-      'Institutions: issue documents to NAD; Students: consent and access records; Employers: verify credentials via NAD; NAD: maintain secure repository and APIs.',
-  },
-  {
-    key: 'register',
-    title: 'How to Register on NAD',
-    content:
-      '1) Create an account on the NAD portal. 2) Add your institution details. 3) Link issued awards. 4) Verify email and mobile. 5) Grant permissions to share or download documents.',
-  },
-  {
-    key: 'abc',
-    title: 'Academic Bank of Credits (ABC)',
-    content:
-      'ABC enables credit accumulation and transfer across institutions. NAD integration allows records of earned credits to be securely stored and shared for academic mobility.',
-  },
-  {
-    key: 'notices',
-    title: 'Notices',
-    content:
-      'All NAD-related notices, announcements and maintenance windows will appear here. (Dummy notice) NAD will be upgraded on 2026-02-01 between 02:00-04:00 AM.',
+      'Regular activities include community outreach, blood donation camps, environmental drives, awareness campaigns, skill-development workshops, campus cleanliness drives, and disaster relief support. (Dummy list)',
   },
   {
     key: 'contact',
-    title: 'Contact',
+    title: 'Contact Us',
     content:
-      'For NAD support contact: nad-support@nith.ac.in or call +91-12345-67890. Office hours: Mon-Fri 09:30-17:30.',
+      'NSS Coordinator: nss-coordinator@nith.ac.in\nPhone: +91-00000-00000\nOffice: Student Affairs Building, Office hours: Mon-Fri 10:00-16:00',
   },
 ];
 
 export default function Page() {
-  const [active, setActive] = useState<string>('vision');
+  const [active, setActive] = useState<string>('about');
   const current = SECTIONS.find((s) => s.key === active) ?? SECTIONS[0];
 
   return (
@@ -77,6 +47,7 @@ export default function Page() {
       <div>
         <Header31 />
       </div>
+
       <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto">
           <nav className="flex items-center space-x-2 text-sm text-gray-600">
@@ -87,9 +58,9 @@ export default function Page() {
               Home
             </Link>
             <span>›</span>
-            <span className="text-gray-400">Academics</span>
+            <span className="text-gray-400">Student</span>
             <span>›</span>
-            <span className="text-[#800000] font-medium">NAD</span>
+            <span className="text-[#800000] font-medium">NSS</span>
           </nav>
         </div>
       </div>
@@ -100,8 +71,6 @@ export default function Page() {
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse delay-700"></div>
         </div>
 
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')] opacity-5"></div>
-
         <motion.div
           initial="hidden"
           animate="visible"
@@ -110,11 +79,12 @@ export default function Page() {
           className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
         >
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
-            National Academic Depository (NAD)
+            National Service Scheme (NSS)
           </h1>
           <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Secure, digital repository for academic awards — store, access, and
-            verify certificates and transcripts online.
+            NSS encourages students to participate in community service and
+            social outreach activities to foster social responsibility and
+            leadership.
           </p>
         </motion.div>
       </section>
@@ -123,7 +93,7 @@ export default function Page() {
         <div className="flex flex-col md:flex-row gap-6">
           {/* Sidebar */}
           <aside className="w-full md:w-72 bg-white rounded-lg shadow-sm p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">NAD</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">NSS</h3>
             <ul className="space-y-2">
               {SECTIONS.map((s) => (
                 <li key={s.key}>
@@ -151,36 +121,40 @@ export default function Page() {
             </div>
 
             <div className="mt-4 prose prose-sm max-w-none text-gray-700">
-              {current.key === 'register' ? (
+              {current.key === 'objective' ? (
                 <div>
-                  <p>Follow these quick steps to register:</p>
-                  <ol>
-                    <li>
-                      Create your account on the NAD portal with a valid email.
-                    </li>
-                    <li>Complete institution verification (if applicable).</li>
-                    <li>Upload or link issued awards to your profile.</li>
-                    <li>
-                      Verify and share links with employers or institutions.
-                    </li>
-                  </ol>
-                </div>
-              ) : current.key === 'features' ? (
-                <div>
+                  <p>Key objectives of NSS include:</p>
                   <ul>
-                    <li>Secure digital storage of awards.</li>
-                    <li>API access for institution integration.</li>
-                    <li>Student-controlled sharing.</li>
-                    <li>Instant verification for employers.</li>
+                    <li>
+                      Developing student personality through community service.
+                    </li>
+                    <li>Creating social awareness and leadership skills.</li>
+                    <li>Promoting national integration and social cohesion.</li>
                   </ul>
                 </div>
-              ) : current.key === 'abc' ? (
+              ) : current.key === 'activities' ? (
+                <div>
+                  <ul>
+                    <li>Weekly community camps and outreach programs.</li>
+                    <li>Blood donation and health awareness camps.</li>
+                    <li>Environmental drives and cleanliness campaigns.</li>
+                    <li>Skill-building workshops and training sessions.</li>
+                  </ul>
+                </div>
+              ) : current.key === 'contact' ? (
                 <div>
                   <p>
-                    The Academic Bank of Credits (ABC) allows students to
-                    accumulate credits for courses across institutions. NAD
-                    integration ensures credits and earned records are
-                    verifiable.
+                    <strong>Coordinator:</strong> NSS Coordinator
+                    <br />
+                    <strong>Email:</strong>{' '}
+                    <a
+                      href="mailto:nss-coordinator@nith.ac.in"
+                      className="text-[#800000]"
+                    >
+                      nss-coordinator@nith.ac.in
+                    </a>
+                    <br />
+                    <strong>Phone:</strong> +91-00000-00000
                   </p>
                 </div>
               ) : (
@@ -193,13 +167,13 @@ export default function Page() {
                 href="#"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-[#800000] text-white rounded-md text-sm hover:bg-[#6a0000]"
               >
-                Download Guide
+                View Activities Calendar
               </a>
               <a
-                href="mailto:nad-support@nith.ac.in"
+                href="mailto:nss-coordinator@nith.ac.in"
                 className="inline-flex items-center gap-2 px-4 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100"
               >
-                Contact Support
+                Contact Coordinator
               </a>
             </div>
           </section>

@@ -13,70 +13,68 @@ const fadeUp = {
 
 const SECTIONS = [
   {
-    key: 'vision',
-    title: 'Vision of NAD',
+    key: 'intro',
+    title: 'Introduction',
     content:
-      'The National Academic Depository (NAD) aims to provide a secure, digital depository for academic awards, ensuring accessibility, authenticity and easy verification of academic records across institutions.',
+      'Welcome to NITH — international admissions information and a quick overview for prospective students.',
   },
   {
-    key: 'about',
-    title: 'About NAD',
+    key: 'message',
+    title: 'Message',
     content:
-      'NAD is an online storehouse of academic awards (certificates, diplomas, degrees, mark sheets). It facilitates issuance, storage, retrieval and verification of academic documents in a digital format.',
+      'Message from the International Office: We welcome students from across the world to be part of our vibrant community.',
   },
   {
-    key: 'features',
-    title: 'Features of NAD',
+    key: 'why',
+    title: 'Why Study at NITH',
     content:
-      'Secure storage, instant verification, tamper-proof records, institution integration, student access and download, and support for multiple formats.',
+      'Strong academic programs, research opportunities, and a supportive campus environment.',
   },
   {
-    key: 'benefits',
-    title: 'Benefits of NAD',
+    key: 'life',
+    title: 'Life in Bharat',
     content:
-      'Ease of verification for employers, reduced paperwork for institutions, quick access for students, reduced fraud, and centralized archival of awards.',
+      'Cultural experiences, local hospitality, and opportunities to explore India during your studies.',
   },
   {
-    key: 'roles',
-    title: 'Roles & Responsibilities',
+    key: 'campus',
+    title: 'Campus Life',
     content:
-      'Institutions: issue documents to NAD; Students: consent and access records; Employers: verify credentials via NAD; NAD: maintain secure repository and APIs.',
+      'Clubs, societies, sports, and on-campus facilities to support student life and learning.',
   },
   {
-    key: 'register',
-    title: 'How to Register on NAD',
+    key: 'connect',
+    title: 'Connectivity',
     content:
-      '1) Create an account on the NAD portal. 2) Add your institution details. 3) Link issued awards. 4) Verify email and mobile. 5) Grant permissions to share or download documents.',
+      'Transport options and connectivity to nearby cities and airports.',
   },
   {
-    key: 'abc',
-    title: 'Academic Bank of Credits (ABC)',
-    content:
-      'ABC enables credit accumulation and transfer across institutions. NAD integration allows records of earned credits to be securely stored and shared for academic mobility.',
+    key: 'hear',
+    title: "Hear from our Intl' Students",
+    content: 'Student testimonials and experiences — (dummy content).',
   },
   {
-    key: 'notices',
-    title: 'Notices',
+    key: 'counselling',
+    title: 'Counselling and Mental Health Services',
     content:
-      'All NAD-related notices, announcements and maintenance windows will appear here. (Dummy notice) NAD will be upgraded on 2026-02-01 between 02:00-04:00 AM.',
+      'We provide counselling services and mental health support to all students.',
   },
   {
     key: 'contact',
-    title: 'Contact',
+    title: 'Contact details',
     content:
-      'For NAD support contact: nad-support@nith.ac.in or call +91-12345-67890. Office hours: Mon-Fri 09:30-17:30.',
+      'Email: intl-admissions@nith.ac.in | Phone: +91-12345-67890 | Office hours: Mon-Fri 09:30-17:30',
   },
 ];
 
 export default function Page() {
-  const [active, setActive] = useState<string>('vision');
+  const [active, setActive] = useState<string>('intro');
   const current = SECTIONS.find((s) => s.key === active) ?? SECTIONS[0];
 
   return (
-    <div className=" bg-gray-50  ">
-      <div>
-        <Header31 />
-      </div>
+    <div className="min-h-screen bg-gray-50">
+      <Header31 />
+
       <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto">
           <nav className="flex items-center space-x-2 text-sm text-gray-600">
@@ -87,9 +85,11 @@ export default function Page() {
               Home
             </Link>
             <span>›</span>
-            <span className="text-gray-400">Academics</span>
+            <span className="text-gray-400">About</span>
             <span>›</span>
-            <span className="text-[#800000] font-medium">NAD</span>
+            <span className="text-[#800000] font-medium">
+              International Admissions
+            </span>
           </nav>
         </div>
       </div>
@@ -110,26 +110,28 @@ export default function Page() {
           className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
         >
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
-            National Academic Depository (NAD)
+            International Admissions
           </h1>
           <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Secure, digital repository for academic awards — store, access, and
-            verify certificates and transcripts online.
+            Information for international applicants — programs, campus life,
+            support services, and how to apply.
           </p>
         </motion.div>
       </section>
 
       <main className="max-w-7xl mx-auto px-4 md:px-6 py-10">
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Sidebar */}
           <aside className="w-full md:w-72 bg-white rounded-lg shadow-sm p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">NAD</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              International Admissions
+            </h3>
             <ul className="space-y-2">
               {SECTIONS.map((s) => (
                 <li key={s.key}>
                   <button
                     onClick={() => setActive(s.key)}
                     className={`w-full text-left px-3 py-2 rounded-md transition-colors text-sm ${active === s.key ? 'bg-[#800000] text-white' : 'text-gray-700 hover:bg-gray-100'}`}
+                    aria-pressed={active === s.key}
                   >
                     {s.title}
                   </button>
@@ -138,7 +140,6 @@ export default function Page() {
             </ul>
           </aside>
 
-          {/* Content panel */}
           <section className="flex-1 bg-white rounded-lg shadow-sm p-6">
             <div className="flex items-start justify-between">
               <h2 className="text-2xl font-semibold text-gray-900">
@@ -151,41 +152,7 @@ export default function Page() {
             </div>
 
             <div className="mt-4 prose prose-sm max-w-none text-gray-700">
-              {current.key === 'register' ? (
-                <div>
-                  <p>Follow these quick steps to register:</p>
-                  <ol>
-                    <li>
-                      Create your account on the NAD portal with a valid email.
-                    </li>
-                    <li>Complete institution verification (if applicable).</li>
-                    <li>Upload or link issued awards to your profile.</li>
-                    <li>
-                      Verify and share links with employers or institutions.
-                    </li>
-                  </ol>
-                </div>
-              ) : current.key === 'features' ? (
-                <div>
-                  <ul>
-                    <li>Secure digital storage of awards.</li>
-                    <li>API access for institution integration.</li>
-                    <li>Student-controlled sharing.</li>
-                    <li>Instant verification for employers.</li>
-                  </ul>
-                </div>
-              ) : current.key === 'abc' ? (
-                <div>
-                  <p>
-                    The Academic Bank of Credits (ABC) allows students to
-                    accumulate credits for courses across institutions. NAD
-                    integration ensures credits and earned records are
-                    verifiable.
-                  </p>
-                </div>
-              ) : (
-                <p>{current.content}</p>
-              )}
+              <p>{current.content}</p>
             </div>
 
             <div className="mt-6 flex items-center gap-3">
@@ -196,7 +163,7 @@ export default function Page() {
                 Download Guide
               </a>
               <a
-                href="mailto:nad-support@nith.ac.in"
+                href="mailto:intl-admissions@nith.ac.in"
                 className="inline-flex items-center gap-2 px-4 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100"
               >
                 Contact Support
