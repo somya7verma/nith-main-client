@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header31 from '../../components/header3';
 import Footer from '../../components/footer';
-import { Sparkles } from 'lucide-react';
 import { getAboutNithData } from '../api/api';
 import { useEffect, useState } from 'react';
 
@@ -95,6 +96,7 @@ interface ConnectivityInfo {
 }
 
 export default function ConnectivityPage() {
+  const language = useSelector((state: RootState) => state.language.value);
   const connectivityModes: ConnectivityInfo[] = [
     {
       icon: <TrainIcon />,

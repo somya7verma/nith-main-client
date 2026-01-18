@@ -1,24 +1,14 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import Link from 'next/link';
 import Header31 from '../../components/header3';
 import Footer from '../../components/footer';
 import { getAboutNithData } from '../api/api';
 import { useEffect, useState } from 'react';
-import {
-  Sparkles,
-  Eye,
-  Lightbulb,
-  Beaker,
-  Users,
-  Heart,
-  Globe,
-  Calendar,
-  User,
-  BookOpen,
-  Building2,
-} from 'lucide-react';
+import { Eye, Lightbulb, Beaker, Users, Heart, Globe } from 'lucide-react';
 
 const fadeUp = {
   hidden: {
@@ -71,6 +61,7 @@ interface Mission {
 }
 
 export default function VisionMissionPage() {
+  const language = useSelector((state: RootState) => state.language.value);
   const missions: Mission[] = [
     {
       icon: Lightbulb,
@@ -328,141 +319,6 @@ export default function VisionMissionPage() {
               technology.
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      <section className="relative py-24 px-6 bg-gradient-to-b from-white via-gray-50/50 to-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
-              Our Legacy
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              At a Glance
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              Key milestones and achievements that define our excellence
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInScale}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{
-                y: -8,
-                transition: { type: 'spring', stiffness: 300 },
-              }}
-              className="group relative bg-white rounded-3xl shadow-lg p-8 text-center hover:shadow-2xl transition-all duration-300 border border-gray-100"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              <div className="relative">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Calendar className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-                  1986
-                </div>
-                <p className="text-gray-600 font-medium">Established</p>
-                <p className="text-gray-500 text-sm mt-2">
-                  Legacy of Excellence
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInScale}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{
-                y: -8,
-                transition: { type: 'spring', stiffness: 300 },
-              }}
-              className="group relative bg-white rounded-3xl shadow-lg p-8 text-center hover:shadow-2xl transition-all duration-300 border border-gray-100"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              <div className="relative">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <User className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-                  5000+
-                </div>
-                <p className="text-gray-600 font-medium">Students</p>
-                <p className="text-gray-500 text-sm mt-2">
-                  Bright Minds Learning
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInScale}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              whileHover={{
-                y: -8,
-                transition: { type: 'spring', stiffness: 300 },
-              }}
-              className="group relative bg-white rounded-3xl shadow-lg p-8 text-center hover:shadow-2xl transition-all duration-300 border border-gray-100"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              <div className="relative">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <BookOpen className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-                  200+
-                </div>
-                <p className="text-gray-600 font-medium">Faculty Members</p>
-                <p className="text-gray-500 text-sm mt-2">Expert Educators</p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInScale}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              whileHover={{
-                y: -8,
-                transition: { type: 'spring', stiffness: 300 },
-              }}
-              className="group relative bg-white rounded-3xl shadow-lg p-8 text-center hover:shadow-2xl transition-all duration-300 border border-gray-100"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              <div className="relative">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Building2 className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-                  20+
-                </div>
-                <p className="text-gray-600 font-medium">Departments</p>
-                <p className="text-gray-500 text-sm mt-2">
-                  Diverse Disciplines
-                </p>
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 

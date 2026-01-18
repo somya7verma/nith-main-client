@@ -73,9 +73,10 @@ export default function Page() {
   const current = SECTIONS.find((s) => s.key === active) ?? SECTIONS[0];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header31 />
-
+    <div className=" bg-gray-50  ">
+      <div>
+        <Header31 />
+      </div>
       <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto">
           <nav className="flex items-center space-x-2 text-sm text-gray-600">

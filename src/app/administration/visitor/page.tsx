@@ -4,8 +4,11 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import Header31 from '@/app/components/header3';
+
 import Footer from '@/app/components/footer';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { ArrowRight } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -13,6 +16,7 @@ const fadeUp = {
 };
 
 export default function VisitorPage() {
+  const language = useSelector((state: RootState) => state.language.value);
   return (
     <div className="min-h-screen bg-white">
       <Header31 />
@@ -24,12 +28,16 @@ export default function VisitorPage() {
               href="/"
               className="hover:text-[#800000] transition-colors duration-200"
             >
-              Home
+              {language == 'en' ? 'Home' : 'होम'}
             </Link>
             <span>›</span>
-            <span className="text-gray-400">Administration</span>
+            <span className="text-gray-400">
+              {language == 'en' ? 'Administration' : 'प्रशासन'}
+            </span>
             <span>›</span>
-            <span className="text-[#800000] font-medium">Visitor</span>
+            <span className="text-[#800000] font-medium">
+              {language == 'en' ? 'Visitor' : 'आगंतुक'}
+            </span>
           </nav>
         </div>
       </div>
@@ -50,103 +58,78 @@ export default function VisitorPage() {
           className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
         >
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
-            Visitor
+            {language == 'en' ? 'Visitor' : 'आगंतुक'}
           </h1>
 
           <p className="text-white/80 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Official Visitor of the Institute
+            {language == 'en'
+              ? 'Official Visitor of the Institute'
+              : 'संस्थान के आधिकारिक आगंतुक'}
           </p>
         </motion.div>
       </section>
 
       {/* Visitor details separated into its own section */}
-      <section className="relative py-12 px-6 bg-white">
+      <section className="relative py-16 px-6 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-100">
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-200">
+            <div className="flex flex-col items-center gap-8">
               {/* Image area */}
-              <div className="w-full md:w-1/3 flex-shrink-0">
-                <div className="w-48 h-48 md:w-64 md:h-64 bg-gray-100 rounded-2xl overflow-hidden mx-auto">
+              <div className="flex-shrink-0">
+                <div className="w-72 h-96 md:w-96 md:h-screen bg-gradient-to-br from-[#800000] to-[#631012] rounded-lg overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/visitor.jpg"
+                    src="/presidentimage.jpg"
                     alt="Visitor"
-                    width={256}
-                    height={256}
+                    width={688}
+                    height={1088}
                     className="object-cover w-full h-full"
                   />
                 </div>
               </div>
 
               {/* Text content */}
-              <div className="w-full md:w-2/3">
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
-                  Smt. Droupadi Murmu
+              <div className="w-full text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  {language == 'en'
+                    ? 'Smt. Droupadi Murmu'
+                    : 'श्रीमती द्रौपदी मुर्मु'}
                 </h2>
 
-                <p className="text-gray-700 mb-3">
-                  Her Excellency Honorable Smt. Droupadi Murmu, The President of
-                  India, is the ex officio visitor of the Institute.
+                <div className="inline-block mb-6 px-4 py-2 bg-[#800000]/10 rounded-full">
+                  <p className="text-[#800000] font-semibold text-sm uppercase tracking-wide">
+                    {language == 'en'
+                      ? 'President of India'
+                      : 'भारत की राष्ट्रपति'}
+                  </p>
+                </div>
+
+                <p className="text-gray-700 mb-6 text-lg leading-relaxed max-w-2xl mx-auto">
+                  {language == 'en'
+                    ? `Her Excellency Honorable Smt. Droupadi Murmu, The President of India, is the ex officio visitor of the Institute.`
+                    : `माननीय श्रीमती द्रौपदी मुर्मु, भारत की राष्ट्रपति, संस्थान की पदेन आगंतुक हैं।`}
                 </p>
 
-                <p className="text-gray-600 mb-6">
-                  Official Website of Visitor
-                </p>
-
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="flex flex-col items-center gap-4">
                   <Link
-                    href="https://presidentofindia.nic.in"
+                    href="https://rashtrapati.gov.in"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2 bg-[#800000] text-white font-semibold rounded-2xl hover:shadow-md transition-all duration-200"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#800000] text-white font-semibold rounded-2xl hover:bg-[#631012] shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    Official Portal
+                    {language == 'en' ? 'Official Portal' : 'आधिकारिक पोर्टल'}
                     <ArrowRight className="w-4 h-4" />
                   </Link>
 
-                  <div className="text-sm text-gray-500">
-                    For formal communications, please use the President&apos;s
-                    official channels.
-                  </div>
+                  <p className="text-sm text-gray-500 max-w-xs">
+                    {language == 'en'
+                      ? `For formal communications, please use the President's official channels.`
+                      : `औपचारिक संचार के लिए, कृपया राष्ट्रपति के आधिकारिक चैनलों का उपयोग करें।`}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="relative py-20 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 max-w-4xl mx-auto text-center"
-        >
-          <Sparkles className="w-10 h-10 text-[#800000] mx-auto mb-6" />
-
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Connect with the Office
-          </h2>
-
-          <p className="text-gray-600 text-lg mb-8 leading-relaxed font-light">
-            For formal communications related to the Visitor&apos;s oversight,
-            please use the official channels provided on the President&apos;s
-            website.
-          </p>
-
-          <div className="flex justify-center">
-            <Link
-              href="https://presidentofindia.nic.in"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#800000] text-white font-semibold rounded-2xl hover:shadow-2xl transition-all duration-300"
-            >
-              Official Portal
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </motion.div>
       </section>
 
       <Footer />

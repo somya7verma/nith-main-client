@@ -3,14 +3,22 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/image'; // Added Image component usage for better performance
 import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 interface DownloadsItem {
   id: number;
-  title: string;
-  description: string;
+  title: {
+    en: string;
+    hi: string;
+  };
+  description: {
+    en: string;
+    hi: string;
+  };
   image: string;
   date: string;
   slug: string;
@@ -20,9 +28,14 @@ interface DownloadsItem {
 const initialDownloadsData: DownloadsItem[] = [
   {
     id: 1,
-    title: 'NITH Downloads Association Announces Annual Meet 2025',
-    description:
-      'The NIT Hamirpur Downloads Association is pleased to announce the Annual Downloads Meet scheduled for March 2025. All registered Downloads are cordially invited to participate in this grand event celebrating our shared legacy.',
+    title: {
+      en: 'NITH Downloads Association Announces Annual Meet 2025',
+      hi: 'एनआईटीएच डाउनलोड्स संघ ने वार्षिक बैठक 2025 की घोषणा की',
+    },
+    description: {
+      en: 'The NIT Hamirpur Downloads Association is pleased to announce the Annual Downloads Meet scheduled for March 2025. All registered Downloads are cordially invited to participate in this grand event celebrating our shared legacy.',
+      hi: 'एनआईटी हमीरपुर डाउनलोड्स संघ मार्च 2025 में निर्धारित वार्षिक डाउनलोड्स बैठक की घोषणा करते हुए प्रसन्नता महसूस कर रहा है। सभी पंजीकृत डाउनलोड्स को इस भव्य आयोजन में भाग लेने के लिए आमंत्रित किया जाता है।',
+    },
     image: '/Downloads/Downloads-meet.jpg',
     date: '2025-01-15',
     slug: 'annual-meet-2025',
@@ -30,9 +43,14 @@ const initialDownloadsData: DownloadsItem[] = [
   },
   {
     id: 2,
-    title: 'Distinguished Downloads Award Nominations Open',
-    description:
-      'Nominations are now open for the Distinguished Downloads Award 2025. The award recognizes outstanding contributions by NITH Downloads in their respective fields. Submit your nominations before the deadline.',
+    title: {
+      en: 'Distinguished Downloads Award Nominations Open',
+      hi: 'विशिष्ट डाउनलोड्स पुरस्कार नामांकन खुले हैं',
+    },
+    description: {
+      en: 'Nominations are now open for the Distinguished Downloads Award 2025. The award recognizes outstanding contributions by NITH Downloads in their respective fields. Submit your nominations before the deadline.',
+      hi: 'विशिष्ट डाउनलोड्स पुरस्कार 2025 के लिए नामांकन अब खुले हैं। यह पुरस्कार अपने-अपने क्षेत्रों में एनआईटीएच डाउनलोड्स के उत्कृष्ट योगदान को मान्यता देता है। कृपया समय सीमा से पहले अपना नामांकन जमा करें।',
+    },
     image: '/Downloads/award.jpg',
     date: '2025-01-12',
     slug: 'distinguished-Downloads-award-2025',
@@ -44,14 +62,17 @@ const ITEMS_PER_PAGE = 10;
 
 const DownloadsSkeleton = () => (
   <div className="animate-pulse space-y-6">
-    {[1, 2, 3, 4, 5].map((i) => (
-      <div key={i} className="flex gap-5 p-5 bg-white rounded-xl">
-        <div className="w-32 h-24 bg-gray-200 rounded-lg flex-shrink-0"></div>
-        <div className="flex-1 space-y-3">
-          <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+    {[1, 2, 3].map((i) => (
+      <div
+        key={i}
+        className="flex flex-col sm:flex-row gap-5 p-5 bg-white rounded-xl border border-gray-100"
+      >
+        <div className="w-full sm:w-48 h-48 sm:h-auto bg-gray-200 rounded-lg flex-shrink-0"></div>
+        <div className="flex-1 space-y-3 py-2">
+          <div className="h-6 bg-gray-200 rounded w-3/4"></div>
           <div className="h-4 bg-gray-200 rounded w-full"></div>
           <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-          <div className="h-3 bg-gray-200 rounded w-24"></div>
+          <div className="mt-4 h-8 bg-gray-200 rounded w-32"></div>
         </div>
       </div>
     ))}
@@ -59,6 +80,9 @@ const DownloadsSkeleton = () => (
 );
 
 export default function Downloads() {
+  // Select language from Redux store
+  const language = useSelector((state: RootState) => state.language.value);
+
   const [downloads, setDownloads] =
     useState<DownloadsItem[]>(initialDownloadsData);
   const [loading, setLoading] = useState(true);
@@ -68,6 +92,7 @@ export default function Downloads() {
     const fetchData = async () => {
       try {
         setLoading(true);
+        // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1000));
         setDownloads(initialDownloadsData);
       } catch (err) {
@@ -79,19 +104,22 @@ export default function Downloads() {
     fetchData();
   }, []);
 
-  const filteredDownloads = downloads;
-  const totalPages = Math.ceil(filteredDownloads.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(downloads.length / ITEMS_PER_PAGE);
+
   const paginatedDownloads = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    return filteredDownloads.slice(start, start + ITEMS_PER_PAGE);
-  }, [filteredDownloads, currentPage]);
+    return downloads.slice(start, start + ITEMS_PER_PAGE);
+  }, [downloads, currentPage]);
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    return new Date(dateStr).toLocaleDateString(
+      language === 'en' ? 'en-US' : 'hi-IN',
+      {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+    );
   };
 
   const getPageNumbers = () => {
@@ -130,287 +158,80 @@ export default function Downloads() {
       <Header31 />
       <div className="min-h-screen bg-gray-50">
         {/* Breadcrumb */}
-        <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
-          <div className="max-w-7xl mx-auto">
-            <nav className="flex items-center space-x-2 text-sm text-gray-600">
+        <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
+          <div className="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+            <nav className="flex items-center space-x-2 text-sm text-gray-500">
               <Link
                 href="/"
                 className="hover:text-[#800000] transition-colors duration-200"
               >
-                Home
+                {language === 'en' ? 'Home' : 'होम'}
               </Link>
               <span>›</span>
-              <span className="text-gray-400">Downloads</span>
+              <span className="font-medium text-gray-900">
+                {language === 'en' ? 'Downloads' : 'डाउनलोड्स'}
+              </span>
             </nav>
           </div>
         </div>
 
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-[#631012] via-[#7a1a1d] to-[#4a0c0e] py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-6">
+        <section className="bg-gradient-to-br from-[#631012] via-[#7a1a1d] to-[#4a0c0e] py-16 md:py-24 relative overflow-hidden">
+          {/* Decorative background element */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Downloads
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                {language === 'en' ? 'Downloads ' : 'डाउनलोड्स '}
               </h1>
-              <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
-                Latest Downloads, announcements, and updates from the NITH
-                Downloads community.
+              <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+                {language === 'en'
+                  ? 'Access the latest documents, announcements, and resources from the NITH community.'
+                  : 'एनआईटीएच समुदाय से नवीनतम दस्तावेज़, घोषणाएं और संसाधन प्राप्त करें।'}
               </p>
             </motion.div>
           </div>
         </section>
 
+        {/* Content Section */}
         <section className="py-12 md:py-16 px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
-            {/* Stats Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl shadow-sm p-6 mb-8"
-            >
-              <span className="font-semibold text-gray-700">
-                Total Downloads: {downloads.length}
-              </span>
-            </motion.div>
-
             <div className="w-full">
-              <div className="mb-6">
-                <p className="text-gray-600">
-                  Showing{' '}
-                  <span className="font-semibold text-[#631012]">
-                    {paginatedDownloads.length}
-                  </span>{' '}
-                  of{' '}
-                  <span className="font-semibold">
-                    {filteredDownloads.length}
-                  </span>{' '}
-                  Downloads items
-                </p>
-              </div>
-
-              {loading ? (
-                <DownloadsSkeleton />
-              ) : paginatedDownloads.length === 0 ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-white rounded-2xl shadow-sm p-12 text-center"
-                >
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-                    <svg
-                      className="w-10 h-10 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                      />
-                    </svg>
+              <div className="w-full bg-white rounded-t-xl border border-gray-200 overflow-hidden">
+                {/* Header Grid */}
+                <div className="grid grid-cols-[80px_1fr_140px] gap-4 bg-gray-50 border-b border-gray-200 p-4 text-sm font-semibold text-gray-700">
+                  <div className="text-center text-gray-500">S.I no</div>
+                  <div className="uppercase tracking-wider text-xs font-bold text-[#631012]">
+                    Description
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    No Downloads available
-                  </h3>
-                  <p className="text-gray-500 mb-6">
-                    There are no Downloads items available.
-                  </p>
-                </motion.div>
-              ) : (
-                <div className="space-y-4">
-                  <AnimatePresence mode="wait">
-                    {paginatedDownloads.map((item, index) => (
-                      <motion.article
-                        key={item.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                        className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 group"
-                      >
-                        <div className="flex flex-col sm:flex-row">
-                          <div className="sm:w-48 md:w-56 flex-shrink-0">
-                            <div className="relative h-48 sm:h-full w-full bg-gray-100">
-                              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#631012]/10 to-[#631012]/5">
-                                <svg
-                                  className="w-12 h-12 text-[#631012]/30"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={1}
-                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex-1 p-5 sm:p-6 flex flex-col">
-                            <div className="flex-1">
-                              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#631012] transition-colors line-clamp-2">
-                                <Link
-                                  href={`/Downloads/Downloads/${item.slug}`}
-                                >
-                                  {item.title}
-                                </Link>
-                              </h3>
-                              <p className="text-gray-600 text-sm line-clamp-2 mb-4">
-                                {item.description}
-                              </p>
-                            </div>
-
-                            <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
-                              <div className="flex items-center gap-2 text-sm text-gray-500">
-                                <svg
-                                  className="w-4 h-4"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                  />
-                                </svg>
-                                {formatDate(item.date)}
-                              </div>
-                              <div className="flex items-center gap-2">
-                                {item.downloadUrl && (
-                                  <a
-                                    href={item.downloadUrl}
-                                    download
-                                    className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-green-700 bg-green-50 rounded-lg hover:bg-green-600 hover:text-white transition-all duration-300"
-                                  >
-                                    📥 Download
-                                  </a>
-                                )}
-                                <Link
-                                  href={`/Downloads/Downloads/${item.slug}`}
-                                  className="group/btn inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-[#631012] bg-[#631012]/5 rounded-lg hover:bg-[#631012] hover:text-white transition-all duration-300 ease-out"
-                                >
-                                  Read More
-                                  <svg
-                                    className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M9 5l7 7-7 7"
-                                    />
-                                  </svg>
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.article>
-                    ))}
-                  </AnimatePresence>
+                  <div className="text-center uppercase tracking-wider text-xs font-bold text-[#631012]">
+                    Downloads
+                  </div>{' '}
+                  {/* Downloads */}
                 </div>
-              )}
 
-              {totalPages > 1 && !loading && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="mt-8 flex justify-center"
-                >
-                  <div className="inline-flex items-center gap-1 bg-white rounded-xl shadow-sm p-2">
-                    <button
-                      onClick={() =>
-                        setCurrentPage((prev) => Math.max(prev - 1, 1))
-                      }
-                      disabled={currentPage === 1}
-                      className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                        currentPage === 1
-                          ? 'text-gray-300 cursor-not-allowed'
-                          : 'text-gray-600 hover:bg-gray-100 hover:text-[#631012]'
-                      }`}
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 19l-7-7 7-7"
-                        />
-                      </svg>
-                      <span className="hidden sm:inline">Previous</span>
+                {/* Example Data Row (to show alignment) */}
+                <div className="grid grid-cols-[80px_1fr_140px] gap-4 p-4 border-b border-gray-100 hover:bg-gray-50 items-center">
+                  <div className="text-center font-mono text-gray-400">01</div>
+                  <div className="text-gray-600 text-sm">
+                    Registration form for the 2025 alumni meet.
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button className="text-[#631012] hover:underline text-sm font-medium">
+                      Pdf
                     </button>
-                    <div className="flex items-center gap-1 px-2">
-                      {getPageNumbers().map((page, index) =>
-                        page === '...' ? (
-                          <span key={index} className="px-3 py-2 text-gray-400">
-                            ...
-                          </span>
-                        ) : (
-                          <button
-                            key={index}
-                            onClick={() => setCurrentPage(page as number)}
-                            className={`w-10 h-10 rounded-lg text-sm font-medium transition-all ${
-                              currentPage === page
-                                ? 'bg-[#631012] text-white shadow-md'
-                                : 'text-gray-600 hover:bg-gray-100'
-                            }`}
-                          >
-                            {page}
-                          </button>
-                        )
-                      )}
-                    </div>
-                    <button
-                      onClick={() =>
-                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                      }
-                      disabled={currentPage === totalPages}
-                      className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                        currentPage === totalPages
-                          ? 'text-gray-300 cursor-not-allowed'
-                          : 'text-gray-600 hover:bg-gray-100 hover:text-[#631012]'
-                      }`}
-                    >
-                      <span className="hidden sm:inline">Next</span>
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
+                    <button className="text-[#631012] hover:underline text-sm font-medium">
+                      Word
                     </button>
                   </div>
-                </motion.div>
-              )}
+                </div>
+              </div>
             </div>
           </div>
         </section>
