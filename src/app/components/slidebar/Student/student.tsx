@@ -84,14 +84,9 @@ const studentData = [
         icon: Guitar,
         links: [
           {
-            title: 'Clubs List',
+            title: 'Clubs/Socities List',
             title2: 'क्लब सूची',
             href: '/student/cultural/introduction',
-          },
-          {
-            title: 'Societies',
-            title2: 'सोसाइटियां',
-            href: '/student/cultural/clubs',
           },
           {
             title: "Hill'ffair (Festival)",
@@ -111,7 +106,7 @@ const studentData = [
         icon: Cpu,
         links: [
           {
-            title: 'Clubs List',
+            title: 'Clubs/Socities List',
             title2: 'क्लब सूची',
             href: '/student/technical/introduction',
           },
