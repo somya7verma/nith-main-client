@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 import {
   ChevronRight,
   ArrowUpRight,
@@ -14,56 +16,92 @@ const alumniData = [
   {
     id: '01',
     category: 'Engagement',
+    category2: 'सहभागिता', // Hindi Category
     icon: Users,
     links: [
-      { title: 'Alumni Activities', href: '/alumni/activities' },
-      { title: 'Functionaries', href: '/alumni/functionaries' },
+      {
+        title: 'Alumni Activities',
+        title2: 'पूर्व छात्र गतिविधियां',
+        href: '/alumni/activities',
+      },
+      {
+        title: 'Functionaries',
+        title2: 'पदाधिकारी',
+        href: '/alumni/functionaries',
+      },
       {
         title: 'Alumni Notices',
+        title2: 'पूर्व छात्र सूचनाएं',
         href: 'https://alumni.nith.ac.in/newsroom.dz',
         isExternal: true,
       },
       {
         title: 'Alumni Related MoU',
+        title2: 'पूर्व छात्र संबंधित समझौता ज्ञापन (MoU)',
         href: 'https://nith.ac.in/uploads/topics/mouepack16939083811860.pdf',
         isExternal: true,
       },
-      { title: 'Alumni Assist', href: '/alumni/assist' },
+      {
+        title: 'Alumni Assist',
+        title2: 'पूर्व छात्र सहायता',
+        href: '/alumni/assist',
+      },
     ],
   },
   {
     id: '02',
     category: 'Network',
+    category2: 'नेटवर्क', // Hindi Category
     icon: Globe,
     links: [
       {
         title: 'List of Alumni',
+        title2: 'पूर्व छात्रों की सूची',
         href: 'https://alumni.nith.ac.in/members.dz',
         isExternal: true,
       },
       {
         title: 'Alumni Registration',
+        title2: 'पूर्व छात्र पंजीकरण',
         href: 'https://alumni.nith.ac.in/user/signup.dz',
         isExternal: true,
       },
       {
         title: 'Local Chapters',
+        title2: 'स्थानीय अध्याय',
         href: 'https://alumni.nith.ac.in/chapters.dz',
-        disabled: true,
       },
-      { title: 'Annual Alumni Meet', href: '/alumni/annual-meet' },
-      { title: 'Distinguished Alumni', href: '/alumni/distinguished' },
+      {
+        title: 'Annual Alumni Meet',
+        title2: 'वार्षिक पूर्व छात्र मिलन',
+        href: '/alumni/annual-meet',
+      },
+      {
+        title: 'Distinguished Alumni',
+        title2: 'प्रतिष्ठित पूर्व छात्र',
+        href: '/alumni/distinguished',
+      },
     ],
   },
   {
     id: '03',
     category: 'Impact & Access',
+    category2: 'प्रभाव और पहुंच', // Hindi Category
     icon: Gem,
     links: [
-      { title: 'Endowment Fund', href: '/alumni/endowment-fund' },
-      { title: 'Awards Initiatives', href: '/alumni/awards-initiatives' },
+      {
+        title: 'Endowment Fund',
+        title2: 'बंदोबस्ती निधि (Endowment Fund)',
+        href: '/alumni/endowment-fund',
+      },
+      {
+        title: 'Awards Initiatives',
+        title2: 'पुरस्कार पहल',
+        href: '/alumni/awards-initiatives',
+      },
       {
         title: 'Alumni Portal',
+        title2: 'पूर्व छात्र पोर्टल',
         href: 'https://alumni.nith.ac.in/',
         isExternal: true,
       },
@@ -72,6 +110,7 @@ const alumniData = [
 ];
 
 function Alumni() {
+  const language = useSelector((state: RootState) => state.language.value);
   return (
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
@@ -90,7 +129,7 @@ function Alumni() {
                     className="text-gray-400 group-hover/header:text-gray-900 transition-colors sm:w-4 sm:h-4"
                   />
                   <h3 className="text-[clamp(10px,2vw,14px)] font-bold uppercase tracking-wider text-gray-800">
-                    {column.category}
+                    {language == 'en' ? column.category : column.category2}
                   </h3>
                 </div>
               </div>
@@ -98,26 +137,6 @@ function Alumni() {
               {/* Links List */}
               <ul className="space-y-0.5 sm:space-y-1">
                 {column.links.map((link, index) => {
-                  // Handle Disabled State
-                  if (link.disabled) {
-                    return (
-                      <li
-                        key={index}
-                        className="flex items-center justify-between py-1.5 sm:py-2 px-1 sm:px-2 opacity-50 cursor-not-allowed select-none"
-                      >
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          <Lock
-                            size={10}
-                            className="text-gray-400 sm:w-3 sm:h-3"
-                          />
-                          <span className="text-[clamp(10px,2vw,14px)] font-medium text-gray-400">
-                            {link.title}
-                          </span>
-                        </div>
-                      </li>
-                    );
-                  }
-
                   // Handle Active State
                   return (
                     <li key={index}>
@@ -142,7 +161,7 @@ function Alumni() {
                           )}
 
                           <span className="text-[clamp(10px,2vw,14px)] font-medium text-gray-600 group-hover/link:text-black transition-colors">
-                            {link.title}
+                            {language == 'en' ? link.title : link.title2}
                           </span>
                         </div>
 

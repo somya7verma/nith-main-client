@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 import {
   ChevronRight,
   ArrowUpRight,
@@ -147,6 +149,7 @@ const studentData = [
 ];
 
 const Student = () => {
+  const language = useSelector((state: RootState) => state.language.value);
   return (
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-2 sm:px-4">

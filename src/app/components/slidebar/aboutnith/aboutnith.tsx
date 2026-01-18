@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 import {
   ChevronRight,
   ArrowUpRight,
@@ -12,57 +14,73 @@ const aboutData = [
   {
     id: '01',
     category: 'Identity',
+    category2: 'पहचान',
     icon: Landmark,
     links: [
       {
         title: 'History',
+        title2: 'इतिहास',
         href: '/about/history',
         description: 'Our legacy & milestones',
+        description2: 'हमारी विरासत और उपलब्धियां',
       },
       {
         title: 'Vision & Mission',
+        title2: 'दृष्टि और लक्ष्य',
         href: '/about/vision-and-mission',
         description: 'Our purpose & future roadmap',
+        description2: 'हमारा उद्देश्य और भविष्य का रोडमैप',
       },
     ],
   },
   {
     id: '02',
     category: 'Strategy',
+    category2: 'रणनीति',
     icon: Target,
     links: [
       {
         title: 'Goals',
+        title2: 'लक्ष्य',
         href: '/about/goals',
         description: 'Strategic objectives',
+        description2: 'रणनीतिक उद्देश्य',
       },
       {
         title: 'Core Values',
+        title2: 'मूल मूल्य',
         href: '/about/core-values',
         description: 'Guiding principles',
+        description2: 'मार्गदर्शक सिद्धांत',
       },
     ],
   },
   {
     id: '03',
     category: 'Location',
+    category2: 'स्थान',
     icon: MapPin,
     links: [
       {
         title: 'About the City',
+        title2: 'शहर के बारे में',
         href: '/about/the-city',
         description: 'Culture & geography of Hamirpur',
+        description2: 'हमीरपुर की संस्कृति और भूगोल',
       },
       {
         title: 'Connectivity',
+        title2: 'संपर्क मार्ग',
         href: '/about/connectivity',
         description: 'How to reach the campus',
+        description2: 'परिसर तक कैसे पहुंचें',
       },
     ],
   },
 ];
 
 function AboutNith() {
+  const language = useSelector((state: RootState) => state.language.value);
   return (
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
@@ -81,7 +99,7 @@ function AboutNith() {
                     className="text-gray-400 group-hover/header:text-gray-900 transition-colors sm:w-4 sm:h-4"
                   />
                   <h3 className="text-[clamp(10px,2vw,14px)] font-bold uppercase tracking-wider text-gray-800">
-                    {column.category}
+                    {language == 'en' ? column.category : column.category2}
                   </h3>
                 </div>
               </div>
@@ -109,10 +127,12 @@ function AboutNith() {
 
                         <div>
                           <span className="block text-[clamp(11px,2vw,14px)] font-medium text-gray-600 group-hover/link:text-black transition-colors">
-                            {link.title}
+                            {language == 'en' ? link.title : link.title2}
                           </span>
                           <span className="block text-[clamp(8px,1.5vw,10px)] text-gray-400 uppercase tracking-wide mt-0.5 group-hover/link:text-[#800000]/70 transition-colors">
-                            {link.description}
+                            {language == 'en'
+                              ? link.description
+                              : link.description2}
                           </span>
                         </div>
                       </div>
