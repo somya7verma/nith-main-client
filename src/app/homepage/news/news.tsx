@@ -23,6 +23,34 @@ type NewsData = {
   updatedAt: string;
 };
 
+// Mock News Data
+const mockNewsData: NewsData[] = [
+  {
+    id: 1,
+    Heading: 'NITH Convocation 2025',
+    Subheading: 'Annual Convocation Ceremony',
+    Description:
+      'The 25th Convocation Ceremony of NITH was held with academic excellence and student achievements celebrated.',
+    image: '/group.jpg',
+    startedAt: new Date('2024-10-18').toISOString(),
+    endedAt: new Date('2024-10-18').toISOString(),
+    createdAt: new Date('2024-10-18').toISOString(),
+    updatedAt: new Date('2024-10-18').toISOString(),
+  },
+  {
+    id: 2,
+    Heading: 'Campus Recruitment Drive',
+    Subheading: 'Top Companies Recruiting',
+    Description:
+      'Leading IT companies and consulting firms are recruiting NITH graduates with competitive packages.',
+    image: '/robosocnith_cover.jpg',
+    startedAt: new Date('2024-10-15').toISOString(),
+    endedAt: new Date('2024-10-15').toISOString(),
+    createdAt: new Date('2024-10-15').toISOString(),
+    updatedAt: new Date('2024-10-15').toISOString(),
+  },
+];
+
 const transformNews = (news: NewsData) => ({
   id: news.id,
   title: news.Heading,
@@ -49,13 +77,9 @@ function News() {
     const fetchNews = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/users/news');
-        const result = await response.json();
-        if (result.success && result.data) {
-          setNewsData(result.data);
-        } else {
-          setError(result.message || 'Failed to fetch news');
-        }
+        // Simulate API delay
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        setNewsData(mockNewsData);
       } catch (err) {
         setError('Failed to fetch news');
       } finally {

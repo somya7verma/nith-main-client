@@ -9,7 +9,11 @@ function Gallery() {
   const galleryImages = Array.from({ length: 12 }).map((_, i) => ({
     id: i + 1,
     src:
-      i % 3 === 0 ? '/admin.jpg' : i % 2 === 0 ? '/direct.jpg' : '/window.svg',
+      i % 3 === 0
+        ? '/award.jpg'
+        : i % 2 === 0
+          ? '/direct.jpg'
+          : '/workshop.jpg',
     title: `Gallery Image ${i + 1}`,
     category: ['Event', 'Achievement', 'Campus'][i % 3],
   }));
