@@ -5,9 +5,10 @@ import Link from 'next/link';
 import Header31 from '../../components/header3';
 import { useEffect, useState } from 'react';
 import Footer from '../../components/footer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { getAboutNithData } from '../api/api';
 import {
-  Sparkles,
   ShieldCheck,
   Trophy,
   Users,
@@ -67,6 +68,7 @@ interface CoreValue {
 }
 
 export default function CoreValuesPage() {
+  const language = useSelector((state: RootState) => state.language.value);
   const coreValues: CoreValue[] = [
     {
       icon: ShieldCheck,

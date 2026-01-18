@@ -1,7 +1,8 @@
 'use client';
 import Header31 from '@/app/components/header3';
-import { div } from 'motion/react-client';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 interface Meeting {
   id: number;
@@ -54,7 +55,7 @@ const meetingsData: Meeting[] = [
 
 export default function MinutesBWC() {
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
-
+  const language = useSelector((state: RootState) => state.language.value);
   return (
     <>
       <Header31 />

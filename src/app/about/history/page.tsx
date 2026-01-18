@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header31 from '../../components/header3';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import Footer from '../../components/footer';
 import { getAboutNithData } from '../api/api';
 import { useEffect, useState } from 'react';
@@ -79,6 +81,7 @@ const timelineEvents: TimelineEvent[] = [
 ];
 
 export default function HistoryPage() {
+  const language = useSelector((state: RootState) => state.language.value);
   const [connectivityData, setConnectivityData] = useState<Record<
     string,
     unknown
