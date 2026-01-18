@@ -11,26 +11,31 @@ import Department from './slidebar/Departments/department';
 import Downloads from './slidebar/downloads/downloads';
 import Faculty from './slidebar/Faculty/faculty';
 import Student from './slidebar/Student/student';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { toggleLanguage } from '../langslice';
 
 function Header31() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [language, setLanguage] = useState<string>('en');
+  const language = useSelector((state: RootState) => state.language.value);
+  const dispatch = useDispatch();
 
   // Top Bar Lists
   const accessibilityItems = [
-    'A+',
-    'A-',
-    'Toggle Contrast',
-    'Grey Scale',
-    'Links',
-    'Reset',
+    { label: 'A+', label2: 'ए+' },
+    { label: 'A-', label2: 'ए-' },
+    { label: 'Toggle Contrast', label2: 'कंट्रास्ट' },
+    { label: 'Grey Scale', label2: 'ग्रे स्केल' },
+    { label: 'Links', label2: 'लिंक' },
+    { label: 'Reset', label2: 'रीसेट' },
   ];
+
   const quickLinks = [
-    'Home',
-    'Internet',
-    'eOffice',
-    'Directory',
-    'Faculty Portfolio',
+    { label: 'Home', label2: 'होम' },
+    { label: 'Internet', label2: 'इंटरनेट' },
+    { label: 'eOffice', label2: 'ई-ऑफिस' },
+    { label: 'Directory', label2: 'डायरेक्टरी' },
+    { label: 'Faculty Portfolio', label2: 'फैकल्टी पोर्टफोलियो' },
   ];
 
   return (
@@ -43,21 +48,21 @@ function Header31() {
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4 opacity-90">
             {accessibilityItems.map((item) => (
               <button
-                key={item}
+                key={item.label}
                 className="hover:text-white hover:underline transition-colors duration-200 px-0.5 text-[clamp(7px,1.1vw,10px)] sm:text-[clamp(8px,1.3vw,11px)] md:text-[clamp(9px,1.5vw,12px)]"
               >
-                {item}
+                {language == 'en' ? item.label : item.label2}
               </button>
             ))}
           </div>
           <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-5 font-semibold md:ml-auto">
             {quickLinks.map((item) => (
               <Link
-                key={item}
+                key={item.label}
                 href="#"
                 className="hover:text-white hover:underline decoration-white underline-offset-4 transition-all duration-200 text-[clamp(7px,1.1vw,10px)] sm:text-[clamp(8px,1.3vw,11px)] md:text-[clamp(9px,1.5vw,12px)] px-0.5"
               >
-                {item}
+                {language == 'en' ? item.label : item.label2}
               </Link>
             ))}
             <span className="hidden md:block w-px h-3 bg-white/20 my-auto hover:text-black rounded-sm hover:bg-white" />
@@ -65,10 +70,10 @@ function Header31() {
               type="button"
               className="hover:text-black rounded-sm hover:bg-white p-1 text-[clamp(7px,1.1vw,10px)] sm:text-[clamp(8px,1.3vw,11px)] md:text-[clamp(9px,1.5vw,12px)]"
               onClick={() => {
-                setLanguage(language === 'en' ? 'hi' : 'en');
+                dispatch(toggleLanguage());
               }}
             >
-              {language === 'en' ? 'English' : 'Hindi'}
+              {language === 'en' ? 'English' : 'हिंदी'}
             </button>
           </div>
         </div>
@@ -102,21 +107,25 @@ function Header31() {
           {/* === RIGHT SIDE: TEXT STACK === */}
           <Link
             href="/"
-            className="flex flex-col justify-center items-center md:items-end text-center md:text-right group"
+            className={`flex flex-col ${language == 'en' ? 'gap-0' : 'gap-2'} justify-center items-center md:items-end text-center md:text-right group px-10`}
           >
             <div className="flex items-center gap-2 sm:gap-3">
               <span className="hidden lg:block w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gradient-to-l from-[#631012] to-transparent"></span>
               <h3 className="text-[clamp(9px,2vw,14px)] font-bold text-[#631012] uppercase tracking-[0.15em] sm:tracking-[0.25em]">
-                National Institute of Technology
+                {language == 'en'
+                  ? ' National Institute of Technology'
+                  : ' राष्ट्रीय प्रौद्योगिकी संस्थान हमीरपुर'}
               </h3>
             </div>
 
-            <h1 className="text-[clamp(2rem,8vw,6rem)] font-black text-black tracking-tighter leading-[0.9] mt-1 sm:mt-2 drop-shadow-sm transition-colors duration-300">
-              HAMIRPUR
+            <h1 className="text-[clamp(2rem,5vw,6rem)] font-black text-black tracking-tighter leading-[0.9] mt-1 sm:mt-2 drop-shadow-sm transition-colors duration-300">
+              {language == 'en' ? 'HAMIRPUR' : ' हमीरपुर'}
             </h1>
 
-            <p className="text-[clamp(9px,1.8vw,11px)] text-gray-500 font-serif italic tracking-wide mt-1 sm:mt-2 flex items-center gap-2 justify-center md:justify-end">
-              An Institute of National Importance
+            <p className="text-[clamp(9px,1.8vw,11px)]  text-gray-500 font-serif italic tracking-wide  sm:mt-2 flex items-center gap-2 justify-center md:justify-end">
+              {language == 'en'
+                ? ' An Institute of National Importance'
+                : 'राष्ट्रीय महत्व का संस्थान'}
               {/* Dot color changed to Maroon */}
               <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#631012] rounded-full"></span>
             </p>
@@ -131,26 +140,62 @@ function Header31() {
             <div className="flex flex-wrap items-center h-full w-full justify-center gap-y-1">
               {/* Responsive nav item: text shrinks more on small screens */}
               {[
-                { key: 'about', label: 'About NITH' },
-                { key: 'authorities', label: 'Authorities' },
-                { key: 'administration', label: 'Administration' },
-                { key: 'departments', label: 'Departments' },
-                { key: 'academics', label: 'Academics' },
-                { key: 'student', label: 'Student' },
-                { key: 'faculty', label: 'Faculty' },
-                { key: 'alumni', label: 'Alumni' },
-                { key: 'downloads', label: 'Downloads' },
+                {
+                  id: 'about',
+                  label: 'About NITH',
+                  label2: 'संस्थान के बारे में',
+                },
+                {
+                  id: 'authorities',
+                  label: 'Authorities',
+                  label2: 'प्राधिकरण',
+                },
+                {
+                  id: 'administration',
+                  label: 'Administration',
+                  label2: 'प्रशासन',
+                },
+                {
+                  id: 'departments',
+                  label: 'Departments',
+                  label2: 'विभाग',
+                },
+                {
+                  id: 'academics',
+                  label: 'Academics',
+                  label2: 'शैक्षणिक',
+                },
+                {
+                  id: 'student',
+                  label: 'Student',
+                  label2: 'छात्र',
+                },
+                {
+                  id: 'faculty',
+                  label: 'Faculty',
+                  label2: 'संकाय',
+                },
+                {
+                  id: 'alumni',
+                  label: 'Alumni',
+                  label2: 'पूर्व छात्र',
+                },
+                {
+                  id: 'downloads',
+                  label: 'Downloads',
+                  label2: 'डाउनलोड',
+                },
               ].map((item) => (
                 <div
-                  key={item.key}
-                  className="text-white font-bold uppercase tracking-[0.05em] sm:tracking-[0.1em] px-1 sm:px-2 lg:px-4 h-8 sm:h-11 md:h-13 flex items-center gap-1 cursor-pointer hover:text-white transition-all whitespace-nowrap text-[clamp(6px,0.95vw,9px)] sm:text-[clamp(7px,1.1vw,10px)] md:text-[clamp(8px,1.3vw,11px)]"
-                  onMouseEnter={() => setActiveDropdown(item.key)}
+                  key={item.id}
+                  className="text-white  uppercase tracking-[0.05em] sm:tracking-[0.1em] px-1 sm:px-2 lg:px-4 h-8 sm:h-11 md:h-13 flex items-center gap-1 cursor-pointer hover:text-white transition-all whitespace-nowrap text-[clamp(6px,0.95vw,9px)] sm:text-[clamp(7px,1.1vw,10px)] md:text-[clamp(8px,1.3vw,11px)]"
+                  onMouseEnter={() => setActiveDropdown(item.id)}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {item.label}
+                  {language == 'en' ? item.label : item.label2}
                   <ChevronDown
                     size={10}
-                    className={`transition-transform duration-300 ${activeDropdown === item.key ? 'rotate-180' : ''}`}
+                    className={`transition-transform duration-300 ${activeDropdown === item.id ? 'rotate-180' : ''}`}
                   />
                 </div>
               ))}
