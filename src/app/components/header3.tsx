@@ -2,18 +2,19 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown, Search } from 'lucide-react';
-import Aboutnith from '../components/slidebar/aboutnith/aboutnith';
-import Academic from '../components/slidebar/Academics/academic';
-import Administration from '../components/slidebar/Administration/administration';
-import Authorities from '../components/slidebar/Authorities/authorities';
-import Alumni from '../components/slidebar/Alumni/alumini';
-import Department from '../components/slidebar/Departments/department';
-import Downloads from '../components/slidebar/downloads/downloads';
-import Faculty from '../components/slidebar/Faculty/faculty';
-import Student from '../components/slidebar/Student/student';
+import Aboutnith from './slidebar/aboutnith/aboutnith';
+import Academic from './slidebar/Academics/academic';
+import Administration from './slidebar/Administration/administration';
+import Authorities from './slidebar/Authorities/authorities';
+import Alumni from './slidebar/Alumni/alumini';
+import Department from './slidebar/Departments/department';
+import Downloads from './slidebar/downloads/downloads';
+import Faculty from './slidebar/Faculty/faculty';
+import Student from './slidebar/Student/student';
 
 function Header31() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [language, setLanguage] = useState<string>('en');
 
   // Top Bar Lists
   const accessibilityItems = [
@@ -60,12 +61,15 @@ function Header31() {
               </Link>
             ))}
             <span className="hidden md:block w-px h-3 bg-white/20 my-auto hover:text-black rounded-sm hover:bg-white" />
-            <Link
-              href="#"
-              className="hover:text-black rounded-sm hover:bg-white p-1"
+            <button
+              type="button"
+              className="hover:text-black rounded-sm hover:bg-white p-1 text-[clamp(7px,1.1vw,10px)] sm:text-[clamp(8px,1.3vw,11px)] md:text-[clamp(9px,1.5vw,12px)]"
+              onClick={() => {
+                setLanguage(language === 'en' ? 'hi' : 'en');
+              }}
             >
-              English
-            </Link>
+              {language === 'en' ? 'English' : 'Hindi'}
+            </button>
           </div>
         </div>
       </div>
