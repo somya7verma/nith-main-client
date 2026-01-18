@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { getAboutNithData } from '../api/api';
 import { useEffect, useState } from 'react';
 import {
@@ -16,7 +18,6 @@ import {
   Leaf,
   GraduationCap,
   ArrowRight,
-  Sparkles,
 } from 'lucide-react';
 
 const fadeUp = {
@@ -27,16 +28,6 @@ const fadeUp = {
 const fadeInScale = {
   hidden: { opacity: 0, scale: 0.9 },
   visible: { opacity: 1, scale: 1 },
-};
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0 },
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 30 },
-  visible: { opacity: 1, x: 0 },
 };
 
 const staggerContainer = {
@@ -275,150 +266,6 @@ export default function GoalsPage() {
             })}
           </motion.div>
         </div>
-      </section>
-
-      {/* Long-Term Vision Banner */}
-      <section className="relative overflow-hidden bg-gray-900">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#800000]/20 via-gray-900 to-[#631012]/20"></div>
-
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#800000]/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#631012]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-5xl mx-auto text-center py-24 px-8"
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <div className="w-20 h-1 bg-gradient-to-r from-transparent via-white to-transparent mx-auto mb-8"></div>
-            <Sparkles className="w-12 h-12 text-white/80 mx-auto mb-6" />
-          </motion.div>
-
-          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-            Empowering minds today to lead the innovations of tomorrow
-          </h2>
-
-          <p className="text-white/70 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-light">
-            Building a future where knowledge meets purpose, excellence becomes
-            tradition, and every idea has the power to transform the world.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* How We Aim to Achieve Our Goals */}
-      <section className="relative py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-20"
-          >
-            <span className="inline-block px-4 py-1.5 bg-[#800000]/5 text-[#800000] text-sm font-semibold rounded-full mb-4">
-              Implementation Strategy
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Our Action Plan
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              A strategic roadmap guiding our journey towards excellence and
-              sustained growth
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {roadmap.map((step, index) => (
-              <motion.div
-                key={index}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={index % 2 === 0 ? fadeInLeft : fadeInRight}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group"
-              >
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#800000] to-[#631012] flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      {index + 1}
-                    </div>
-                  </div>
-
-                  <div className="flex-1">
-                    <h4 className="font-bold text-xl text-gray-900 mb-3 group-hover:text-[#800000] transition-colors">
-                      {step.title}
-                    </h4>
-                    <p className="text-gray-600 leading-relaxed">
-                      {step.description}
-                    </p>
-
-                    <div className="mt-4 h-1 w-0 group-hover:w-16 bg-gradient-to-r from-[#800000] to-transparent transition-all duration-500 rounded-full"></div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative py-20 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#800000]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gray-200 rounded-full blur-3xl"></div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 max-w-4xl mx-auto text-center"
-        >
-          <Sparkles className="w-10 h-10 text-[#800000] mx-auto mb-6" />
-
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Join Us in Achieving Our Vision
-          </h2>
-
-          <p className="text-gray-600 text-xl mb-10 leading-relaxed font-light">
-            Collaborate, Innovate, Inspire — Together we build a brighter future
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                href="/admissions"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#800000] to-[#631012] text-white font-semibold rounded-2xl hover:shadow-2xl transition-all duration-300"
-              >
-                Explore Admissions
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                href="/research"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#800000] font-semibold rounded-2xl border-2 border-[#800000] hover:bg-[#800000] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl"
-              >
-                Research Opportunities
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-          </div>
-        </motion.div>
       </section>
 
       <Footer />

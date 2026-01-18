@@ -1,12 +1,13 @@
 'use client';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
 import { useEffect, useState } from 'react';
 import { getAboutNithData } from '../api/api';
-import { Sparkles, MapPin, Mountain, Route, BookOpen, Map } from 'lucide-react';
+import { MapPin, Mountain, Route } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -18,16 +19,6 @@ const fadeInScale = {
   visible: { opacity: 1, scale: 1 },
 };
 
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0 },
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 30 },
-  visible: { opacity: 1, x: 0 },
-};
-
 interface CityInfoCard {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
@@ -35,21 +26,24 @@ interface CityInfoCard {
 }
 
 export default function AboutCityPage() {
+  const language = useSelector((state: RootState) => state.language.value);
+
   const cityInfo: CityInfoCard[] = [
     {
       icon: MapPin,
-      title: 'Location',
-      subtitle: 'Himachal Pradesh, India',
+      title: language == 'en' ? 'Location' : 'स्थान',
+      subtitle:
+        language == 'en' ? 'Himachal Pradesh, India' : 'हिमाचल प्रदेश, भारत',
     },
     {
       icon: Mountain,
-      title: 'Altitude',
-      subtitle: '785 metres',
+      title: language == 'en' ? 'Altitude' : 'ऊंचाई',
+      subtitle: language == 'en' ? '785 metres' : '785 मीटर',
     },
     {
       icon: Route,
-      title: 'Connectivity',
-      subtitle: 'NH-3 & NH-103',
+      title: language == 'en' ? 'Connectivity' : 'संयोजकता',
+      subtitle: language == 'en' ? 'NH-3 & NH-103' : 'NH-3 & NH-103',
     },
   ];
 
@@ -94,12 +88,16 @@ export default function AboutCityPage() {
               href="/"
               className="hover:text-[#800000] transition-colors duration-200"
             >
-              Home
+              {language == 'en' ? 'Home' : 'होम'}
             </Link>
             <span>›</span>
-            <span className="text-gray-400">About</span>
+            <span className="text-gray-400">
+              {language == 'en' ? 'About' : 'परिचय'}
+            </span>
             <span>›</span>
-            <span className="text-[#800000] font-medium">About the City</span>
+            <span className="text-[#800000] font-medium">
+              {language == 'en' ? 'About the City' : 'शहर के बारे में'}
+            </span>
           </nav>
         </div>
       </div>
@@ -120,7 +118,7 @@ export default function AboutCityPage() {
           className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
         >
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
-            About Hamirpur
+            {language == 'en' ? 'About Hamirpur' : 'हमीरपुर के बारे में'}
           </h1>
           {connectivityData?.description ? (
             <div
@@ -150,11 +148,12 @@ export default function AboutCityPage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              City Overview
+              {language == 'en' ? 'City Overview' : 'शहर का अवलोकन'}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              Essential information about Hamirpur&apos;s location and
-              characteristics
+              {language == 'en'
+                ? "Essential information about Hamirpur's location and characteristics"
+                : 'हमीरपुर के स्थान और विशेषताओं के बारे में आवश्यक जानकारी'}
             </p>
           </motion.div>
 
@@ -207,27 +206,18 @@ export default function AboutCityPage() {
                 <div className="flex items-center gap-5">
                   <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed">
-                    Hamirpur, the district headquarter, is situated at an
-                    altitude of{' '}
-                    <span className="font-semibold text-[#800000]">
-                      785 meters
-                    </span>{' '}
-                    in the Himalayan State of Himachal Pradesh, India. Hamirpur
-                    is a clean and eco-friendly district and is famous for its{' '}
-                    <span className="font-semibold text-[#800000]">
-                      high literacy rate
-                    </span>
-                    .
+                    {language == 'en'
+                      ? `Hamirpur, the district headquarter, is situated at an altitude of 785 meters in the Himalayan State of Himachal Pradesh, India. Hamirpur is a clean and eco-friendly district and is famous for its high literacy rate.`
+                      : `हमीरपुर, जिला मुख्यालय, हिमाचल प्रदेश के हिमालयी राज्य में 785 मीटर की ऊंचाई पर स्थित है। हमीरपुर एक स्वच्छ और पर्यावरण के अनुकूल जिला है और अपनी उच्च साक्षरता दर के लिए प्रसिद्ध है।`}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-5">
                   <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed">
-                    Hamirpur City is surrounded by pine tree forest and has a
-                    good city infrastructure ranging from Quality Educational
-                    Institutions including NIT, State Universities and Skill
-                    Learning Centres.
+                    {language == 'en'
+                      ? `Hamirpur City is surrounded by pine tree forest and has a good city infrastructure ranging from Quality Educational Institutions including NIT, State Universities and Skill Learning Centres.`
+                      : `हमीरपुर शहर देवदार के जंगल से घिरा हुआ है और NIT, राज्य विश्वविद्यालयों और कौशल सीखने के केंद्रों सहित गुणवत्ता वाली शैक्षणिक संस्थाओं की अच्छी शहरी बुनियादी ढांचे है।`}
                   </p>
                 </div>
               </div>
@@ -236,24 +226,18 @@ export default function AboutCityPage() {
                 <div className="flex items-center gap-5">
                   <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed">
-                    During winter, the climate is cold but pleasant when woolens
-                    are required. During summer the maximum temperature is
-                    around{' '}
-                    <span className="font-semibold text-[#800000]">
-                      40 degrees Celsius
-                    </span>{' '}
-                    and cottons are recommended.
+                    {language == 'en'
+                      ? `During winter, the climate is cold but pleasant when woolens are required. During summer the maximum temperature is around 40 degrees Celsius and cottons are recommended.`
+                      : `सर्दियों में जलवायु ठंडी लेकिन सुखद होती है जब ऊनी कपड़ों की आवश्यकता होती है। गर्मी के दौरान अधिकतम तापमान लगभग 40 डिग्री सेल्सियस होता है और कपास की सिफारिश की जाती है।`}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-5">
                   <div className="w-2 h-2 bg-[#800000] rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed">
-                    It is a major junction on National Highway 3 while National
-                    Highway 103 starts from here. The bulk of the population
-                    speaks <span className="font-semibold">Hindi</span>, with{' '}
-                    <span className="font-semibold">English</span> widely
-                    understood.
+                    {language == 'en'
+                      ? `It is a major junction on National Highway 3 while National Highway 103 starts from here. The bulk of the population speaks Hindi, with English widely understood.`
+                      : `यह राष्ट्रीय राजमार्ग 3 पर एक प्रमुख जंक्शन है जबकि राष्ट्रीय राजमार्ग 103 यहां से शुरू होता है। अधिकांश आबादी हिंदी बोलती है, अंग्रेजी व्यापक रूप से समझी जाती है।`}
                   </p>
                 </div>
               </div>
@@ -273,10 +257,12 @@ export default function AboutCityPage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Location Map
+              {language == 'en' ? 'Location Map' : 'स्थान का नक्शा'}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              Explore our campus location in the scenic Hamirpur valley
+              {language == 'en'
+                ? 'Explore our campus location in the scenic Hamirpur valley'
+                : 'सुंदर हमीरपुर घाटी में हमारे परिसर के स्थान की खोज करें'}
             </p>
           </motion.div>
 

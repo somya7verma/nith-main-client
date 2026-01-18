@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -12,6 +14,7 @@ const fadeUp = {
 };
 
 export default function ChairpersonPage() {
+  const language = useSelector((state: RootState) => state.language.value);
   return (
     <div className="min-h-screen bg-white">
       <Header31 />
@@ -23,12 +26,16 @@ export default function ChairpersonPage() {
               href="/"
               className="hover:text-[#800000] transition-colors duration-200"
             >
-              Home
+              {language == 'en' ? 'Home' : 'होम'}
             </Link>
             <span>›</span>
-            <span className="text-gray-400">Administration</span>
+            <span className="text-gray-400">
+              {language == 'en' ? 'Administration' : 'प्रशासन'}
+            </span>
             <span>›</span>
-            <span className="text-[#800000] font-medium">Chairperson</span>
+            <span className="text-[#800000] font-medium">
+              {language == 'en' ? 'Chairperson' : 'अध्यक्ष'}
+            </span>
           </nav>
         </div>
       </div>
@@ -47,11 +54,13 @@ export default function ChairpersonPage() {
           className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
         >
           <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
-            Chairperson
+            {language == 'en' ? 'Chairperson' : 'अध्यक्ष'}
           </h1>
 
           <p className="text-white/80 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Office bearers and leadership of the Institute
+            {language == 'en'
+              ? 'Office bearers and leadership of the Institute'
+              : 'संस्थान के कार्यालय धारक और नेतृत्व'}
           </p>
         </motion.div>
       </section>
@@ -62,27 +71,42 @@ export default function ChairpersonPage() {
             <div className="flex flex-col md:flex-row items-center gap-6">
               <div className="flex-1">
                 <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
-                  Shri Sanjay Gupta
+                  {language == 'en' ? 'Shri Sanjay Gupta' : 'श्री संजय गुप्ता'}
                 </h2>
 
-                <p className="text-gray-700 mb-4">Shri Sanjay Gupta</p>
+                <p className="text-gray-700 mb-4">
+                  {language == 'en' ? 'Shri Sanjay Gupta' : 'श्री संजय गुप्ता'}
+                </p>
 
                 <ul className="text-gray-600 space-y-2">
-                  <li>Editor-in-Chief of Dainik Jagran – New Delhi</li>
-                  <li>Chairman, IIM Amritsar – Punjab</li>
-                  <li>Chairman, NIT Hamirpur – Himachal Pradesh</li>
+                  <li>
+                    {language == 'en'
+                      ? 'Editor-in-Chief of Dainik Jagran – New Delhi'
+                      : 'दैनिक जागरण के संपादक – नई दिल्ली'}
+                  </li>
+                  <li>
+                    {language == 'en'
+                      ? 'Chairman, IIM Amritsar – Punjab'
+                      : 'अध्यक्ष, आईआईएम अमृतसर – पंजाब'}
+                  </li>
+                  <li>
+                    {language == 'en'
+                      ? 'Chairman, NIT Hamirpur – Himachal Pradesh'
+                      : 'अध्यक्ष, एनआईटी हमीरपुर – हिमाचल प्रदेश'}
+                  </li>
                 </ul>
 
                 <div className="mt-6 border-t pt-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    Chairman&apos;s Message
+                    {language == 'en'
+                      ? "Chairman's Message"
+                      : 'अध्यक्ष का संदेश'}
                   </h3>
 
                   <p className="text-gray-700 mb-3">
-                    Shri Sanjay Gupta warmly welcomes you to the Institute. His
-                    leadership emphasises collaboration between academia and
-                    industry, excellence in education, and a strong commitment
-                    to community development.
+                    {language == 'en'
+                      ? `Shri Sanjay Gupta warmly welcomes you to the Institute. His leadership emphasises collaboration between academia and industry, excellence in education, and a strong commitment to community development.`
+                      : `श्री संजय गुप्ता संस्थान में आपका स्वागत करते हैं। उनका नेतृत्व शिक्षा और उद्योग के बीच सहयोग, शिक्षा में उत्कृष्टता और सामुदायिक विकास के प्रति मजबूत प्रतिबद्धता पर जोर देता है।`}
                   </p>
                 </div>
               </div>
