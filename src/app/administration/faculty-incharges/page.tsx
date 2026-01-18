@@ -115,7 +115,7 @@ export default function FacultyInchargesPage() {
             Faculty Incharges
           </h1>
           <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
-            Roles and contacts, styled consistent with Alumni.
+            Roles and contacts.
           </p>
         </motion.div>
       </section>
