@@ -39,7 +39,7 @@ function Header31() {
   ];
 
   return (
-    <div className="flex flex-col w-full font-sans bg-white shadow-xl ">
+    <div className="flex flex-col w-full font-sans bg-white shadow-xl relative">
       <div className="absolute top-0 right-0 w-full h-full bg-[linear-gradient(rgba(99,16,18,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,16,18,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none z-0 transition-all duration-300"></div>
 
       {/* 1. TOP UTILITY BAR */}

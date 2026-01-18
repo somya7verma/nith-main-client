@@ -1,245 +1,261 @@
 'use client';
-import Header31 from '@/app/components/header3';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
 
-interface Meeting {
+import React, { useState, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
+import Header31 from '@/app/components/header3';
+import Footer from '@/app/components/footer';
+
+interface NewsItem {
   id: number;
-  particulars: string;
-  dateOfMeeting: string;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  category: string;
+  slug: string;
 }
 
-const meetingsData: Meeting[] = [
+interface ArchiveMonth {
+  month: string;
+  year: number;
+  count: number;
+  key: string;
+}
+
+const initialNewsData: NewsItem[] = [
   {
     id: 1,
-    particulars: '52nd meeting of the Board of Governors',
-    dateOfMeeting: '30.05.2024',
+    title: 'NITH Faculty Association Announces Annual Meet 2025',
+    description:
+      'The NIT Hamirpur Faculty Association is pleased to announce the Annual Faculty Meet scheduled for March 2025. All registered Faculty are cordially invited to participate in this grand event celebrating our shared legacy.',
+    image: '/news/Faculty-meet.jpg',
+    date: '2025-01-15',
+    category: 'Events',
+    slug: 'annual-meet-2025',
   },
   {
     id: 2,
-    particulars: '51st meeting of the Board of Governors',
-    dateOfMeeting: '06.03.2024',
-  },
-  {
-    id: 3,
-    particulars: '50th meeting of the Board of Governors',
-    dateOfMeeting: '17.11.2023',
-  },
-  {
-    id: 4,
-    particulars: '49th meeting of the Board of Governors',
-    dateOfMeeting: '20.03.2023',
-  },
-  {
-    id: 5,
-    particulars: '48th meeting of the Board of Governors',
-    dateOfMeeting: '15.12.2022',
-  },
-  {
-    id: 6,
-    particulars: '47th meeting of the Board of Governors',
-    dateOfMeeting: '12.04.2022',
-  },
-  {
-    id: 7,
-    particulars: '46th meeting of the Board of Governors',
-    dateOfMeeting: '30.12.2021',
-  },
-  {
-    id: 8,
-    particulars: '45th meeting of the Board of Governors',
-    dateOfMeeting: '28.09.2021',
+    title: 'Distinguished Faculty Award Nominations Open',
+    description:
+      'Nominations are now open for the Distinguished Faculty Award 2025. The award recognizes outstanding contributions by NITH Faculty in their respective fields. Submit your nominations before the deadline.',
+    image: '/news/award.jpg',
+    date: '2025-01-12',
+    category: 'Awards',
+    slug: 'distinguished-Faculty-award-2025',
   },
 ];
 
-export default function MinutesBWC() {
-  const language = useSelector((state: RootState) => state.language.value);
-  const [expandedRow, setExpandedRow] = useState<number | null>(null);
+const ITEMS_PER_PAGE = 10;
+
+const NewsSkeleton = () => (
+  <div className="animate-pulse space-y-6">
+    {[1, 2, 3, 4, 5].map((i) => (
+      <div key={i} className="flex gap-5 p-5 bg-white rounded-xl">
+        <div className="w-32 h-24 bg-gray-200 rounded-lg flex-shrink-0"></div>
+        <div className="flex-1 space-y-3">
+          <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+          <div className="h-4 bg-gray-200 rounded w-full"></div>
+          <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+          <div className="h-3 bg-gray-200 rounded w-24"></div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const ArchiveSkeleton = () => (
+  <div className="animate-pulse space-y-3">
+    {[1, 2, 3, 4, 5, 6].map((i) => (
+      <div key={i} className="h-8 bg-gray-200 rounded"></div>
+    ))}
+  </div>
+);
+
+export default function FacultyNewsroom() {
+  const [news, setNews] = useState<NewsItem[]>(initialNewsData);
+  const [archives, setArchives] = useState<ArchiveMonth[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedArchive, setSelectedArchive] = useState<string | null>(null);
+
+  const generateArchives = (newsData: NewsItem[]): ArchiveMonth[] => {
+    const archiveMap = new Map<string, ArchiveMonth>();
+    newsData.forEach((item) => {
+      const date = new Date(item.date);
+      const month = date.toLocaleDateString('en-US', { month: 'long' });
+      const year = date.getFullYear();
+      const key = `${year}-${date.getMonth()}`;
+      if (archiveMap.has(key)) {
+        archiveMap.get(key)!.count++;
+      } else {
+        archiveMap.set(key, { month, year, count: 1, key });
+      }
+    });
+    return Array.from(archiveMap.values()).sort((a, b) => {
+      if (a.year !== b.year) return b.year - a.year;
+      return (
+        new Date(`${b.month} 1, ${b.year}`).getMonth() -
+        new Date(`${a.month} 1, ${a.year}`).getMonth()
+      );
+    });
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        setNews(initialNewsData);
+        setArchives(generateArchives(initialNewsData));
+      } catch (err) {
+        console.error('Error fetching news:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setArchives(generateArchives(news));
+  }, [news]);
+
+  const filteredNews = useMemo(() => {
+    if (!selectedArchive) return news;
+    return news.filter((item) => {
+      const date = new Date(item.date);
+      const key = `${date.getFullYear()}-${date.getMonth()}`;
+      return key === selectedArchive;
+    });
+  }, [news, selectedArchive]);
+
+  const totalPages = Math.ceil(filteredNews.length / ITEMS_PER_PAGE);
+  const paginatedNews = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredNews.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredNews, currentPage]);
+
+  const handleArchiveClick = (key: string | null) => {
+    setSelectedArchive(key);
+    setCurrentPage(1);
+  };
+
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
+  const getPageNumbers = () => {
+    const pages: (number | string)[] = [];
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      if (currentPage <= 3) {
+        pages.push(1, 2, 3, 4, '...', totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(
+          1,
+          '...',
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages
+        );
+      } else {
+        pages.push(
+          1,
+          '...',
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          '...',
+          totalPages
+        );
+      }
+    }
+    return pages;
+  };
 
   return (
     <>
       <Header31 />
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Page Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Minutes of the Meetings
-            </h1>
-            <p className="text-lg text-gray-600 mb-2">Board of Governors</p>
-            <div className="w-24 h-1 bg-gradient-to-r from-[#631012] to-[#8a1518] mx-auto rounded-full"></div>
-          </div>
-
-          {/* Table Section */}
-          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-            {/* Table Container */}
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                {/* Table Header */}
-                <thead>
-                  <tr className="bg-gradient-to-r from-[#631012] to-[#8a1518] text-white">
-                    <th className="px-6 py-5 text-left text-sm font-semibold">
-                      Sl. No
-                    </th>
-                    <th className="px-6 py-5 text-left text-sm font-semibold">
-                      Particulars
-                    </th>
-                    <th className="px-6 py-5 text-left text-sm font-semibold">
-                      Date of Meeting
-                    </th>
-                    <th className="px-6 py-5 text-center text-sm font-semibold">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-
-                {/* Table Body */}
-                <tbody>
-                  {meetingsData.map((meeting, index) => (
-                    <>
-                      <tr
-                        key={meeting.id}
-                        className={`border-b transition-all duration-300 hover:bg-gray-50 ${
-                          index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                        }`}
-                      >
-                        <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                          {meeting.id}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-700">
-                          <span className="font-medium text-[#631012]">
-                            {meeting.particulars}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
-                          {meeting.dateOfMeeting}
-                        </td>
-                        <td className="px-6 py-4 text-center">
-                          <button
-                            onClick={() =>
-                              setExpandedRow(
-                                expandedRow === meeting.id ? null : meeting.id
-                              )
-                            }
-                            className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-gradient-to-r from-[#631012] to-[#8a1518] text-white text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
-                          >
-                            {expandedRow === meeting.id ? 'Hide' : 'View'}
-                          </button>
-                        </td>
-                      </tr>
-
-                      {/* Expanded Row Details */}
-                      {expandedRow === meeting.id && (
-                        <tr className="bg-gradient-to-r from-gray-100 to-gray-50 border-b">
-                          <td colSpan={4} className="px-6 py-6">
-                            <div className="space-y-4">
-                              <div>
-                                <h4 className="text-sm font-semibold text-gray-900 mb-2">
-                                  Meeting Details
-                                </h4>
-                                <p className="text-sm text-gray-600">
-                                  <strong className="text-gray-900">
-                                    {meeting.particulars}
-                                  </strong>
-                                </p>
-                                <p className="text-sm text-gray-600 mt-2">
-                                  <strong>Date:</strong> {meeting.dateOfMeeting}
-                                </p>
-                              </div>
-
-                              {/* Download Links */}
-                              <div className="flex flex-wrap gap-3">
-                                <a
-                                  href="#"
-                                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg text-sm font-medium transition-all duration-300"
-                                >
-                                  <svg
-                                    className="w-4 h-4"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
-                                  </svg>
-                                  Download PDF
-                                </a>
-                                <a
-                                  href="#"
-                                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 hover:bg-green-100 text-green-700 rounded-lg text-sm font-medium transition-all duration-300"
-                                >
-                                  <svg
-                                    className="w-4 h-4"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                                  </svg>
-                                  View Details
-                                </a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      )}
-                    </>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Table Footer Stats */}
-            <div className="px-6 py-4 bg-gray-50 border-t">
-              <p className="text-sm text-gray-600">
-                Showing <strong>{meetingsData.length}</strong> meetings of the
-                Board of Governors
-              </p>
-            </div>
-          </div>
-
-          {/* Info Section */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#631012] to-[#8a1518] flex items-center justify-center text-white text-xl">
-                  📋
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">
-                    {meetingsData.length} Meetings
-                  </h3>
-                  <p className="text-sm text-gray-600">Available records</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#631012] to-[#8a1518] flex items-center justify-center text-white text-xl">
-                  📅
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">Latest</h3>
-                  <p className="text-sm text-gray-600">
-                    {meetingsData[0].dateOfMeeting}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#631012] to-[#8a1518] flex items-center justify-center text-white text-xl">
-                  📄
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">Documents</h3>
-                  <p className="text-sm text-gray-600">Ready to download</p>
-                </div>
-              </div>
-            </div>
+      <div className="min-h-screen bg-gray-50">
+        {/* Breadcrumb */}
+        <div className="bg-gray-50 py-4 px-6 md:px-12 border-b border-gray-200">
+          <div className="max-w-7xl mx-auto">
+            <nav className="flex items-center space-x-2 text-sm text-gray-600">
+              <Link
+                href="/"
+                className="hover:text-[#800000] transition-colors duration-200"
+              >
+                Home
+              </Link>
+              <span>›</span>
+              <span className="text-gray-400">Authorities</span>
+              <span>›</span>
+              <span className="text-[#800000] font-medium">Minutes of FC</span>
+            </nav>
           </div>
         </div>
+
+        {/* Hero Section */}
+        <section className="bg-gradient-to-br from-[#631012] via-[#7a1a1d] to-[#4a0c0e] py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Minutes of FC
+              </h1>
+              <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
+                Latest news, announcements, and updates from the NITH Faculty
+                Notices.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+        <section className="py-12 md:py-16 px-4 md:px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="w-full">
+              <div className="w-full bg-white rounded-t-xl border border-gray-200 overflow-hidden">
+                {/* Header Grid */}
+                <div className="grid grid-cols-[80px_1fr_140px_140px] gap-4 bg-gray-50 border-b border-gray-200 p-4 text-sm font-semibold text-gray-700">
+                  <div className="text-center text-gray-500">S.I no</div>
+                  <div className="uppercase tracking-wider text-xs font-bold text-[#631012]">
+                    Particulars
+                  </div>
+                  <div className="text-center uppercase tracking-wider text-xs font-bold text-[#631012]">
+                    Remarks
+                  </div>
+                  <div className="text-center uppercase tracking-wider text-xs font-bold text-[#631012]">
+                    date of Upload
+                  </div>
+                </div>
+                {/* Example Data Row (to show alignment) */}
+                <div className="grid grid-cols-[80px_1fr_140px_140px] gap-4 p-4 border-b border-gray-100 hover:bg-gray-50 items-center">
+                  <div className="text-center font-mono text-gray-400">01</div>
+                  <div className="text-gray-600 text-sm">
+                    Registration form for the 2025 alumni meet.
+                  </div>
+                  <div className="text-gray-600 text-sm">
+                    Registration form for the 2025 alumni meet.
+                  </div>
+                  <div className="text-gray-600 text-sm">dates</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
+      <Footer />
     </>
   );
 }

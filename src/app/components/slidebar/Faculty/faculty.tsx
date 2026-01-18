@@ -66,7 +66,7 @@ const facultyData = [
       {
         title: 'Workshop Conduct Rules',
         title2: 'कार्यशाला संचालन नियम',
-        href: '/faculty-section/Rules_for_Conducting_Workshops_Conferences',
+        href: '/faculty-section/Rules_for_Conducting_Workshops',
       },
     ],
   },
