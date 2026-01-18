@@ -98,8 +98,6 @@ function Authorities() {
               {/* Links List */}
               <ul className="space-y-2 sm:space-y-3">
                 {section.links.map((link) => {
-                  const isPdf = link.href.endsWith('.pdf');
-
                   return (
                     <li key={link.title}>
                       <Link

@@ -201,7 +201,7 @@ function Administration() {
                   <div key={idx} className="group/section">
                     {/* Sub-Section Title */}
                     <h4 className="text-[clamp(9px,1.8vw,12px)] font-semibold text-gray-400 uppercase tracking-widest mb-2 sm:mb-3 pl-1 sm:pl-2 border-l border-transparent group-hover/section:border-gray-200 transition-all">
-                      {section.title}
+                      {language == 'en' ? section.title : section.title2}
                     </h4>
 
                     {/* Links List */}

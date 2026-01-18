@@ -19,24 +19,55 @@ const studentData = [
   {
     id: '01',
     category: 'Campus Life',
+    category2: 'परिसर जीवन', // Hindi Category
     icon: Smile,
     sections: [
       {
         title: 'Essentials',
+        title2: 'आवश्यक', // Hindi Section Title
         links: [
-          { title: 'Student Activities', href: '/student/activities' },
-          { title: 'Functionaries', href: '/student/functionaries' },
-          { title: 'Student Notices', href: '/student/notices' },
-          { title: 'SGRC', href: '/student/sgrc' },
+          {
+            title: 'Student Activities',
+            title2: 'छात्र गतिविधियां',
+            href: '/student/activities',
+          },
+          {
+            title: 'Functionaries',
+            title2: 'पदाधिकारी',
+            href: '/student/functionaries',
+          },
+          {
+            title: 'Student Notices',
+            title2: 'छात्र सूचनाएं',
+            href: '/student/notices',
+          },
+          {
+            title: 'SGRC',
+            title2: 'एसजीआरसी (SGRC)',
+            href: '/student/sgrc',
+          },
         ],
       },
       {
         title: 'Accommodation',
+        title2: 'आवास', // Hindi Section Title
         icon: Tent,
         links: [
-          { title: 'Hostels at NITH', href: '/student/hostels-at-nith' },
-          { title: 'Hostel Management', href: '/student/hostel-management' },
-          { title: 'Hostel Booklet', href: '/student/hostel-booklet' },
+          {
+            title: 'Hostels at NITH',
+            title2: 'एनआईटीएच में छात्रावास',
+            href: '/student/hostels-at-nith',
+          },
+          {
+            title: 'Hostel Management',
+            title2: 'छात्रावास प्रबंधन',
+            href: '/student/hostel-management',
+          },
+          {
+            title: 'Hostel Booklet',
+            title2: 'छात्रावास पुस्तिका',
+            href: '/student/hostel-booklet',
+          },
         ],
       },
     ],
@@ -44,49 +75,101 @@ const studentData = [
   {
     id: '02',
     category: 'Extracurriculars',
+    category2: 'पाठ्येतर गतिविधियां', // Hindi Category
     icon: Trophy,
     sections: [
       {
         title: 'Cultural',
+        title2: 'सांस्कृतिक', // Hindi Section Title
         icon: Guitar,
         links: [
-          { title: 'Clubs List', href: '/student/cultural/introduction' },
-          { title: 'Societies', href: '/student/cultural/clubs' },
+          {
+            title: 'Clubs List',
+            title2: 'क्लब सूची',
+            href: '/student/cultural/introduction',
+          },
+          {
+            title: 'Societies',
+            title2: 'सोसाइटियां',
+            href: '/student/cultural/clubs',
+          },
           {
             title: "Hill'ffair (Festival)",
+            title2: "हिल'फेयर (महोत्सव)",
             href: '/student/cultural/hillfair',
           },
-          { title: 'SPIC MACAY', href: '/student/cultural/spic-macay' },
+          {
+            title: 'SPIC MACAY',
+            title2: 'स्पिक मैके (SPIC MACAY)',
+            href: '/student/cultural/spic-macay',
+          },
         ],
       },
       {
         title: 'Technical',
+        title2: 'तकनीकी', // Hindi Section Title
         icon: Cpu,
         links: [
-          { title: 'Clubs List', href: '/student/technical/introduction' },
-          { title: 'Nimbus (Tech Fest)', href: '/student/technical/nimbus' },
-          { title: 'Innovation', href: '/student/technical/innovation' },
+          {
+            title: 'Clubs List',
+            title2: 'क्लब सूची',
+            href: '/student/technical/introduction',
+          },
+          {
+            title: 'Nimbus (Tech Fest)',
+            title2: 'निम्बस (टेक फेस्ट)',
+            href: '/student/technical/nimbus',
+          },
+          {
+            title: 'Innovation',
+            title2: 'नवाचार',
+            href: '/student/technical/innovation',
+          },
         ],
       },
       {
         title: 'Sports & Wellness',
+        title2: 'खेल और कल्याण', // Hindi Section Title
         links: [
           {
             title: 'Sports Introduction',
+            title2: 'खेल परिचय',
             href: '/student/sports/introduction',
           },
-          { title: 'Lakaar (Sports Meet)', href: '/student/sports/lakaar' },
-          { title: 'Yoga Day', href: '/student/sports/yoga-day' },
+          {
+            title: 'Lakaar (Sports Meet)',
+            title2: 'लकार (खेल मीट)',
+            href: '/student/sports/lakaar',
+          },
+          {
+            title: 'Yoga Day',
+            title2: 'योग दिवस',
+            href: '/student/sports/yoga-day',
+          },
         ],
       },
       {
         title: 'Service & Publishing',
+        title2: 'सेवा और प्रकाशन', // Hindi Section Title
         links: [
-          { title: 'NSS Activities', href: '/student/nss' },
-          { title: 'NCC Activities', href: '/student/ncc' },
-          { title: 'Magazine', href: '/student/publications/magazine' },
+          {
+            title: 'NSS Activities',
+            title2: 'एनएसएस (NSS) गतिविधियां',
+            href: '/student/nss',
+          },
+          {
+            title: 'NCC Activities',
+            title2: 'एनसीसी (NCC) गतिविधियां',
+            href: '/student/ncc',
+          },
+          {
+            title: 'Magazine',
+            title2: 'पत्रिका',
+            href: '/student/publications/magazine',
+          },
           {
             title: 'News Bulletin',
+            title2: 'समाचार बुलेटिन',
             href: '/student/publications/news-bulletin',
           },
         ],
@@ -96,35 +179,69 @@ const studentData = [
   {
     id: '03',
     category: 'Conduct',
+    category2: 'आचरण', // Hindi Category
     icon: Scale,
     sections: [
       {
         title: 'Discipline',
+        title2: 'अनुशासन', // Hindi Section Title
         links: [
-          { title: 'Discipline Rules', href: '/student/discipline/rules' },
-          { title: 'Discipline Board', href: '/student/discipline/board' },
+          {
+            title: 'Discipline Rules',
+            title2: 'अनुशासन नियम',
+            href: '/student/discipline/rules',
+          },
+          {
+            title: 'Discipline Board',
+            title2: 'अनुशासन बोर्ड',
+            href: '/student/discipline/board',
+          },
         ],
       },
       {
         title: 'Counselling',
+        title2: 'परामर्श', // Hindi Section Title
         links: [
-          { title: 'Counselling Rules', href: '/student/counselling/rules' },
-          { title: 'Counselling Board', href: '/student/counselling/board' },
+          {
+            title: 'Counselling Rules',
+            title2: 'परामर्श नियम',
+            href: '/student/counselling/rules',
+          },
+          {
+            title: 'Counselling Board',
+            title2: 'परामर्श बोर्ड',
+            href: '/student/counselling/board',
+          },
         ],
       },
       {
         title: 'Governance',
+        title2: 'शासन', // Hindi Section Title
         links: [
-          { title: 'Student Council Rules', href: '/student/council/rules' },
-          { title: 'Student Council Board', href: '/student/council/board' },
+          {
+            title: 'Student Council Rules',
+            title2: 'छात्र परिषद नियम',
+            href: '/student/council/rules',
+          },
+          {
+            title: 'Student Council Board',
+            title2: 'छात्र परिषद बोर्ड',
+            href: '/student/council/board',
+          },
         ],
       },
       {
         title: 'Anti-Ragging',
+        title2: 'रैगिंग विरोधी', // Hindi Section Title
         links: [
-          { title: 'Anti-Ragging Rules', href: '/student/anti-ragging/rules' },
+          {
+            title: 'Anti-Ragging Rules',
+            title2: 'रैगिंग विरोधी नियम',
+            href: '/student/anti-ragging/rules',
+          },
           {
             title: 'Anti-Ragging Committee',
+            title2: 'रैगिंग विरोधी समिति',
             href: '/student/anti-ragging/committee',
           },
         ],
@@ -134,14 +251,28 @@ const studentData = [
   {
     id: '04',
     category: 'Welfare',
+    category2: 'कल्याण', // Hindi Category
     icon: HandCoins,
     sections: [
       {
         title: 'Benefits',
+        title2: 'लाभ', // Hindi Section Title
         links: [
-          { title: 'Scholarships', href: '/student/welfare/scholarships' },
-          { title: 'Prizes & Medals', href: '/student/welfare/prizes-medals' },
-          { title: 'Insurance', href: '/student/welfare/insurance' },
+          {
+            title: 'Scholarships',
+            title2: 'छात्रवृत्ति',
+            href: '/student/welfare/scholarships',
+          },
+          {
+            title: 'Prizes & Medals',
+            title2: 'पुरस्कार और पदक',
+            href: '/student/welfare/prizes-medals',
+          },
+          {
+            title: 'Insurance',
+            title2: 'बीमा',
+            href: '/student/welfare/insurance',
+          },
         ],
       },
     ],
@@ -168,7 +299,7 @@ const Student = () => {
                     className="text-gray-400 group-hover/header:text-gray-900 transition-colors sm:w-4 sm:h-4"
                   />
                   <h3 className="text-[clamp(10px,2vw,14px)] font-bold uppercase tracking-wider text-gray-800">
-                    {column.category}
+                    {language == 'en' ? column.category : column.category2}
                   </h3>
                 </div>
               </div>
@@ -180,7 +311,7 @@ const Student = () => {
                     {/* Sub-Section Title */}
                     <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3 pl-1 sm:pl-2 border-l border-transparent group-hover/section:border-gray-200 transition-all">
                       <h4 className="text-[clamp(9px,1.8vw,12px)] font-semibold text-gray-400 uppercase tracking-widest">
-                        {section.title}
+                        {language == 'en' ? section.title : section.title2}
                       </h4>
                     </div>
 
@@ -198,7 +329,7 @@ const Student = () => {
                                 className="text-gray-300 group-hover/link:text-[#800000] transition-colors sm:w-3.5 sm:h-3.5"
                               />
                               <span className="text-[clamp(10px,2vw,14px)] font-medium text-gray-600 group-hover/link:text-black transition-colors">
-                                {link.title}
+                                {language == 'en' ? link.title : link.title2}
                               </span>
                             </div>
 
