@@ -132,9 +132,9 @@ const studentData = [
             href: '/student/sports/introduction',
           },
           {
-            title: 'Lakaar (Sports Meet)',
+            title: 'Lalkaar (Sports Meet)',
             title2: 'लकार (खेल मीट)',
-            href: '/student/sports/lakaar',
+            href: '/student/sports/lalkaar',
           },
           {
             title: 'Yoga Day',
