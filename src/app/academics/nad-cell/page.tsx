@@ -1,9 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const SECTIONS = [
   {
@@ -88,15 +94,28 @@ export default function Page() {
       </div>
 
       <section className="relative bg-gradient-to-br from-[#800000] via-[#631012] to-[#8B1E1E] overflow-hidden">
-        <div className="relative z-10 text-center py-16 px-6 md:px-12">
-          <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-2">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse delay-700"></div>
+        </div>
+
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')] opacity-5"></div>
+
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center py-24 md:py-32 px-6 md:px-12"
+        >
+          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
             National Academic Depository (NAD)
           </h1>
           <p className="text-white/90 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed font-light">
             Secure, digital repository for academic awards — store, access, and
             verify certificates and transcripts online.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       <main className="max-w-7xl mx-auto px-4 md:px-6 py-10">
