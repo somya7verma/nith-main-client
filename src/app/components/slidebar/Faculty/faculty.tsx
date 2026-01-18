@@ -14,12 +14,22 @@ const facultyData = [
   {
     id: '01',
     category: 'Administration',
+    category2: 'प्रशासन', // Hindi Category
     icon: Briefcase,
     links: [
-      { title: 'Faculty Activities', href: '/faculty-section/Activities' },
-      { title: 'Functionaries', href: '/faculty-section/Functionaries' },
+      {
+        title: 'Faculty Activities',
+        title2: 'संकाय गतिविधियां',
+        href: '/faculty-section/Activities',
+      },
+      {
+        title: 'Functionaries',
+        title2: 'पदाधिकारी',
+        href: '/faculty-section/Functionaries',
+      },
       {
         title: 'Faculty Notices',
+        title2: 'संकाय सूचनाएं',
         href: '/faculty-section/Faculty_Related_Notices',
       },
     ],
@@ -27,23 +37,35 @@ const facultyData = [
   {
     id: '02',
     category: 'Allowances',
+    category2: 'भत्ते', // Hindi Category
     icon: Coins,
     links: [
-      { title: 'CPDA Rules', href: '/faculty-section/CPDA_Rules' },
-      { title: 'Deputation Rules', href: '/faculty-section/Deputation_Rules' },
+      {
+        title: 'CPDA Rules',
+        title2: 'सीपीडीए (CPDA) नियम',
+        href: '/faculty-section/CPDA_Rules',
+      },
+      {
+        title: 'Deputation Rules',
+        title2: 'प्रतिनियुक्ति नियम',
+        href: '/faculty-section/Deputation_Rules',
+      },
     ],
   },
   {
     id: '03',
     category: 'Service Rules',
+    category2: 'सेवा नियम', // Hindi Category
     icon: FileText,
     links: [
       {
         title: 'Application Forwarding',
+        title2: 'आवेदन अग्रेषण',
         href: '/faculty-section/Application_Forwarding_Rules',
       },
       {
         title: 'Workshop Conduct Rules',
+        title2: 'कार्यशाला संचालन नियम',
         href: '/faculty-section/Rules_for_Conducting_Workshops_Conferences',
       },
     ],
@@ -70,7 +92,7 @@ function Faculty() {
                     className="text-gray-400 group-hover/header:text-gray-900 transition-colors sm:w-4 sm:h-4"
                   />
                   <h3 className="text-[clamp(10px,2vw,14px)] font-bold uppercase tracking-wider text-gray-800">
-                    {column.category}
+                    {language == 'en' ? column.category : column.category2}
                   </h3>
                 </div>
               </div>
@@ -89,7 +111,7 @@ function Faculty() {
                           className="text-gray-300 group-hover/link:text-[#800000] transition-colors sm:w-3.5 sm:h-3.5"
                         />
                         <span className="text-[clamp(10px,2vw,14px)] font-medium text-gray-600 group-hover/link:text-black transition-colors">
-                          {link.title}
+                          {language == 'en' ? link.title : link.title2}
                         </span>
                       </div>
 

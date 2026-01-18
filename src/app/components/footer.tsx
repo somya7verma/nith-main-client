@@ -1,52 +1,80 @@
+'use client';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 function Footer() {
   // --- Data Arrays for Links ---
+  const language = useSelector((state: RootState) => state.language.value);
 
   const rulesLinks = [
-    { name: 'Recruitment Rules', href: '#' },
-    { name: 'Employee Rules', href: '#' },
-    { name: 'Institute Rules', href: '#' },
-    { name: 'Annual Reports', href: '#' },
-    { name: 'Notices/Office Orders', href: '#' },
-    { name: 'Act & Statutes', href: '#' },
-    { name: 'Photo/Video Gallery', href: '#' },
-    { name: 'Research & Publications @ NITH', href: '#' },
-    { name: 'Media Coverage @ NITH', href: '#' },
-    { name: 'RTI', href: '#' },
-    { name: 'New Criminal Laws', href: '#' },
+    { name: 'Recruitment Rules', name2: 'भर्ती नियम', href: '#' },
+    { name: 'Employee Rules', name2: 'कर्मचारी नियम', href: '#' },
+    { name: 'Institute Rules', name2: 'संस्थान नियम', href: '#' },
+    { name: 'Annual Reports', name2: 'वार्षिक रिपोर्ट', href: '#' },
+    {
+      name: 'Notices/Office Orders',
+      name2: 'सूचनाएं/कार्यालय आदेश',
+      href: '#',
+    },
+    { name: 'Act & Statutes', name2: 'अधिनियम और विधियां', href: '#' },
+    { name: 'Photo/Video Gallery', name2: 'फोटो/वीडियो गैलरी', href: '#' },
+    {
+      name: 'Research & Publications @ NITH',
+      name2: 'NITH पर शोध और प्रकाशन',
+      href: '#',
+    },
+    { name: 'Media Coverage @ NITH', name2: 'NITH पर मीडिया कवरेज', href: '#' },
+    { name: 'RTI', name2: 'सूचना का अधिकार', href: '#' },
+    { name: 'New Criminal Laws', name2: 'नए आपराधिक कानून', href: '#' },
   ];
 
   const goiLinks = [
-    { name: 'DST NIDHI (i-TBI@NITH)', href: '#' },
-    { name: 'CM Startup @ NITH', href: '#' },
-    { name: 'MOOC @ NITH', href: '#' },
-    { name: 'GIAN @ NITH', href: '#' },
-    { name: 'NIRF@NITH', href: '#' },
-    { name: 'ARIIA@NITH', href: '#' },
-    { name: 'SKill India @ NITH', href: '#' },
-    { name: 'SBA @ NITH', href: '#' },
-    { name: 'UBA @ NITH', href: '#' },
-    { name: 'RAA @ NITH', href: '#' },
-    { name: 'EBSB @ NITH', href: '#' },
-    { name: 'Literacy Mission @ NITH', href: '#' },
-    { name: 'NAD @ NITH', href: '#' },
+    {
+      name: 'DST NIDHI (i-TBI@NITH)',
+      name2: 'DST NIDHI (i-TBI@NITH)',
+      href: '#',
+    },
+    { name: 'CM Startup @ NITH', name2: 'CM स्टार्टअप @ NITH', href: '#' },
+    { name: 'MOOC @ NITH', name2: 'MOOC @ NITH', href: '#' },
+    { name: 'GIAN @ NITH', name2: 'GIAN @ NITH', href: '#' },
+    { name: 'NIRF@NITH', name2: 'NIRF@NITH', href: '#' },
+    { name: 'ARIIA@NITH', name2: 'ARIIA@NITH', href: '#' },
+    { name: 'SKill India @ NITH', name2: 'कौशल भारत @ NITH', href: '#' },
+    { name: 'SBA @ NITH', name2: 'SBA @ NITH', href: '#' },
+    { name: 'UBA @ NITH', name2: 'UBA @ NITH', href: '#' },
+    { name: 'RAA @ NITH', name2: 'RAA @ NITH', href: '#' },
+    { name: 'EBSB @ NITH', name2: 'EBSB @ NITH', href: '#' },
+    {
+      name: 'Literacy Mission @ NITH',
+      name2: 'साक्षरता मिशन @ NITH',
+      href: '#',
+    },
+    { name: 'NAD @ NITH', name2: 'NAD @ NITH', href: '#' },
   ];
 
   const importantLinks = [
-    { name: 'Newsletter', href: '#' },
-    { name: 'MoE', href: '#' },
-    { name: 'PMRF', href: '#' },
-    { name: 'NIT Council', href: '#' },
-    { name: 'Digital India', href: '#' },
-    { name: 'National Career Service', href: '#' },
-    { name: 'Vittiya Saksharta Abhiyan', href: '#' },
-    { name: 'CEC', href: '#' },
-    { name: 'MyGov', href: '#' },
-    { name: 'PMNRF', href: '#' },
-    { name: 'TIFAC-CORE@NITH', href: '#' },
-    { name: 'FAQ', href: '#' },
-    { name: 'BIS', href: '#' },
+    { name: 'Newsletter', name2: 'समाचार पत्र', href: '#' },
+    { name: 'MoE', name2: 'शिक्षा मंत्रालय', href: '#' },
+    { name: 'PMRF', name2: 'PMRF', href: '#' },
+    { name: 'NIT Council', name2: 'NIT परिषद', href: '#' },
+    { name: 'Digital India', name2: 'डिजिटल भारत', href: '#' },
+    {
+      name: 'National Career Service',
+      name2: 'राष्ट्रीय कैरियर सेवा',
+      href: '#',
+    },
+    {
+      name: 'Vittiya Saksharta Abhiyan',
+      name2: 'वित्तीय साक्षरता अभियान',
+      href: '#',
+    },
+    { name: 'CEC', name2: 'CEC', href: '#' },
+    { name: 'MyGov', name2: 'MyGov', href: '#' },
+    { name: 'PMNRF', name2: 'PMNRF', href: '#' },
+    { name: 'TIFAC-CORE@NITH', name2: 'TIFAC-CORE@NITH', href: '#' },
+    { name: 'FAQ', name2: 'अक्सर पूछे जाने वाले प्रश्न', href: '#' },
+    { name: 'BIS', name2: 'BIS', href: '#' },
   ];
 
   return (
@@ -64,10 +92,14 @@ function Footer() {
               />
               <div>
                 <h3 className="font-bold text-lg leading-tight text-white tracking-wide">
-                  National Institute Of Technology
+                  {language == 'en'
+                    ? 'National Institute Of Technology'
+                    : 'राष्ट्रीय प्रौद्योगिकी संस्थान'}
                 </h3>
                 <p className="text-sm font-medium text-white/80">
-                  Hamirpur, Himachal Pradesh
+                  {language == 'en'
+                    ? 'Hamirpur, Himachal Pradesh'
+                    : 'हमीरपुर, हिमाचल प्रदेश'}
                 </p>
               </div>
             </div>
@@ -95,9 +127,9 @@ function Footer() {
                   />
                 </svg>
                 <span className="leading-relaxed">
-                  NIT Hamirpur, Anu, Hamirpur,
-                  <br />
-                  Himachal Pradesh 177005, India
+                  {language == 'en'
+                    ? 'NIT Hamirpur, Anu, Hamirpur, Himachal Pradesh 177005, India'
+                    : 'NIT हमीरपुर, अनु, हमीरपुर, हिमाचल प्रदेश 177005, भारत'}
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -114,7 +146,9 @@ function Footer() {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                <span>+91-1972-254011</span>
+                <span>
+                  {language == 'en' ? '+91-1972-254011' : '+91-1972-254011'}
+                </span>
               </div>
             </div>
 
@@ -148,7 +182,7 @@ function Footer() {
             {/* Column 1: Rules & Reports */}
             <div>
               <h4 className="text-white font-bold mb-4 text-base border-b border-white/20 pb-2 inline-block">
-                Rules and Reports
+                {language == 'en' ? 'Rules and Reports' : 'नियम और रिपोर्ट'}
               </h4>
               <ul className="text-white/80 text-xs space-y-2.5">
                 {rulesLinks.map((link, i) => (
@@ -157,7 +191,7 @@ function Footer() {
                       href={link.href}
                       className="hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
                     >
-                      {link.name}
+                      {language == 'en' ? link.name : link.name2}
                     </a>
                   </li>
                 ))}
@@ -167,7 +201,7 @@ function Footer() {
             {/* Column 2: GOI Initiatives */}
             <div>
               <h4 className="text-white font-bold mb-4 text-base border-b border-white/20 pb-2 inline-block">
-                GOI Initiatives@nith
+                {language == 'en' ? 'GOI Initiatives@nith' : 'GOI पहल@nith'}
               </h4>
               <ul className="text-white/80 text-xs space-y-2.5">
                 {goiLinks.map((link, i) => (
@@ -176,7 +210,7 @@ function Footer() {
                       href={link.href}
                       className="hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
                     >
-                      {link.name}
+                      {language == 'en' ? link.name : link.name2}
                     </a>
                   </li>
                 ))}
@@ -186,7 +220,7 @@ function Footer() {
             {/* Column 3: Important Links */}
             <div>
               <h4 className="text-white font-bold mb-4 text-base border-b border-white/20 pb-2 inline-block">
-                Important Links
+                {language == 'en' ? 'Important Links' : 'महत्वपूर्ण लिंक'}
               </h4>
               <ul className="text-white/80 text-xs space-y-2.5">
                 {importantLinks.map((link, i) => (
@@ -195,7 +229,7 @@ function Footer() {
                       href={link.href}
                       className="hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
                     >
-                      {link.name}
+                      {language == 'en' ? link.name : link.name2}
                     </a>
                   </li>
                 ))}
@@ -207,8 +241,9 @@ function Footer() {
         {/* Bottom message */}
         <div className="mt-12 pt-6 border-t border-white/10 text-center">
           <p className="text-white/60 text-xs tracking-wider">
-            © {new Date().getFullYear()} National Institute of Technology,
-            Hamirpur. All Rights Reserved.
+            {language == 'en'
+              ? `© ${new Date().getFullYear()} National Institute of Technology, Hamirpur. All Rights Reserved.`
+              : `© ${new Date().getFullYear()} राष्ट्रीय प्रौद्योगिकी संस्थान, हमीरपुर। सर्वाधिकार सुरक्षित।`}
           </p>
         </div>
       </div>

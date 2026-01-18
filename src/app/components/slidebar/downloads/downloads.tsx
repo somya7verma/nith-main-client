@@ -15,36 +15,45 @@ const downloadsData = [
   {
     id: '01',
     category: 'Students',
+    category2: 'छात्र', // Hindi Category
     icon: GraduationCap,
     links: [
       {
         title: 'Browse Student Downloads',
+        title2: 'छात्र डाउनलोड देखें', // Hindi Title
         href: '/Download_routes/Download-for-students',
         description: 'Forms, Manuals & Guidelines',
+        description2: 'फॉर्म, नियमावली और दिशानिर्देश', // Hindi Description
       },
     ],
   },
   {
     id: '02',
     category: 'Faculty & Staff',
+    category2: 'संकाय एवं कर्मचारी', // Hindi Category
     icon: Users,
     links: [
       {
         title: 'Browse Faculty Downloads',
+        title2: 'संकाय डाउनलोड देखें', // Hindi Title
         href: '/Download_routes/Download-for-Faculty',
         description: 'Administrative & Academic Forms',
+        description2: 'प्रशासनिक और शैक्षणिक फॉर्म', // Hindi Description
       },
     ],
   },
   {
     id: '03',
     category: 'General',
+    category2: 'सामान्य', // Hindi Category
     icon: FolderOpen,
     links: [
       {
         title: 'Miscellaneous Downloads',
+        title2: 'विविध डाउनलोड', // Hindi Title
         href: '/Download_routes/Miscellaneous-Downloads',
         description: 'Public Documents & Archives',
+        description2: 'सार्वजनिक दस्तावेज और अभिलेखागार', // Hindi Description
       },
     ],
   },
@@ -70,7 +79,7 @@ const Downloads = () => {
                     className="text-gray-400 group-hover/header:text-gray-900 transition-colors sm:w-4 sm:h-4"
                   />
                   <h3 className="text-[clamp(10px,2vw,14px)] font-bold uppercase tracking-wider text-gray-800">
-                    {column.category}
+                    {language == 'en' ? column.category : column.category2}
                   </h3>
                 </div>
               </div>
@@ -92,11 +101,13 @@ const Downloads = () => {
 
                         <div>
                           <span className="block text-[clamp(11px,2vw,14px)] font-medium text-gray-600 group-hover/link:text-black transition-colors">
-                            {link.title}
+                            {language == 'en' ? link.title : link.title2}
                           </span>
                           {/* Added small description text since there is only 1 link per column */}
                           <span className="block text-[clamp(8px,1.5vw,10px)] text-gray-400 uppercase tracking-wide mt-0.5">
-                            {link.description}
+                            {language == 'en'
+                              ? link.description
+                              : link.description2}
                           </span>
                         </div>
                       </div>

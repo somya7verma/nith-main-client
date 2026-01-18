@@ -8,18 +8,48 @@ const departmentData = [
   {
     id: '01',
     category: 'Engineering',
+    category2: 'अभियांत्रिकी', // Hindi Category
     icon: Cpu,
     sections: [
       {
         title: 'B.Tech / M.Tech',
+        title2: 'बी.टेक / एम.टेक', // Hindi Section Title
         links: [
-          { title: 'Computer Science & Engineering', href: '#' },
-          { title: 'Civil Engineering', href: '#' },
-          { title: 'Chemical Engineering', href: '#' },
-          { title: 'Electronics & Comm. Engineering', href: '#' },
-          { title: 'Electrical Engineering', href: '#' },
-          { title: 'Mechanical Engineering', href: '#' },
-          { title: 'Material Science & Engineering', href: '#' },
+          {
+            title: 'Computer Science & Engineering',
+            title2: 'कंप्यूटर विज्ञान और इंजीनियरिंग',
+            href: '#',
+          },
+          {
+            title: 'Civil Engineering',
+            title2: 'सिविल इंजीनियरिंग',
+            href: '#',
+          },
+          {
+            title: 'Chemical Engineering',
+            title2: 'केमिकल इंजीनियरिंग',
+            href: '#',
+          },
+          {
+            title: 'Electronics & Comm. Engineering',
+            title2: 'इलेक्ट्रॉनिक्स और संचार इंजीनियरिंग',
+            href: '#',
+          },
+          {
+            title: 'Electrical Engineering',
+            title2: 'इलेक्ट्रिकल इंजीनियरिंग',
+            href: '#',
+          },
+          {
+            title: 'Mechanical Engineering',
+            title2: 'मैकेनिकल इंजीनियरिंग',
+            href: '#',
+          },
+          {
+            title: 'Material Science & Engineering',
+            title2: 'पदार्थ विज्ञान और इंजीनियरिंग',
+            href: '#',
+          },
         ],
       },
     ],
@@ -27,37 +57,75 @@ const departmentData = [
   {
     id: '02',
     category: 'Sciences',
+    category2: 'विज्ञान', // Hindi Category
     icon: Atom,
     sections: [
       {
         title: 'Pure Sciences',
+        title2: 'शुद्ध विज्ञान', // Hindi Section Title
         links: [
-          { title: 'Chemistry', href: '#' },
-          { title: 'Mathematics & Scientific Computing', href: '#' },
-          { title: 'Physics & Photonics Science', href: '#' },
+          {
+            title: 'Chemistry',
+            title2: 'रसायन विज्ञान',
+            href: '#',
+          },
+          {
+            title: 'Mathematics & Scientific Computing',
+            title2: 'गणित और वैज्ञानिक कंप्यूटिंग',
+            href: '#',
+          },
+          {
+            title: 'Physics & Photonics Science',
+            title2: 'भौतिकी और फोटोनिक्स विज्ञान',
+            href: '#',
+          },
         ],
       },
       {
         title: 'Centres',
-        links: [{ title: 'Centre For Energy Studies', href: '#' }],
+        title2: 'केंद्र', // Hindi Section Title
+        links: [
+          {
+            title: 'Centre For Energy Studies',
+            title2: 'ऊर्जा अध्ययन केंद्र',
+            href: '#',
+          },
+        ],
       },
     ],
   },
   {
     id: '03',
     category: 'Liberal Arts',
+    category2: 'उदार कला', // Hindi Category
     icon: Library,
     sections: [
       {
         title: 'Professional Schools',
+        title2: 'व्यावसायिक स्कूल', // Hindi Section Title
         links: [
-          { title: 'Architecture', href: '#' },
-          { title: 'Management Studies', href: '#' },
+          {
+            title: 'Architecture',
+            title2: 'वास्तुकला',
+            href: '#',
+          },
+          {
+            title: 'Management Studies',
+            title2: 'प्रबंधन अध्ययन',
+            href: '#',
+          },
         ],
       },
       {
         title: 'Humanities',
-        links: [{ title: 'Humanities & Social Sciences', href: '#' }],
+        title2: 'मानविकी', // Hindi Section Title
+        links: [
+          {
+            title: 'Humanities & Social Sciences',
+            title2: 'मानविकी और सामाजिक विज्ञान',
+            href: '#',
+          },
+        ],
       },
     ],
   },
@@ -83,7 +151,7 @@ function Department() {
                     className="text-gray-400 group-hover/header:text-gray-900 transition-colors sm:w-4 sm:h-4"
                   />
                   <h3 className="text-[clamp(10px,2vw,14px)] font-bold uppercase tracking-wider text-gray-800">
-                    {column.category}
+                    {language == 'en' ? column.category : column.category2}
                   </h3>
                 </div>
               </div>
@@ -94,7 +162,7 @@ function Department() {
                   <div key={idx} className="group/section">
                     {/* Sub-Section Title (Only if multiple sections exist or explicit titles needed) */}
                     <h4 className="text-[clamp(9px,1.8vw,12px)] font-semibold text-gray-400 uppercase tracking-widest mb-2 sm:mb-3 pl-1 sm:pl-2 border-l border-transparent group-hover/section:border-gray-200 transition-all">
-                      {section.title}
+                      {language == 'en' ? section.title : section.title2}
                     </h4>
 
                     {/* Links List */}
@@ -111,7 +179,7 @@ function Department() {
                                 className="text-gray-300 group-hover/link:text-[#800000] transition-colors sm:w-3.5 sm:h-3.5"
                               />
                               <span className="text-[clamp(10px,2vw,14px)] font-medium text-gray-600 group-hover/link:text-black transition-colors">
-                                {link.title}
+                                {language == 'en' ? link.title : link.title2}
                               </span>
                             </div>
 

@@ -1,5 +1,6 @@
 'use client';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import {
@@ -72,6 +73,7 @@ function News() {
   const [newsData, setNewsData] = useState<NewsData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const language = useSelector((state: RootState) => state.language.value);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -110,17 +112,19 @@ function News() {
           {/* --- LEFT COLUMN: ADMISSIONS (Unchanged) --- */}
           <div>
             <h3 className="text-3xl font-bold text-[#631012] mb-6 border-b-4 border-[#631012] pb-2 inline-block">
-              Admissions
+              {language == 'en' ? 'Admissions' : ' प्रवेश'}
             </h3>
             <div className="space-y-4">
               <div className="group border border-gray-200 rounded-xl p-6 bg-white hover:border-[#631012] hover:shadow-lg transition-all cursor-pointer">
                 <div className="flex justify-between items-start">
                   <div>
                     <h4 className="text-xl font-bold text-[#631012] group-hover:text-red-700 transition-colors mb-1">
-                      B.Tech
+                      {language == 'en' ? 'B.Tech' : 'बी.टेक'}
                     </h4>
                     <p className="text-gray-500 text-sm font-medium">
-                      Undergraduate Program
+                      {language == 'en'
+                        ? 'Undergraduate Program'
+                        : 'अंडरग्रेजुएट प्रोग्राम'}
                     </p>
                   </div>
                   <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-[#631012] transition-colors" />

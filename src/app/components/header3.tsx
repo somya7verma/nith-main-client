@@ -40,7 +40,7 @@ function Header31() {
 
   return (
     <div className="flex flex-col w-full font-sans bg-white shadow-xl ">
-      <div className="absolute top-0 right-0 w-full h-full bg-[linear-gradient(rgba(99,16,18,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,16,18,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none z-0"></div>
+      <div className="absolute top-0 right-0 w-full h-full bg-[linear-gradient(rgba(99,16,18,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,16,18,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none z-0 transition-all duration-300"></div>
 
       {/* 1. TOP UTILITY BAR */}
       <div className="bg-[#500c0e] text-gray-300 text-[clamp(8px,1.5vw,10px)] py-1 sm:py-2 px-2 sm:px-4 md:px-8 border-b border-[#631012]">
@@ -49,7 +49,7 @@ function Header31() {
             {accessibilityItems.map((item) => (
               <button
                 key={item.label}
-                className="hover:text-white hover:underline transition-colors duration-200 px-0.5 text-[clamp(7px,1.1vw,10px)] sm:text-[clamp(8px,1.3vw,11px)] md:text-[clamp(9px,1.5vw,12px)]"
+                className="hover:text-white hover:underline transition-all duration-300 px-0.5 text-[clamp(7px,1.1vw,10px)] sm:text-[clamp(8px,1.3vw,11px)] md:text-[clamp(9px,1.5vw,12px)]"
               >
                 {language == 'en' ? item.label : item.label2}
               </button>
@@ -60,7 +60,7 @@ function Header31() {
               <Link
                 key={item.label}
                 href="#"
-                className="hover:text-white hover:underline decoration-white underline-offset-4 transition-all duration-200 text-[clamp(7px,1.1vw,10px)] sm:text-[clamp(8px,1.3vw,11px)] md:text-[clamp(9px,1.5vw,12px)] px-0.5"
+                className="hover:text-white hover:underline decoration-white underline-offset-4 transition-all duration-300 text-[clamp(7px,1.1vw,10px)] sm:text-[clamp(8px,1.3vw,11px)] md:text-[clamp(9px,1.5vw,12px)] px-0.5"
               >
                 {language == 'en' ? item.label : item.label2}
               </Link>
@@ -111,18 +111,23 @@ function Header31() {
           >
             <div className="flex items-center gap-2 sm:gap-3">
               <span className="hidden lg:block w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gradient-to-l from-[#631012] to-transparent"></span>
-              <h3 className="text-[clamp(9px,2vw,14px)] font-bold text-[#631012] uppercase tracking-[0.15em] sm:tracking-[0.25em]">
+              <h3
+                className={`text-[clamp(9px,3vw,14px)] font-bold text-[#631012] uppercase transition-all duration-300 ${language == 'en' ? 'tracking-[0.15em] sm:tracking-[0.25em]' : 'tracking-normal'}`}
+              >
                 {language == 'en'
                   ? ' National Institute of Technology'
                   : ' राष्ट्रीय प्रौद्योगिकी संस्थान हमीरपुर'}
               </h3>
             </div>
 
-            <h1 className="text-[clamp(2rem,5vw,6rem)] font-black text-black tracking-tighter leading-[0.9] mt-1 sm:mt-2 drop-shadow-sm transition-colors duration-300">
+            <h1
+              className={`text-[clamp(2rem,5vw,6rem)] font-black text-black tracking-tighter leading-[0.9] mt-1 sm:mt-2 drop-shadow-sm transition-all duration-500 origin-center`}
+              key={language}
+            >
               {language == 'en' ? 'HAMIRPUR' : ' हमीरपुर'}
             </h1>
 
-            <p className="text-[clamp(9px,1.8vw,11px)]  text-gray-500 font-serif italic tracking-wide  sm:mt-2 flex items-center gap-2 justify-center md:justify-end">
+            <p className="text-[clamp(9px,1.8vw,11px)] text-gray-500 font-serif italic transition-all duration-300 sm:mt-2 flex items-center gap-2 justify-center md:justify-end">
               {language == 'en'
                 ? ' An Institute of National Importance'
                 : 'राष्ट्रीय महत्व का संस्थान'}
