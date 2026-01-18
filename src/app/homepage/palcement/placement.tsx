@@ -4,7 +4,7 @@ function Placement() {
   return (
     <section className="py-16 px-6 bg-black relative">
       {/* Background image with low opacity */}
-      <div className="absolute inset-0 bg-[url('/admin.jpg')] bg-cover bg-center bg-fixed opacity-50"></div>
+      <div className="absolute inset-0 bg-[url('/nith.jpg')] bg-cover bg-center bg-fixed opacity-50"></div>
 
       {/* Content with full opacity */}
       <div className="max-w-7xl mx-auto relative z-10">

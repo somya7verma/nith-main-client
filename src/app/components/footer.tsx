@@ -120,15 +120,6 @@ function Footer() {
 
             {/* Map and Social Row */}
             <div className="flex items-center gap-4 pt-2">
-              {/* Map Thumbnail */}
-              <div className="h-20 w-28 rounded-lg overflow-hidden border border-white/30 shadow-md hover:border-white transition-colors cursor-pointer bg-white/10">
-                <img
-                  src="/map-thumb.png"
-                  alt="Location Map"
-                  className="h-full w-full object-cover opacity-80 hover:opacity-100 transition-opacity"
-                />
-              </div>
-
               {/* Social Icons */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2">

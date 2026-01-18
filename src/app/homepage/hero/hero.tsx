@@ -19,12 +19,11 @@ export default async function Hero() {
         {/* Background Image with Subtle Parallax */}
         <div className="absolute inset-0">
           <Image
-            src="/admin.jpg"
+            src="/nith.jpg"
             alt="NIT Hamirpur Campus"
             fill
             className="object-cover scale-105 animate-hero-zoom"
             priority
-            quality={95}
           />
         </div>
 

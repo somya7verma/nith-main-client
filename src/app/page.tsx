@@ -25,12 +25,12 @@ export default function Home() {
 
       {/* Main content sections */}
       <main>
-        <div className="flex flex-row  ">
+        <div className="flex flex-col md:flex-row gap-2 md:gap-4">
           <section id="events" className="flex-1">
             <Event />
           </section>
           <section className="flex-1">
-            <Academics></Academics>
+            <Academics />
           </section>
         </div>
 

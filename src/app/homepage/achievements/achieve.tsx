@@ -21,6 +21,40 @@ interface TransformedAchievement {
   category: string;
 }
 
+// Mock Achievements Data
+const mockAchievements: Achievement[] = [
+  {
+    id: 1,
+    tagline: 'Academic Excellence',
+    Heading: 'Ranked Among Top Engineering Institutes',
+    description:
+      'NITH consistently ranked in top 20 engineering institutions in India for academic excellence and research contributions.',
+    image: '/nith.jpg',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    tagline: 'Industry Recognition',
+    Heading: 'Strategic Partnerships with Leading Companies',
+    description:
+      'Collaborations with Fortune 500 companies and tech giants for placement and internship opportunities.',
+    image: '/award.jpg',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 3,
+    tagline: 'Research & Innovation',
+    Heading: 'Strong Research Output and Publications',
+    description:
+      'Faculty and students contributing to peer-reviewed journals and international research conferences.',
+    image: '/workshop.jpg',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
+
 function Achieve() {
   const [achievements, setAchievements] = useState<TransformedAchievement[]>(
     []
@@ -44,18 +78,13 @@ function Achieve() {
     const fetchAchievements = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/users/achievement');
-        const result = await response.json();
-
-        if (result.success && Array.isArray(result.data)) {
-          const transformedAchievements = result.data.map(transformAchievement);
-          setAchievements(transformedAchievements);
-          // Reset selectedIndex if it's out of bounds
-          if (transformedAchievements.length > 0) {
-            setSelectedIndex(0);
-          }
-        } else {
-          setError('Failed to load achievements');
+        // Simulate API delay
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        const transformedAchievements =
+          mockAchievements.map(transformAchievement);
+        setAchievements(transformedAchievements);
+        if (transformedAchievements.length > 0) {
+          setSelectedIndex(0);
         }
       } catch (err) {
         setError('Error fetching achievements');

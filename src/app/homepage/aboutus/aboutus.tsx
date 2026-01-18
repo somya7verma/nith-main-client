@@ -22,6 +22,11 @@ const fadeUp = {
   },
 };
 
+const mockAboutData = {
+  AboutDesc:
+    'National Institute of Technology Hamirpur (NITH) is one of the premier engineering institutions in India. Established in 1986, NITH has been nurturing talent and fostering innovation through quality education and research. Our commitment to excellence has made us a leading institute in technical education.',
+};
+
 function Aboutus() {
   const [aboutDesc, setAboutDesc] = useState<string>('');
 
@@ -29,14 +34,13 @@ function Aboutus() {
     let mounted = true;
     async function load() {
       try {
-        const res = await fetch('/api/users/homepage');
-        const json = await res.json();
-        if (mounted && json && json.success && json.data) {
-          setAboutDesc(json.data.AboutDesc || '');
+        // Simulate API delay
+        await new Promise((resolve) => setTimeout(resolve, 200));
+        if (mounted) {
+          setAboutDesc(mockAboutData.AboutDesc || '');
         }
       } catch (e) {
-        // ignore
-        console.error('Failed to load homepage about description', e);
+        console.error('Failed to load about description', e);
       }
     }
     load();
