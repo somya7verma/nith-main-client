@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Header31 from '@/app/components/header3';
 import Footer from '@/app/components/footer';
 import { CreditCard, AlertCircle, Mail, Home } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const fadeUp = {
   hidden: {
@@ -42,62 +44,96 @@ const staggerContainer = {
 const certificateFees = [
   {
     slNo: 1,
-    name: 'Bonafide Certificate',
+    name: {
+      en: 'Bonafide Certificate',
+      hi: 'बोनाफाइड प्रमाण पत्र',
+    },
     fee: '₹500',
   },
   {
     slNo: 2,
-    name: 'Character Certificate',
+    name: {
+      en: 'Character Certificate',
+      hi: 'चरित्र प्रमाण पत्र',
+    },
     fee: '₹500',
   },
   {
     slNo: 3,
-    name: 'Migration Certificate',
+    name: {
+      en: 'Migration Certificate',
+      hi: 'माइग्रेशन प्रमाण पत्र',
+    },
     fee: '₹2,000',
   },
   {
     slNo: 4,
-    name: 'Transcript (within India)',
-    fee: '₹2,000 per copy',
+    name: {
+      en: 'Transcript (within India)',
+      hi: 'ट्रांसक्रिप्ट (भारत में)',
+    },
+    fee: '₹2,000 ',
   },
   {
     slNo: 5,
-    name: 'Transcript (outside India)',
-    fee: '₹5,000 per copy',
+    name: {
+      en: 'Transcript (outside India)',
+      hi: 'ट्रांसक्रिप्ट (भारत के बाहर)',
+    },
+    fee: '₹5,000 ',
   },
   {
     slNo: 6,
-    name: 'Misc. (Backlog, Rank, Verification/Attestation of DMC/Degree etc.)',
-    fee: '₹500 each',
+    name: {
+      en: 'Misc. (Backlog, Rank, Verification/Attestation of DMC/Degree etc.)',
+      hi: 'अन्य (बैकलॉग, रैंक, सत्यापन/प्रमाणन आदि)',
+    },
+    fee: '₹500 ',
   },
   {
     slNo: 7,
-    name: 'Duplicate Grade Card / Duplicate Provisional Degree / Degree Certificate',
-    fee: '₹1,000 each',
+    name: {
+      en: 'Duplicate Grade Card / Duplicate Provisional Degree / Degree Certificate',
+      hi: 'डुप्लिकेट ग्रेड कार्ड / डुप्लिकेट प्रोविजनल डिग्री / डिग्री प्रमाण पत्र',
+    },
+    fee: '₹1,000 ',
   },
   {
     slNo: 8,
-    name: 'Medium of Instruction Certificate',
+    name: {
+      en: 'Medium of Instruction Certificate',
+      hi: 'शिक्षण माध्यम प्रमाण पत्र',
+    },
     fee: '₹500',
   },
   {
     slNo: 9,
-    name: 'Verification of Degree (within India)',
+    name: {
+      en: 'Verification of Degree (within India)',
+      hi: 'डिग्री सत्यापन (भारत में)',
+    },
     fee: '₹1,000',
   },
   {
     slNo: 10,
-    name: 'Verification of Degree (outside India)',
+    name: {
+      en: 'Verification of Degree (outside India)',
+      hi: 'डिग्री सत्यापन (भारत के बाहर)',
+    },
     fee: '$100',
   },
   {
     slNo: 11,
-    name: 'Verification through Govt./Govt.-Aided Institutions',
-    fee: 'No Charges',
+    name: {
+      en: 'Verification through Govt./Govt.-Aided Institutions',
+      hi: 'सरकारी/सरकारी सहायता प्राप्त संस्थानों के माध्यम से सत्यापन',
+    },
+    fee: '0',
   },
 ];
 
 export default function AlumniAssist() {
+  const language = useSelector((state: RootState) => state.language.value);
   return (
     <div className="min-h-screen bg-white">
       <Header31 />
@@ -110,12 +146,16 @@ export default function AlumniAssist() {
               href="/"
               className="hover:text-[#800000] transition-colors duration-200"
             >
-              Home
+              {language === 'en' ? 'Home' : 'होम'}
             </Link>
             <span>›</span>
-            <span className="text-gray-400">Alumni</span>
+            <span className="text-gray-400">
+              {language === 'en' ? 'Alumni' : 'पूर्व छात्र'}
+            </span>
             <span>›</span>
-            <span className="text-[#800000] font-medium">Alumni Assist</span>
+            <span className="text-[#800000] font-medium">
+              {language === 'en' ? 'Alumni Assist' : 'अलुम्नाई सहायता'}
+            </span>
           </nav>
         </div>
       </div>
@@ -130,11 +170,12 @@ export default function AlumniAssist() {
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Alumni Assist
+              {language === 'en' ? 'Alumni Assist' : 'अलुम्नाई सहायता'}
             </h1>
             <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-              This section provides important procedures, rules, and assistance
-              details for alumni of NIT Hamirpur.
+              {language === 'en'
+                ? 'This section provides important procedures, rules, and assistance details for alumni of NIT Hamirpur.'
+                : 'यह अनुभाग एनआईटी हमीरपुर के पूर्व छात्रों के लिए महत्वपूर्ण प्रक्रियाएं, नियम और सहायता विवरण प्रदान करता है।'}
             </p>
           </motion.div>
         </div>
@@ -154,24 +195,32 @@ export default function AlumniAssist() {
           >
             <div className="bg-[#800000] px-6 py-4">
               <h2 className="text-lg md:text-xl font-semibold text-white">
-                Procedure for Issue of Duplicate Degree Certificate
+                {language === 'en'
+                  ? 'Procedure for Issue of Duplicate Degree Certificate'
+                  : 'डुप्लिकेट डिग्री प्रमाण पत्र जारी करने की प्रक्रिया'}
               </h2>
             </div>
             <div className="p-6">
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>
-                  Register an F.I.R. for loss of Detailed Marks Card / Semester
-                  Grade Report / Degree.
+                  {language === 'en'
+                    ? 'Register an F.I.R. for loss of Detailed Marks Card / Semester Grade Report / Degree.'
+                    : 'विस्तृत अंक पत्र/सेमेस्टर ग्रेड रिपोर्ट/डिग्री की हानि के लिए एफ.आई.आर. दर्ज करें।'}
                 </li>
                 <li>
-                  After waiting 15 days, advertise the loss in a National daily
-                  newspaper.
+                  {language === 'en'
+                    ? 'After waiting 15 days, advertise the loss in a National daily newspaper.'
+                    : '15 दिन प्रतीक्षा के बाद, राष्ट्रीय दैनिक समाचार पत्र में हानि का विज्ञापन दें।'}
                 </li>
                 <li>
-                  Apply with a copy of the newspaper cutting to:
+                  {language === 'en'
+                    ? 'Apply with a copy of the newspaper cutting to:'
+                    : 'समाचार पत्र की कटिंग की प्रति के साथ आवेदन करें:'}
                   <div className="mt-2 ml-6 text-sm">
                     <p>
-                      <span className="font-medium">To:</span>{' '}
+                      <span className="font-medium">
+                        {language === 'en' ? 'To:' : 'प्रति:'}
+                      </span>{' '}
                       <a
                         href="mailto:ar-acad@nith.ac.in"
                         className="text-[#800000] hover:underline"
@@ -180,7 +229,9 @@ export default function AlumniAssist() {
                       </a>
                     </p>
                     <p>
-                      <span className="font-medium">CC:</span>{' '}
+                      <span className="font-medium">
+                        {language === 'en' ? 'CC:' : 'सीसी:'}
+                      </span>{' '}
                       <a
                         href="mailto:certificate-acad@nith.ac.in"
                         className="text-[#800000] hover:underline"
@@ -191,19 +242,24 @@ export default function AlumniAssist() {
                   </div>
                 </li>
                 <li>
-                  Submit an affidavit on Non-Judicial stamp paper of Rs. 10/-.
+                  {language === 'en'
+                    ? 'Submit an affidavit on Non-Judicial stamp paper of Rs. 10/-.'
+                    : '₹10/- के गैर-न्यायिक स्टाम्प पेपर पर शपथ पत्र जमा करें।'}
                 </li>
                 <li>
-                  Deposit/remit the requisite fee in cash to the Cashier or via
-                  Bank Draft in favour of Registrar, NIT Hamirpur (HP).
+                  {language === 'en'
+                    ? 'Deposit/remit the requisite fee in cash to the Cashier or via Bank Draft in favour of Registrar, NIT Hamirpur (HP).'
+                    : 'आवश्यक शुल्क कैशियर को नकद या बैंक ड्राफ्ट के माध्यम से रजिस्ट्रार, एनआईटी हमीरपुर (एचपी) के पक्ष में जमा करें।'}
                 </li>
                 <li>
-                  Duplicate Degree Certificate will be issued by the Registrar
-                  (or Director-cum-Chairman, Senate in absence).
+                  {language === 'en'
+                    ? 'Duplicate Degree Certificate will be issued by the Registrar (or Director-cum-Chairman, Senate in absence).'
+                    : 'डुप्लिकेट डिग्री प्रमाण पत्र रजिस्ट्रार (या अनुपस्थिति में निदेशक-सह-अध्यक्ष, सीनेट) द्वारा जारी किया जाएगा।'}
                 </li>
                 <li>
-                  Duplicate degree will be prepared like the original, with
-                  &quot;Sd/-&quot; in place of signature.
+                  {language === 'en'
+                    ? 'Duplicate degree will be prepared like the original, with "Sd/-" in place of signature.'
+                    : 'डुप्लिकेट डिग्री मूल की तरह तैयार की जाएगी, जिसमें हस्ताक्षर के स्थान पर "Sd/-" होगा।'}
                 </li>
               </ol>
             </div>
@@ -220,20 +276,35 @@ export default function AlumniAssist() {
           >
             <div className="bg-[#800000] px-6 py-4">
               <h2 className="text-lg md:text-xl font-semibold text-white">
-                Procedure for Issue of Duplicate Detailed Marks Cards / Semester
-                Grade Reports
+                {language === 'en'
+                  ? 'Procedure for Issue of Duplicate Detailed Marks Cards / Semester Grade Reports'
+                  : 'डुप्लिकेट विस्तृत अंक पत्र/सेमेस्टर ग्रेड रिपोर्ट जारी करने की प्रक्रिया'}
               </h2>
             </div>
             <div className="p-6">
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Issued by the Academic Section.</li>
-                <li>Submission of F.I.R. copy in case of loss.</li>
-                <li>Payment of requisite fee.</li>
                 <li>
-                  Apply to:
+                  {language === 'en'
+                    ? 'Issued by the Academic Section.'
+                    : 'शैक्षणिक अनुभाग द्वारा जारी किया गया।'}
+                </li>
+                <li>
+                  {language === 'en'
+                    ? 'Submission of F.I.R. copy in case of loss.'
+                    : 'हानि की स्थिति में एफ.आई.आर. की प्रति जमा करें।'}
+                </li>
+                <li>
+                  {language === 'en'
+                    ? 'Payment of requisite fee.'
+                    : 'आवश्यक शुल्क का भुगतान।'}
+                </li>
+                <li>
+                  {language === 'en' ? 'Apply to:' : 'आवेदन करें:'}
                   <div className="mt-2 ml-6 text-sm">
                     <p>
-                      <span className="font-medium">To:</span>{' '}
+                      <span className="font-medium">
+                        {language === 'en' ? 'To:' : 'प्रति:'}
+                      </span>{' '}
                       <a
                         href="mailto:ar-acad@nith.ac.in"
                         className="text-[#800000] hover:underline"
@@ -242,7 +313,9 @@ export default function AlumniAssist() {
                       </a>
                     </p>
                     <p>
-                      <span className="font-medium">CC:</span>{' '}
+                      <span className="font-medium">
+                        {language === 'en' ? 'CC:' : 'सीसी:'}
+                      </span>{' '}
                       <a
                         href="mailto:certificate-acad@nith.ac.in"
                         className="text-[#800000] hover:underline"
@@ -267,18 +340,30 @@ export default function AlumniAssist() {
           >
             <div className="bg-[#800000] px-6 py-4">
               <h2 className="text-lg md:text-xl font-semibold text-white">
-                Procedure for Issue of Migration Certificate
+                {language === 'en'
+                  ? 'Procedure for Issue of Migration Certificate'
+                  : 'माइग्रेशन प्रमाण पत्र जारी करने की प्रक्रिया'}
               </h2>
             </div>
             <div className="p-6">
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Issued by the Academic Section.</li>
-                <li>Submission of application along with requisite fee.</li>
                 <li>
-                  Apply to:
+                  {language === 'en'
+                    ? 'Issued by the Academic Section.'
+                    : 'शैक्षणिक अनुभाग द्वारा जारी किया गया।'}
+                </li>
+                <li>
+                  {language === 'en'
+                    ? 'Submission of application along with requisite fee.'
+                    : 'आवश्यक शुल्क के साथ आवेदन जमा करें।'}
+                </li>
+                <li>
+                  {language === 'en' ? 'Apply to:' : 'आवेदन करें:'}
                   <div className="mt-2 ml-6 text-sm">
                     <p>
-                      <span className="font-medium">To:</span>{' '}
+                      <span className="font-medium">
+                        {language === 'en' ? 'To:' : 'प्रति:'}
+                      </span>{' '}
                       <a
                         href="mailto:ar-acad@nith.ac.in"
                         className="text-[#800000] hover:underline"
@@ -287,7 +372,9 @@ export default function AlumniAssist() {
                       </a>
                     </p>
                     <p>
-                      <span className="font-medium">CC:</span>{' '}
+                      <span className="font-medium">
+                        {language === 'en' ? 'CC:' : 'सीसी:'}
+                      </span>{' '}
                       <a
                         href="mailto:certificate-acad@nith.ac.in"
                         className="text-[#800000] hover:underline"
@@ -315,7 +402,9 @@ export default function AlumniAssist() {
                 <CreditCard className="w-6 h-6 text-white" />
               </div>
               <h2 className="text-xl md:text-2xl font-bold text-white">
-                Charges for Issue of Certificates / Documents
+                {language === 'en'
+                  ? 'Charges for Issue of Certificates / Documents'
+                  : 'प्रमाण पत्र/दस्तावेज जारी करने के लिए शुल्क'}
               </h2>
             </div>
             <div className="p-6 md:p-8">
@@ -347,7 +436,7 @@ export default function AlumniAssist() {
                           {item.slNo}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-700 border-b border-gray-100">
-                          {item.name}
+                          {language === 'en' ? item.name.en : item.name.hi}
                         </td>
                         <td className="px-4 py-4 text-sm text-right font-semibold text-[#800000] border-b border-gray-100">
                           {item.fee}
@@ -373,7 +462,6 @@ export default function AlumniAssist() {
                         {item.fee}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-700">{item.name}</p>
                   </div>
                 ))}
               </div>
@@ -396,53 +484,13 @@ export default function AlumniAssist() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-amber-800 mb-2">
-                    Important Note
+                    {language === 'en' ? 'Important Note' : 'महत्वपूर्ण सूचना'}
                   </h3>
                   <p className="text-amber-900/80 leading-relaxed">
-                    These formalities are not required in case of application
-                    due to mutilation of documents. In such cases, the applicant
-                    must attach the mutilated certificate/document along with
-                    the application and requisite fee.
+                    {language === 'en'
+                      ? 'These formalities are not required in case of application due to mutilation of documents. In such cases, the applicant must attach the mutilated certificate/document along with the application and requisite fee.'
+                      : 'दस्तावेज़ के क्षतिग्रस्त होने के कारण आवेदन की स्थिति में ये औपचारिकताएँ आवश्यक नहीं हैं। ऐसे मामलों में, आवेदक को क्षतिग्रस्त प्रमाण पत्र/दस्तावेज़ को आवेदन और आवश्यक शुल्क के साथ संलग्न करना चाहिए।'}
                   </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Section 6: Campus Stay Assistance */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-            variants={fadeInScale}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden"
-          >
-            <div className="bg-[#800000] px-6 py-4">
-              <h2 className="text-lg md:text-xl font-semibold text-white">
-                Campus Stay Assistance for Alumni
-              </h2>
-            </div>
-            <div className="p-6">
-              <p className="text-gray-700 mb-5">
-                Alumni visiting the NITH campus and requiring stay assistance
-                may contact:
-              </p>
-              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div className="w-12 h-12 rounded-full bg-[#800000] flex items-center justify-center flex-shrink-0">
-                  <Home className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900">
-                    Warden, Satpura Hostel
-                  </p>
-                  <a
-                    href="mailto:wardensatpura@nith.ac.in"
-                    className="inline-flex items-center gap-2 text-[#800000] hover:underline text-sm mt-1"
-                  >
-                    <Mail className="w-4 h-4" />
-                    wardensatpura@nith.ac.in
-                  </a>
                 </div>
               </div>
             </div>
