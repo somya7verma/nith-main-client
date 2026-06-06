@@ -1,0 +1,11 @@
+export { default as Analytics } from './analytics/analytics';
+export { default as HomeComponent } from './home/home';
+export { default as Academics } from './academics/academics';
+export { default as People } from './people/people';
+export { default as Researches } from './researches/researches';
+export { default as News } from './news/page';
+export { default as Events } from './events/events';
+export { default as Announcements } from './announcements/announcements';
+export { default as DepartmentalData } from './departmental-data/departmental-data';
+export { default as Credentials } from './credentials/credentials';
+export { default as HOD } from './hod/hod';

@@ -1,0 +1,231 @@
+import React from 'react';
+
+function Administration() {
+  const administrationSections = {
+    leftColumn: [{ title: 'Visitor', href: '/administration/visitor' }],
+    secondColumn: [
+      {
+        section: 'Chairperson',
+        links: [
+          {
+            title: 'Chairperson Message/Profile',
+            href: '/administration/chairperson',
+            hasIcon: true,
+          },
+          {
+            title: 'Former Chairpersons',
+            href: '/administration/chairperson/former',
+            hasIcon: true,
+          },
+        ],
+      },
+      {
+        section: 'Deans/Associate Deans',
+        links: [
+          {
+            title: 'Deans & Associate Deans',
+            href: '/administration/deans',
+            hasIcon: true,
+          },
+        ],
+      },
+      {
+        section: 'Institute Coordinator',
+        links: [
+          {
+            title: 'Institute Coordinators',
+            href: '/administration/institute-coordinator',
+            hasIcon: true,
+          },
+        ],
+      },
+    ],
+    thirdColumn: [
+      {
+        section: 'Director',
+        links: [
+          {
+            title: 'Director',
+            href: '/administration/director',
+            hasIcon: true,
+          },
+          {
+            title: 'Former Directors/Principals',
+            href: '/administration/director/former',
+            hasIcon: true,
+          },
+          {
+            title: 'Director Office',
+            href: '/administration/director/office',
+            hasIcon: true,
+          },
+        ],
+      },
+      {
+        section: 'Head of Departments',
+        links: [
+          {
+            title: 'Head of Departments',
+            href: '/administration/head-of-departments',
+            hasIcon: true,
+          },
+        ],
+      },
+      {
+        title: 'Faculty Incharges',
+        href: '/administration/faculty-incharges',
+      },
+    ],
+    rightColumn: [
+      {
+        section: 'Registrar',
+        links: [
+          {
+            title: 'Registrar',
+            href: '/administration/registrar',
+            hasIcon: true,
+          },
+          {
+            title: 'Registrar Office',
+            href: '/administration/registrar/office',
+            hasIcon: true,
+          },
+        ],
+      },
+      {
+        section: 'Nodal Officers',
+        links: [
+          {
+            title: 'Nodal Officers',
+            href: '/administration/nodal-officers',
+            hasIcon: true,
+          },
+        ],
+      },
+    ],
+  };
+
+  return (
+    <div className="grid grid-cols-4 gap-8">
+      {/* Left Column */}
+      <div className="space-y-4">
+        {administrationSections.leftColumn.map((item, index) => (
+          <div key={index}>
+            <a
+              href={item.href}
+              className="block text-black font-semibold text-sm hover:text-gray-600 transition-colors"
+            >
+              {item.title}
+            </a>
+          </div>
+        ))}
+        <div className="mt-8">
+          <a
+            href="/administration/vigilance"
+            className="block text-black font-semibold text-sm hover:text-gray-600 transition-colors"
+          >
+            Chief Vigilance Officer
+          </a>
+        </div>
+      </div>
+
+      {/* Second Column */}
+      <div className="space-y-6">
+        {administrationSections.secondColumn.map((section, idx) => (
+          <div key={idx}>
+            <h3 className="font-semibold text-black mb-2 text-sm">
+              {section.section}
+            </h3>
+            {section.links && section.links.length > 0 && (
+              <div className="space-y-1">
+                {section.links.map((link, linkIdx) => (
+                  <a
+                    key={linkIdx}
+                    href={link.href}
+                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                  >
+                    {link.hasIcon && <span className="mr-2">›</span>}
+                    {link.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Third Column */}
+      <div className="space-y-6">
+        {administrationSections.thirdColumn.map((item, idx) => {
+          if (item.section) {
+            return (
+              <div key={idx}>
+                <h3 className="font-semibold text-black mb-2 text-sm">
+                  {item.section}
+                </h3>
+                {item.links && item.links.length > 0 && (
+                  <div className="space-y-1">
+                    {item.links.map((link, linkIdx) => (
+                      <a
+                        key={linkIdx}
+                        href={link.href}
+                        className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                      >
+                        {link.hasIcon && <span className="mr-2">›</span>}
+                        {link.title}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          } else {
+            return (
+              <div key={idx}>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                  >
+                    {item.title}
+                  </a>
+                ) : (
+                  <h3 className="font-semibold text-black mb-2 text-sm">
+                    {item.title}
+                  </h3>
+                )}
+              </div>
+            );
+          }
+        })}
+      </div>
+
+      {/* Right Column */}
+      <div className="space-y-6">
+        {administrationSections.rightColumn.map((section, idx) => (
+          <div key={idx}>
+            <h3 className="font-semibold text-black mb-2 text-sm">
+              {section.section}
+            </h3>
+            {section.links && section.links.length > 0 && (
+              <div className="space-y-1">
+                {section.links.map((link, linkIdx) => (
+                  <a
+                    key={linkIdx}
+                    href={link.href}
+                    className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors text-sm"
+                  >
+                    {link.hasIcon && <span className="mr-2">›</span>}
+                    {link.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Administration;
